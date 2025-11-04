@@ -4,10 +4,13 @@ CFLAGS := -g -Wall -Werror -Wextra \
 		#-fsanitize=address,undefined \
 		#-Wunreachable-code -Ofast \
 
-LIBFT_DIR := Libft
+LIBFT_DIR := libft
 LIBFT := $(LIBFT_DIR)/libft.a
-INCLUDES := -I$(LIBFT_DIR) -Iinc -I/usr/include
-SRCS_DIR := src
+MLX42_DIR := MLX42
+MLX42 := $(MLX42_DIR)/build/libmlx42.a
+INCLUDES := -I$(LIBFT_DIR) -I$(MLX42_DIR)/include -Iincludes -I/usr/include
+LIBS := -lglfw -ldl -lm -pthread
+SRCS_DIR := srcs
 OBJS_DIR := build
 
 # Auto-discover source files
@@ -24,7 +27,7 @@ RESET = \033[0m
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(OBJS)
+$(NAME): $(LIBFT) $(MLX42) $(OBJS)
 	@clear
 	@echo "$(GREEN)"
 	@echo "\t ██████╗██╗   ██╗██████╗ ██████╗ ██████╗ "
@@ -42,12 +45,17 @@ $(NAME): $(LIBFT) $(OBJS)
 	else \
 		echo "$(GREEN)🔗 Linking $(NAME)...$(RESET)"; \
 	fi
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX42) $(LIBS) -o $(NAME)
 	@echo "$(GREEN)✅ Built $(NAME)$(RESET)"
 
 $(LIBFT):
 	@echo "$(YELLOW)📙 Building libft...$(RESET)"
 	@$(MAKE) -C $(LIBFT_DIR)
+
+$(MLX42):
+	@echo "$(YELLOW)🖼️  Building MLX42...$(RESET)"
+	@cmake -B $(MLX42_DIR)/build -S $(MLX42_DIR)
+	@make -C $(MLX42_DIR)/build
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 	@mkdir -p $(dir $@)
@@ -65,6 +73,7 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 	@$(MAKE) -C $(LIBFT_DIR) fclean || true
+	@rm -rf $(MLX42_DIR)/build || true
 	@echo "$(RED)🔥 $(NAME) has been deleted!$(RESET)"
 
 re: fclean all

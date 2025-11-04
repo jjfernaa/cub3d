@@ -1,7 +1,8 @@
-#include "cub3d.h"
+#include "../includes/cub3d.h"
 
 int	main(int argc, char **argv)
 {
+	(void)argv;
 	t_game	*game;
 
 	if (argc != 2)
