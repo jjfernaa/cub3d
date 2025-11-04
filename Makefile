@@ -13,9 +13,11 @@ LIBS := -lglfw -ldl -lm -pthread
 SRCS_DIR := srcs
 OBJS_DIR := build
 
-# Auto-discover source files
-SRCS := $(shell find $(SRCS_DIR) -type f -name '*.c' 2>/dev/null)
-OBJS := $(patsubst $(SRCS_DIR)/%.c,$(OBJS_DIR)/%.o,$(SRCS))
+# Source files - Add new .c files here
+SRCS = \
+	$(SRCS_DIR)/main.c \
+
+OBJS = $(patsubst $(SRCS_DIR)/%.c,$(OBJS_DIR)/%.o,$(SRCS))
 
 BLUE = \033[0;34m
 GREEN = \033[0;32m
