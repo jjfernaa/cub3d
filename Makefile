@@ -17,6 +17,8 @@ OBJS_DIR := build
 SRCS = \
 	$(SRCS_DIR)/main.c \
 	$(SRCS_DIR)/parser/error.c \
+	$(SRCS_DIR)/parser/check.c \
+	$(SRCS_DIR)/parser/map.c \
 
 OBJS = $(patsubst $(SRCS_DIR)/%.c,$(OBJS_DIR)/%.o,$(SRCS))
 
