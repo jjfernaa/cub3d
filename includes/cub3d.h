@@ -34,6 +34,8 @@ typedef struct s_game
 	t_textures	textures;
 	int			w_width;
 	int			w_height;
+	int			fd;
+	char		**map;
 }			t_game;
 
 // Utils Function
@@ -46,3 +48,4 @@ int		init_textures(t_game *game);
 int		init_player(t_game *game);
 
 #endif
+

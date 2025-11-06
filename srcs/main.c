@@ -7,7 +7,7 @@ int	main(int argc, char **argv)
 	(void)argv;
 	if (argc != 2)
 	{
-		print_error("Error\n");
+		print_error("Error: Invalid arguments\n");
 		return(-1);
 	}
 	if (init_game(&game) != 0)
