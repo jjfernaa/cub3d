@@ -42,11 +42,7 @@ $(NAME): $(LIBFT) $(MLX42) $(OBJS)
 	@echo "$(BLUE)                🚀 42 School Project 🚀 "
 	@echo "$(RED)                  juan-jof & lginer-m     "
 	@echo "$(RESET)"
-	@if [ -f $(NAME) ]; then \
-		echo "$(YELLOW)🔄 Relinking $(NAME)... (executable already exists)$(RESET)"; \
-	else \
-		echo "$(GREEN)🔗 Linking $(NAME)...$(RESET)"; \
-	fi
+	@echo "$(GREEN)🔗 Linking $(NAME)...$(RESET)"
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(MLX42) $(LIBS) -o $(NAME)
 	@echo "$(GREEN)✅ Built $(NAME)$(RESET)"
 
