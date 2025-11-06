@@ -13,4 +13,5 @@ typedef struct s_game
 
 }			t_game;
 
+void	print_error(char *msg);
 #endif

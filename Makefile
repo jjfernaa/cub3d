@@ -16,6 +16,7 @@ OBJS_DIR := build
 # Source files - Add new .c files here
 SRCS = \
 	$(SRCS_DIR)/main.c \
+	$(SRCS_DIR)/parser/error.c \
 
 OBJS = $(patsubst $(SRCS_DIR)/%.c,$(OBJS_DIR)/%.o,$(SRCS))
 
