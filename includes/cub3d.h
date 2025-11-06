@@ -17,18 +17,3 @@ typedef struct s_game
 
 void	print_error(char *msg);
 #endif
-
-
-/*typedef struct s_coor
-{
-	char			*north;
-	char			*south;
-	char			*west;
-	char			*east;
-	mlx_texture_t	*txt_north_i;
-	mlx_texture_t	*txt_south_i;
-	mlx_texture_t	*txt_west_i;
-	mlx_texture_t	*txt_east_i;
-	mlx_texture_t	*txt_wall;
-
-}			t_coor;*/
