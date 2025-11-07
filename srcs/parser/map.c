@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan-jof <juan-jof@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: lginer-m <lginer-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 18:00:12 by lginer-m          #+#    #+#             */
-/*   Updated: 2025/11/07 11:44:49 by juan-jof         ###   ########.fr       */
+/*   Updated: 2025/11/07 18:49:23 by lginer-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,19 @@ Si la longitud de la fila actual es mayor que la longitud de la fila superior y 
 Si la longitud de la fila actual es mayor que la longitud de la fila inferior y la columna actual es mayor que la longitud de la fila inferior, el carácter actual debe ser '1'.
 Estas reglas deben cumplir con todos los requisitos del mapa.*/
 
-int	count_lines(char *file)
+int	count_lines(char *file, t_game *game)
 {
 	int		fd;
 	int		count;
 	char	*line;
 
+	printf("Intentando abrir: '%s'\n", file);
 	fd = open(file, O_RDONLY);
+	printf("valor fd: %d\n", fd);
 	if(fd < 0)
-		print_error("Error: Failed opening the file/n");
+	{
+		print_error("Error: Failed opening the file\n");
+	}
 	count = 0;
 	line = get_next_line(fd);
 	while(line)
@@ -39,5 +43,6 @@ int	count_lines(char *file)
 		line = get_next_line(fd);
 	}
 	close(fd);
-	return (count);
+	game->w_height = count;
+	return (game->w_height);
 }

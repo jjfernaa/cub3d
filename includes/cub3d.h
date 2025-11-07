@@ -2,7 +2,7 @@
 # define CUB3D_h
 
 # include "../libft/libft.h"
-# include "../Gnl/get_next_line_bonus.h"
+# include "../gnl/get_next_line_bonus.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 # include <stdio.h>
 # include <stdlib.h>
@@ -51,6 +51,6 @@ int		init_player(t_game *game);
 
 // Parser Function
 int		check_extension(char *str);
-int		count_lines(char *file);
+int		count_lines(char *file, t_game *game);
 #endif
 

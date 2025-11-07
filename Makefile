@@ -6,7 +6,7 @@ CFLAGS := -g -Wall -Werror -Wextra \
 
 LIBFT_DIR := libft
 LIBFT := $(LIBFT_DIR)/libft.a
-GNL_DIR := Gnl
+GNL_DIR := gnl
 MLX42_DIR := MLX42
 MLX42 := $(MLX42_DIR)/build/libmlx42.a
 INCLUDES := -I$(LIBFT_DIR) -I$(MLX42_DIR)/include -Iincludes -I/usr/include
