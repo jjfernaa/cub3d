@@ -2,10 +2,12 @@
 # define CUB3D_h
 
 # include "../libft/libft.h"
+# include "../Gnl/get_next_line_bonus.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <fcntl.h>
 
 typedef struct s_player
 {
@@ -47,5 +49,8 @@ int		init_window(t_game *game);
 int		init_textures(t_game *game);
 int		init_player(t_game *game);
 
+// Parser Function
+int		check_extension(char *str);
+int		count_lines(char *file);
 #endif
 
