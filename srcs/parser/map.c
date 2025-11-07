@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lginer-m <lginer-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juan-jof <juan-jof@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 18:00:12 by lginer-m          #+#    #+#             */
-/*   Updated: 2025/11/06 20:22:28 by lginer-m         ###   ########.fr       */
+/*   Updated: 2025/11/07 11:44:49 by juan-jof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ int	count_lines(char *file)
 	if(fd < 0)
 		print_error("Error: Failed opening the file/n");
 	count = 0;
-	line = get_next_line_bonus(fd);
+	line = get_next_line(fd);
 	while(line)
 	{
 		count++;
 		free(line);
-		line = get_next_line_bonus(fd);
+		line = get_next_line(fd);
 	}
 	close(fd);
 	return (count);
