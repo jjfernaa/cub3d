@@ -24,6 +24,7 @@ int	main(int argc, char **argv)
 		return (1);
 	if (init_player(&game) != 0)
 		return (1);
+	render_background(&game);
 	mlx_loop(game.mlx);
 	mlx_terminate(game.mlx);
 	return (0);

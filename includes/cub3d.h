@@ -9,6 +9,10 @@
 # include <unistd.h>
 # include <fcntl.h>
 
+# define W_WIDTH 1280
+# define W_HEIGHT 1280
+
+
 typedef struct s_player
 {
 	double	x;
@@ -16,7 +20,7 @@ typedef struct s_player
 	double	dir_x;
 	double	dir_y;
 	double	plane_x;
-	double	plane_y;
+	double	plane_y; 
 }	t_player;
 
 typedef struct s_textures
@@ -34,8 +38,8 @@ typedef struct s_game
 	mlx_image_t	*img;
 	t_player	player;
 	t_textures	textures;
-	int			w_width;
-	int			w_height;
+	int			floor_color;
+	int			ceiling_color;
 	int			fd;
 	char		**map;
 }			t_game;
@@ -44,13 +48,18 @@ typedef struct s_game
 void	print_error(char *msg);
 
 // Init Function
-int		init_game(t_game *game);
-int		init_window(t_game *game);
-int		init_textures(t_game *game);
-int		init_player(t_game *game);
+int			init_game(t_game *game);
+int			init_window(t_game *game);
+int			init_textures(t_game *game);
+int			init_player(t_game *game);
 
 // Parser Function
-int		check_extension(char *str);
-int		count_lines(char *file);
+int			check_extension(char *str);
+int			count_lines(char *file);
+
+// Render Function
+uint32_t	create_color(int r, int g, int b);
+void		render_background(t_game *game);
+
 #endif
 

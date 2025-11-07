@@ -21,6 +21,7 @@ SRCS = \
 	$(SRCS_DIR)/parser/check.c \
 	$(SRCS_DIR)/parser/map.c \
 	$(SRCS_DIR)/execution/init.c \
+	$(SRCS_DIR)/execution/render.c \
 	$(GNL_DIR)/get_next_line_bonus.c \
 	$(GNL_DIR)/get_next_line_utils_bonus.c \
 
