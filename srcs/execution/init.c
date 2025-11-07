@@ -3,20 +3,18 @@
 int	init_game(t_game *game)
 {
 	ft_memset(game, 0, sizeof(t_game));
-	game->w_width = 1280;
-	game->w_height = 720;
 	return (0);
 }
 
 int	init_window(t_game *game)
 {
-	game->mlx = mlx_init(game->w_width, game->w_height, "cub3D", true);
+	game->mlx = mlx_init(W_WIDTH, W_HEIGHT, "cub3D", true);
 	if (!game->mlx)
 	{
 		print_error("Error: Failed to initialize MLX\n");
 		return (-1);
 	}
-	game->img = mlx_new_image(game->mlx, game->w_width, game->w_height);
+	game->img = mlx_new_image(game->mlx, W_WIDTH, W_HEIGHT);
 	if (!game->img)
 	{
 		print_error("Error: Failed to create image\n");
