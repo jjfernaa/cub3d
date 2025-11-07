@@ -4,16 +4,16 @@ int	main(int argc, char **argv)
 {
 	t_game	game;
 
-	int line_count;
+	//int line_count;
 
 	if (argc != 2)
 		print_error("Error: Invalid arguments\n");
 	if(check_extension(argv[1]) != 1)
 		print_error("Error: Invalid map extension\n");
-	line_count = count_lines(argv[1]);
+	/*line_count = count_lines(argv[1]);
 	if(line_count <= 0)
 		print_error("Error: Failed to read map\n");
-	/*printf("mapa: %d\n", line_count);
+	printf("mapa: %d\n", line_count);
 		return(-1);*/
 	if (init_game(&game) != 0)
 		return (1);

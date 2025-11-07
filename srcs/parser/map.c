@@ -6,7 +6,7 @@
 /*   By: lginer-m <lginer-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 18:00:12 by lginer-m          #+#    #+#             */
-/*   Updated: 2025/11/07 18:49:23 by lginer-m         ###   ########.fr       */
+/*   Updated: 2025/11/07 19:05:37 by lginer-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ Si la longitud de la fila actual es mayor que la longitud de la fila superior y 
 Si la longitud de la fila actual es mayor que la longitud de la fila inferior y la columna actual es mayor que la longitud de la fila inferior, el carácter actual debe ser '1'.
 Estas reglas deben cumplir con todos los requisitos del mapa.*/
 
-int	count_lines(char *file, t_game *game)
+int	count_lines(char *file)
 {
 	int		fd;
 	int		count;
@@ -43,6 +43,5 @@ int	count_lines(char *file, t_game *game)
 		line = get_next_line(fd);
 	}
 	close(fd);
-	game->w_height = count;
-	return (game->w_height);
+	return (count);
 }
