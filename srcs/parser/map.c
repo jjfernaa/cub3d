@@ -6,7 +6,7 @@
 /*   By: lginer-m <lginer-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 18:00:12 by lginer-m          #+#    #+#             */
-/*   Updated: 2025/11/07 19:05:37 by lginer-m         ###   ########.fr       */
+/*   Updated: 2025/11/07 23:47:35 by lginer-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,20 +27,20 @@ int	count_lines(char *file)
 	int		count;
 	char	*line;
 
-	printf("Intentando abrir: '%s'\n", file);
+	//printf("Intentando abrir: '%s'\n", file);
 	fd = open(file, O_RDONLY);
-	printf("valor fd: %d\n", fd);
+	//printf("valor fd: %d\n", fd);
 	if(fd < 0)
-	{
 		print_error("Error: Failed opening the file\n");
-	}
 	count = 0;
 	line = get_next_line(fd);
 	while(line)
-	{
+	{		
+		//printf("mapa: %s\n", line);  //imprime el mapa
 		count++;
 		free(line);
 		line = get_next_line(fd);
+
 	}
 	close(fd);
 	return (count);
