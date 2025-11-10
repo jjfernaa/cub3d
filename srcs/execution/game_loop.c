@@ -6,8 +6,7 @@ void	updates_game(void *param)
 	t_game	*game;
 
 	game = (t_game *)param;
-	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(game->mlx);
+	handle_input(game);
 	// implementar handle_input
 	// implementar update_player
 	// implementar render_frame
