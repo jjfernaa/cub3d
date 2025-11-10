@@ -53,11 +53,13 @@ void				print_error(char *msg);
 
 // Init Function
 int					init_game(t_game *game);
+int					init_graphics(t_game *game);
 int					init_window(t_game *game);
 int					init_textures(t_game *game);
 int					init_player(t_game *game);
 
 // Parser Function
+int					validate_arguments(int argc, char **argv);
 int					check_extension(char *str);
 int					count_lines(char *file, t_game *game);
 char				*paths_of_textures(char *line, const char *name);
@@ -68,5 +70,13 @@ void				match_paths_c_f(char *line, t_game *game);
 // Render Function
 uint32_t			create_color(int r, int g, int b);
 void				render_background(t_game *game);
+
+// Game Function
+void				updates_game(void *param);
+void				run_game(t_game *game);
+
+// Cleanup Functions
+void				cleanup_game(t_game *game);
+void				clean_mlx(t_game *game);
 
 #endif
