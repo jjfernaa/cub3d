@@ -6,7 +6,7 @@
 /*   By: lginer-m <lginer-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 18:00:12 by lginer-m          #+#    #+#             */
-/*   Updated: 2025/11/10 16:29:00 by lginer-m         ###   ########.fr       */
+/*   Updated: 2025/11/10 17:05:17 by lginer-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,14 +95,20 @@ void	match_paths(char *line, t_game *game)
 	}
 }
 
-int load_textures(char *path, t_game *game)
+int load_textures(t_game *game)
 {
-	if(!(game->textures.north = mlx_load_texture(path)))
+	if(!(game->textures.north = mlx_load_png(game->textures.north_path)))
 	{
-		free(path);
+		free(game->textures.north_path); //poner el free_textures en este lugar
+		return(-1);
+	}
+	if(!(game->textures.south = mlx_load_png(game->textures.south_path)))
+	{
+		free(game->textures.north_path); //poner el free_textures en este lugar
 		return(-1);
 	}
 	free(path);
+	
 		/*para poder gestionar más adelante en el parser:
 		if(load_textures(path, game) <= 0)
 			print_error("Error: textures are not loading");*/
