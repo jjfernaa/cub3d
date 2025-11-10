@@ -11,8 +11,11 @@ void	updates_game(void *param)
 	// implementar update_player
 	// implementar render_frame
 }
+
 void	run_game(t_game *game)
 {
+	mlx_cursor_hook(game->mlx, &mouse_callback, game);
+	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
 	mlx_loop_hook(game->mlx, &updates_game, game);
 	//mlx_close_hook(game->mlx, &close_hook, game);// implemetar close_hook(void *param)
 	mlx_loop(game->mlx);

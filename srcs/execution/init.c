@@ -56,7 +56,7 @@ int	init_graphics(t_game *game)
 	if (init_window(game) != 0)
 		return (-1);
 	if (init_textures(game) != 0)
-	{	
+	{
 		clean_mlx(game);
 		return (-1);
 	}

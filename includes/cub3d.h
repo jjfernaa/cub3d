@@ -14,7 +14,7 @@
 # define W_HEIGHT 1280
 # define MOVE_SPEED 0.05
 # define ROT_SPEED 0.03
-# define MUOSE_SENSITIVITY 0.002
+# define MOUSE_SENSITIVITY 0.002
 
 typedef struct s_player
 {
@@ -78,10 +78,16 @@ uint32_t			create_color(int r, int g, int b);
 void				render_background(t_game *game);
 
 // Game Function
-void				move_player(t_game *game, int direction);
 void				handle_input(t_game *game);
 void				updates_game(void *param);
 void				run_game(t_game *game);
+
+// Movement functions
+int		move_player(t_game *game, int direction);
+void	move_vertical(t_game *game, int direction);
+void	move_side(t_game *game, int direction);
+void	move_rotate(t_game *game, double angle);
+void	mouse_callback(double xpos, double ypos, void *param);
 
 // Cleanup Functions
 void				cleanup_game(t_game *game);
