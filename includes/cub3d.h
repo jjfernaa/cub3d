@@ -50,6 +50,7 @@ typedef struct s_game
 
 // Utils Function
 void				print_error(char *msg);
+void				path_to_null(t_game *game);
 
 // Init Function
 int					init_game(t_game *game);
@@ -66,6 +67,7 @@ char				*paths_of_textures(char *line, const char *name);
 void				match_paths(char *line, t_game *game);
 char				*paths_c_f(char *line, const char *name);
 void				match_paths_c_f(char *line, t_game *game);
+int 				load_textures(t_game *game);
 
 // Render Function
 uint32_t			create_color(int r, int g, int b);
@@ -78,5 +80,9 @@ void				run_game(t_game *game);
 // Cleanup Functions
 void				cleanup_game(t_game *game);
 void				clean_mlx(t_game *game);
+void 				free_mlx_textures(t_game *game);
+void 				free_path_textures(t_game *game);
+void				free_textures(t_game *game);
+
 
 #endif

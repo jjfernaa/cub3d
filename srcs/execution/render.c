@@ -2,7 +2,7 @@
 
 uint32_t	create_color(int r, int g, int b)
 {
-	return(r << 24 | g << 16 | b << 8 | 0xFF);
+	return (r << 24 | g << 16 | b << 8 | 0xFF);
 }
 void	render_background(t_game *game)
 {

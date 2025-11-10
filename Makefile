@@ -26,6 +26,7 @@ SRCS = \
 	$(SRCS_DIR)/parser/check.c \
 	$(SRCS_DIR)/parser/map.c \
 	$(SRCS_DIR)/parser/textures.c \
+	$(SRCS_DIR)/parser/free.c \
 	$(SRCS_DIR)/execution/init.c \
 	$(SRCS_DIR)/execution/render.c \
 	$(SRCS_DIR)/execution/game_loop.c \
