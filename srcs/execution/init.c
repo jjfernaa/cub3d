@@ -46,5 +46,22 @@ int	init_player(t_game *game)
 	game->player.plane_y = 0.66;
 	return (0);
 }
+// cree esta funcion para descomprimir el main
 
-
+int	init_graphics(t_game *game)
+{
+	if (init_window(game) != 0)
+		return (-1);
+	if (init_textures(game) != 0)
+	{	
+		clean_mlx(game);
+		return (-1);
+	}
+	if (init_player(game) != 0)
+	{
+		clean_mlx(game);
+		return (-1);
+	}
+	render_background(game);
+	return (0);
+}

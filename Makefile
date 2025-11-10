@@ -14,15 +14,21 @@ LIBS := -lglfw -ldl -lm -pthread
 SRCS_DIR := srcs
 OBJS_DIR := build
 
+# Para probar en otro entorno ⚠️ Borrar al final
+BREW_PREFIX := /opt/homebrew
+INCLUDES := -I$(LIBFT_DIR) -I$(MLX42_DIR)/include -Iincludes -I$(BREW_PREFIX)/include
+LIBS := -L$(BREW_PREFIX)/lib -lglfw -ldl -lm -pthread
+
 # Source files - Add new .c files here
 SRCS = \
 	$(SRCS_DIR)/main.c \
-	$(SRCS_DIR)/parser/error.c \
+	$(SRCS_DIR)/parser/utils.c \
 	$(SRCS_DIR)/parser/check.c \
 	$(SRCS_DIR)/parser/map.c \
 	$(SRCS_DIR)/parser/textures.c \
 	$(SRCS_DIR)/execution/init.c \
 	$(SRCS_DIR)/execution/render.c \
+	$(SRCS_DIR)/execution/game_loop.c \
 	$(GNL_DIR)/get_next_line_bonus.c \
 	$(GNL_DIR)/get_next_line_utils_bonus.c \
 
