@@ -14,6 +14,7 @@ int	init_window(t_game *game)
 		print_error("Error: Failed to initialize MLX\n");
 		return (-1);
 	}
+	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	game->img = mlx_new_image(game->mlx, W_WIDTH, W_HEIGHT);
 	if (!game->img)
 	{
