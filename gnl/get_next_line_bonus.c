@@ -6,7 +6,7 @@
 /*   By: juan-jof <juan-jof@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/26 19:19:01 by lginer-m          #+#    #+#             */
-/*   Updated: 2025/11/10 00:50:33 by juan-jof         ###   ########.fr       */
+/*   Updated: 2025/11/10 15:58:59 by juan-jof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*save[OPEN_MAX];
+	static char	*save[__FD_SETSIZE];//OPEN_MAX
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 	{
