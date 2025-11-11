@@ -1,7 +1,7 @@
 NAME := cub3D
 CC := cc
 CFLAGS := -g -Wall -Werror -Wextra \
-		#-fsanitize=address,undefined \
+		-fsanitize=address,undefined \
 		#-Wunreachable-code -Ofast \
 
 LIBFT_DIR := libft

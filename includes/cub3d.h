@@ -50,7 +50,7 @@ typedef struct s_game
 }					t_game;
 
 // Utils Function
-void				print_error(char *msg);
+int				print_error(char *msg);
 void				path_to_null(t_game *game);
 
 // Init Function
@@ -71,6 +71,8 @@ void				match_paths_c_f(char *line, t_game *game);
 int 				load_textures(t_game *game);
 int 				load_map(char *argv, t_game *game);
 int					memory_map(t_game *game);
+int					get_map(char *file, t_game *game);
+int					check_valid_chars(char *line, t_game *game);
 
 // Render Function
 uint32_t			create_color(int r, int g, int b);

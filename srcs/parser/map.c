@@ -29,12 +29,11 @@ int	count_lines(char *file, t_game *game)
 	{
 		match_paths(line, game);
 		match_paths_c_f(line, game);//luego gestionas las texturas A PARTE(O NO)
-		game->map[count] = ft_strdup(line); //hago una copia para evitar segmentation fault
 		count++;
 		free(line);
 		line = get_next_line(fd);
 	}
-	printf("Total: %d líneas\n", count);
+	//printf("Total: %d líneas\n", count);
 	close(fd);
 	return(count);
 }
@@ -55,3 +54,46 @@ int	memory_map(t_game *game)
 	return (0);
 }
 
+int get_map(char *file, t_game *game) //funciona, pero hay que rescribir un poco en funcion del propposito de la funcion
+{
+	int		fd;
+	int		i;
+	char	*line;
+
+	fd = open(file, O_RDONLY);
+	if(fd < 0)
+		print_error("Error: Failed opening the file\n");
+	i = 0;
+	line = get_next_line(fd);
+	while(line)
+	{
+		game->map[i] = ft_strdup(line); //copia para evitar segmentation fault
+		check_valid_chars(line, game);
+		i++;
+		free(line);
+		line = get_next_line(fd);
+	}
+	close(fd);
+	return(i);
+}
+int	load_map(char *argv, t_game *game) // funcion principal donde cargaremos el mapa y vadilaremos		
+{
+	game->height = count_lines(argv, game);
+	if(game == NULL || game->height < 0)
+	{
+		print_error("Error: Invalid map structure\n");
+		return (1);
+	}
+	if(memory_map(game) != 0)
+	{
+		print_error("Error: Failed to allocate memory on map\n");
+		return (1);
+	}
+	if(get_map(argv, game) != 0)
+	{
+		print_error("Error: Failed to get map\n");
+		return (1);
+	}
+	// gestionamos aqui el parseo del mapa
+	return (0);
+}

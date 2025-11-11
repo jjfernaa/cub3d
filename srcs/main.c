@@ -8,7 +8,7 @@ int	main(int argc, char **argv)
 		return (1);
 	if (init_game(&game) != 0) // lo pongo aqui para evitar que ft_memset borre las texturas
 		return (1);
-	if(load_map(argv[1], &game) != 0) //nueva funcion que valida y carga el mapa
+	if (load_map(argv[1], &game) != 0) // nueva funcion que valida y carga el mapa
 	{
 		print_error("Error: Failed to read map\n");
 		cleanup_game(&game);
