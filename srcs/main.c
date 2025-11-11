@@ -3,14 +3,12 @@
 int	main(int argc, char **argv)
 {
 	t_game	game;
-	int		line_count;
 
 	if (validate_arguments(argc, argv) != 0) // Nueva funcion
 		return (1);
 	if (init_game(&game) != 0) // lo pongo aqui para evitar que ft_memset borre las texturas
 		return (1);
-	line_count = count_lines(argv[1], &game);
-	if (line_count <= 0)
+	if(load_map(argv[1], &game) != 0) //nueva funcion que valida y carga el mapa
 	{
 		print_error("Error: Failed to read map\n");
 		cleanup_game(&game);

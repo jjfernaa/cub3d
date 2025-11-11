@@ -24,11 +24,6 @@ void	free_textures(t_game *game)
 	free_path_textures(game);
 }
 
-void	free_map(t_game *game)
-{
-	(void)game;
-}
-
 void	cleanup_game(t_game *game)
 {
 	if (!game)

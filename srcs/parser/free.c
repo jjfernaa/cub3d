@@ -27,3 +27,16 @@ void	free_path_textures(t_game *game)
 		free(game->textures.ceiling);
 	path_to_null(game);
 }
+void	free_map(t_game *game)
+{
+	int i;
+
+	i = 0;
+	if (game->map == NULL)
+		return ;
+	while (game->map && game->map[i])
+		free(game->map[i++]);
+	free(game->map);
+	game->map = NULL;
+}
+

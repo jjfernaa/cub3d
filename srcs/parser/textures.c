@@ -61,7 +61,8 @@ char	*paths_of_textures(char *line, const char *name)
 		while (line[start] && (line[start] == ' ' || line[start] == '\t'))
 			start++;
 		end = start;
-		while (line[end] && line[end] != ' ' && line[end] != '\t' && line[end] != '\n')
+		while (line[end] && line[end] != ' ' && line[end] != '\t'
+			&& line[end] != '\n')
 			end++;
 		if (end <= start || start < 0 || end < 0)
 			return (NULL);

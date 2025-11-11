@@ -46,6 +46,7 @@ typedef struct s_game
 	int				ceiling_color;
 	int				fd;
 	char			**map;
+	int				height;
 }					t_game;
 
 // Utils Function
@@ -68,6 +69,8 @@ void				match_paths(char *line, t_game *game);
 char				*paths_c_f(char *line, const char *name);
 void				match_paths_c_f(char *line, t_game *game);
 int 				load_textures(t_game *game);
+int 				load_map(char *argv, t_game *game);
+int					memory_map(t_game *game);
 
 // Render Function
 uint32_t			create_color(int r, int g, int b);
@@ -83,6 +86,7 @@ void				clean_mlx(t_game *game);
 void 				free_mlx_textures(t_game *game);
 void 				free_path_textures(t_game *game);
 void				free_textures(t_game *game);
+void				free_map(t_game *game);
 
 
 #endif

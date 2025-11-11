@@ -29,10 +29,29 @@ int	count_lines(char *file, t_game *game)
 	{
 		match_paths(line, game);
 		match_paths_c_f(line, game);//luego gestionas las texturas A PARTE(O NO)
+		game->map[count] = ft_strdup(line); //hago una copia para evitar segmentation fault
 		count++;
 		free(line);
 		line = get_next_line(fd);
 	}
+	printf("Total: %d líneas\n", count);
 	close(fd);
 	return(count);
 }
+
+int	memory_map(t_game *game)
+{
+	int	i;
+
+	game->map = malloc((game->height + 1) * sizeof(char *));
+	if (!game->map)
+		return (1);
+	i = 0;
+	while (i <= game->height)
+	{
+		game->map[i] = NULL; //Lo ponemos a NULL para evitar memoria residual
+		i++;
+	}
+	return (0);
+}
+
