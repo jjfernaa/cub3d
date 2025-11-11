@@ -52,6 +52,8 @@ typedef struct s_game
 	int				ceiling_color;
 	int				fd;
 	char			**map;
+	int				map_width; // Agrego variable para almacenar tamaño del mapa
+	int				map_height; // Agrego variable para almacenar tamaño del mapa
 }					t_game;
 
 // Utils Function
@@ -72,6 +74,7 @@ char				*paths_of_textures(char *line, const char *name);
 void				match_paths(char *line, t_game *game);
 char				*paths_c_f(char *line, const char *name);
 void				match_paths_c_f(char *line, t_game *game);
+int					is_wall(t_game *game, double x, double y); // Agrego funcion chequeo de muro
 
 // Render Function
 uint32_t			create_color(int r, int g, int b);
@@ -83,7 +86,6 @@ void				updates_game(void *param);
 void				run_game(t_game *game);
 
 // Movement functions
-int		move_player(t_game *game, int direction);
 void	move_vertical(t_game *game, int direction);
 void	move_side(t_game *game, int direction);
 void	move_rotate(t_game *game, double angle);

@@ -1,5 +1,22 @@
 #include "../../includes/cub3d.h"
 
+// Necesito mejorar esta funcion para que detectr la colision con un margen
+int	is_wall(t_game *game, double x, double y)
+{
+	int	map_x;
+	int	map_y;
+
+	map_x = (int)x;
+	map_y = (int)y;
+	if (map_y < 0 || map_y >= game->map_height)// Necesito altura del mapa
+		return (1);
+	if (map_x < 0 || map_x >= game->map_width) // Necesito el ancho del mapa
+		return (1);
+	if (game->map[map_y][map_x] == '1')
+		return (1);
+	return (0);
+}
+
 void	move_vertical(t_game *game, int direction)
 {
 	double	new_x;
@@ -9,8 +26,10 @@ void	move_vertical(t_game *game, int direction)
 	speed = MOVE_SPEED * direction;
 	new_x = game->player.x + game->player.dir_x * speed;
 	new_y = game->player.y + game->player.dir_y * speed;
-	game->player.x = new_x;
-	game->player.y = new_y;
+	if (!is_wall(game, new_x, game->player.y))
+		game->player.x = new_x;
+	if (!is_wall(game, game->player.x, new_y))
+		game->player.y = new_y;
 }
 
 void	move_side(t_game *game, int direction)
@@ -22,8 +41,10 @@ void	move_side(t_game *game, int direction)
 	speed = MOVE_SPEED * direction;
 	new_x = game->player.x + game->player.plane_x * speed;
 	new_y = game->player.y + game->player.plane_y * speed;
-	game->player.x = new_x;
-	game->player.y = new_y;
+	if(!is_wall(game, new_x, game->player.y))
+		game->player.x = new_x;
+	if (!is_wall(game, game->player.x, new_y))
+		game->player.y = new_y;
 }
 
 void	move_rotate(t_game *game, double angle)
@@ -68,19 +89,4 @@ void	mouse_callback(double xpos, double ypos, void *param)
 	move_rotate(game, x_off);
 }
 
-void	handle_input(t_game *game)
-{
-	// Movimientos adelante y atras
-	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
-		move_vertical(game, 1);
-	if (mlx_is_key_down(game->mlx, MLX_KEY_S))
-		move_vertical(game, -1);
-	// Movimientos laterales
-	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
-		move_side(game, -1);
-	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
-		move_side(game, 1);
-	// Salir
-	if (mlx_is_key_down(game->mlx, MLX_KEY_ESCAPE))
-		mlx_close_window(game->mlx);
-}
+
