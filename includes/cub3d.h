@@ -72,7 +72,7 @@ int 				load_textures(t_game *game);
 int 				load_map(char *argv, t_game *game);
 int					memory_map(t_game *game);
 int					get_map(char *file, t_game *game);
-int					check_valid_chars(char *line, t_game *game);
+int					check_valid_chars(char *line);
 
 // Render Function
 uint32_t			create_color(int r, int g, int b);

@@ -22,7 +22,7 @@ char	*paths_c_f(char *line, const char *name)
 	}
 	return (NULL);
 }
-
+//hay que tener en cuenta las comas en el parseo del formato del suelo y del color
 void	match_paths_c_f(char *line, t_game *game)
 {
 	char	*temp_path;

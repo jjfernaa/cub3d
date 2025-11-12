@@ -68,7 +68,7 @@ int get_map(char *file, t_game *game) //funciona, pero hay que rescribir un poco
 	while(line)
 	{
 		game->map[i] = ft_strdup(line); //copia para evitar segmentation fault
-		check_valid_chars(line, game);
+		//check_valid_chars(line);
 		i++;
 		free(line);
 		line = get_next_line(fd);
@@ -80,20 +80,11 @@ int	load_map(char *argv, t_game *game) // funcion principal donde cargaremos el 
 {
 	game->height = count_lines(argv, game);
 	if(game == NULL || game->height < 0)
-	{
 		print_error("Error: Invalid map structure\n");
-		return (1);
-	}
 	if(memory_map(game) != 0)
-	{
 		print_error("Error: Failed to allocate memory on map\n");
-		return (1);
-	}
-	if(get_map(argv, game) != 0)
-	{
+	if(get_map(argv, game) <= 0)
 		print_error("Error: Failed to get map\n");
-		return (1);
-	}
 	// gestionamos aqui el parseo del mapa
 	return (0);
 }
