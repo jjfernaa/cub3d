@@ -1,7 +1,7 @@
 NAME := cub3D
 CC := cc
 CFLAGS := -g -Wall -Werror -Wextra \
-		#-fsanitize=address,undefined \
+		-fsanitize=address,undefined \
 		#-Wunreachable-code -Ofast \
 
 LIBFT_DIR := libft
@@ -26,7 +26,9 @@ SRCS = \
 	$(SRCS_DIR)/parser/check.c \
 	$(SRCS_DIR)/parser/map.c \
 	$(SRCS_DIR)/parser/textures.c \
+	$(SRCS_DIR)/parser/free.c \
 	$(SRCS_DIR)/execution/init.c \
+	$(SRCS_DIR)/execution/player.c \
 	$(SRCS_DIR)/execution/render.c \
 	$(SRCS_DIR)/execution/game_loop.c \
 	$(GNL_DIR)/get_next_line_bonus.c \
