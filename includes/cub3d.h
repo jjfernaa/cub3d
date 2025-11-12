@@ -57,7 +57,8 @@ typedef struct s_game
 }					t_game;
 
 // Utils Function
-void				print_error(char *msg);
+int				print_error(char *msg);
+void				path_to_null(t_game *game);
 
 // Init Function
 int					init_game(t_game *game);
@@ -75,6 +76,11 @@ void				match_paths(char *line, t_game *game);
 char				*paths_c_f(char *line, const char *name);
 void				match_paths_c_f(char *line, t_game *game);
 int					is_wall(t_game *game, double x, double y); // Agrego funcion chequeo de muro
+int 				load_textures(t_game *game);
+int 				load_map(char *argv, t_game *game);
+int					memory_map(t_game *game);
+int					get_map(char *file, t_game *game);
+int					check_valid_chars(char *line, t_game *game);
 
 // Render Function
 uint32_t			create_color(int r, int g, int b);
@@ -94,5 +100,10 @@ void	mouse_callback(double xpos, double ypos, void *param);
 // Cleanup Functions
 void				cleanup_game(t_game *game);
 void				clean_mlx(t_game *game);
+void 				free_mlx_textures(t_game *game);
+void 				free_path_textures(t_game *game);
+void				free_textures(t_game *game);
+void				free_map(t_game *game);
+
 
 #endif

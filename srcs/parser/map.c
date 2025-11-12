@@ -18,9 +18,9 @@ int	count_lines(char *file, t_game *game)
 	int		count;
 	char	*line;
 
-	// printf("Intentando abrir: '%s'\n", file);
+	//printf("Intentando abrir: '%s'\n", file);
 	fd = open(file, O_RDONLY);
-	// printf("valor fd: %d\n", fd);
+	//printf("valor fd: %d\n", fd);
 	if(fd < 0)
 		print_error("Error: Failed opening the file\n");
 	count = 0;
@@ -33,65 +33,67 @@ int	count_lines(char *file, t_game *game)
 		free(line);
 		line = get_next_line(fd);
 	}
+	//printf("Total: %d líneas\n", count);
 	close(fd);
 	return(count);
 }
 
-char	*paths_of_textures(char *line, const char *name)
+int	memory_map(t_game *game)
 {
-	char	*path;
-	int		start;
-	int		end;
+	int	i;
 
-	if (ft_strncmp(line, name, 3) == 0)
+	game->map = malloc((game->height + 1) * sizeof(char *));
+	if (!game->map)
+		return (1);
+	i = 0;
+	while (i <= game->height)
 	{
-		start = 3;
-		while(line[start] && (line[start] == ' ' || line[start] == '\t'))
-			start++;
-		end = start;
-		while(line[end] && line[end] != ' ' && line[end] != '\t' && line[end] != '\n')
-			end++;
-		path = ft_substr(line, start, end - start);
-		if(!path)
-			return(NULL);
-		return(path);
+		game->map[i] = NULL; //Lo ponemos a NULL para evitar memoria residual
+		i++;
 	}
-	return (NULL);
+	return (0);
 }
 
-void	match_paths(char *line, t_game *game)
+int get_map(char *file, t_game *game) //funciona, pero hay que rescribir un poco en funcion del propposito de la funcion
 {
-	char *temp_path;
-	
-	if(!game->textures.north_path)
-	{
-		temp_path = paths_of_textures(line, "NO ");
-		if(temp_path)
-			game->textures.north_path = temp_path;
-	}
-	if(!game->textures.south_path)
-	{
-		temp_path = paths_of_textures(line, "SO ");
-		if(temp_path)
-			game->textures.south_path = temp_path;
-	}
-	if(!game->textures.west_path)
-	{
-		temp_path = paths_of_textures(line, "WE ");
-		if(temp_path)
-			game->textures.west_path = temp_path;
-	}
-}
+	int		fd;
+	int		i;
+	char	*line;
 
-/*int load_textures(char *path, t_game *game)
-{
-	if(!(game->textures.north = mlx_load_texture(path)))
+	fd = open(file, O_RDONLY);
+	if(fd < 0)
+		print_error("Error: Failed opening the file\n");
+	i = 0;
+	line = get_next_line(fd);
+	while(line)
 	{
-		free(path);
-		return(-1);
+		game->map[i] = ft_strdup(line); //copia para evitar segmentation fault
+		check_valid_chars(line, game);
+		i++;
+		free(line);
+		line = get_next_line(fd);
 	}
-	free(path);
-		para poder gestionar más adelante en el parser:
-		if(load_textures(path, game) <= 0)
-			print_error("Error: textures are not loading");
-}*/
+	close(fd);
+	return(i);
+}
+int	load_map(char *argv, t_game *game) // funcion principal donde cargaremos el mapa y vadilaremos		
+{
+	game->height = count_lines(argv, game);
+	if(game == NULL || game->height < 0)
+	{
+		print_error("Error: Invalid map structure\n");
+		return (1);
+	}
+	if(memory_map(game) != 0)
+	{
+		print_error("Error: Failed to allocate memory on map\n");
+		return (1);
+	}
+	if(get_map(argv, game) != 0)
+	{
+		print_error("Error: Failed to get map\n");
+		return (1);
+	}
+	// gestionamos aqui el parseo del mapa
+	return (0);
+}
