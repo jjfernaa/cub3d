@@ -4,6 +4,7 @@ uint32_t	create_color(int r, int g, int b)
 {
 	return (r << 24 | g << 16 | b << 8 | 0xFF);
 }
+
 void	render_background(t_game *game)
 {
 	int			x;
@@ -11,9 +12,8 @@ void	render_background(t_game *game)
 	uint32_t	ceiling;
 	uint32_t	floor;
 
-	ceiling = create_color(133, 0, 0);
-	floor = create_color(0, 0, 0);
-
+	ceiling = create_color(14, 14, 125);
+	floor = create_color(47, 61, 40);
 	y = 0;
 	while (y < W_HEIGHT)
 	{

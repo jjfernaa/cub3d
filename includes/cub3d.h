@@ -8,9 +8,13 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <math.h>
 
-# define W_WIDTH 1280
-# define W_HEIGHT 1280
+# define W_WIDTH 1920
+# define W_HEIGHT 1080
+# define MOVE_SPEED 0.05
+# define ROT_SPEED 0.03
+# define MOUSE_SENSITIVITY 0.002
 
 typedef struct s_player
 {
@@ -20,6 +24,8 @@ typedef struct s_player
 	double			dir_y;
 	double			plane_x;
 	double			plane_y;
+	double			mouse_x;
+	int				first_mouse;
 }					t_player;
 
 typedef struct s_textures
@@ -46,7 +52,8 @@ typedef struct s_game
 	int				ceiling_color;
 	int				fd;
 	char			**map;
-	int				height;
+	int				map_width; // Agrego variable para almacenar tamaño del mapa
+	int				map_height; // Agrego variable para almacenar tamaño del mapa
 }					t_game;
 
 // Utils Function
@@ -68,6 +75,7 @@ char				*paths_of_textures(char *line, const char *name);
 void				match_paths(char *line, t_game *game);
 char				*paths_c_f(char *line, const char *name);
 void				match_paths_c_f(char *line, t_game *game);
+int					is_wall(t_game *game, double x, double y); // Agrego funcion chequeo de muro
 int 				load_textures(t_game *game);
 int 				load_map(char *argv, t_game *game);
 int					memory_map(t_game *game);
@@ -79,8 +87,15 @@ uint32_t			create_color(int r, int g, int b);
 void				render_background(t_game *game);
 
 // Game Function
+void				handle_input(t_game *game);
 void				updates_game(void *param);
 void				run_game(t_game *game);
+
+// Movement functions
+void	move_vertical(t_game *game, int direction);
+void	move_side(t_game *game, int direction);
+void	move_rotate(t_game *game, double angle);
+void	mouse_callback(double xpos, double ypos, void *param);
 
 // Cleanup Functions
 void				cleanup_game(t_game *game);
