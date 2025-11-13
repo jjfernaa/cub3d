@@ -81,6 +81,9 @@ int 				load_map(char *argv, t_game *game);
 int					memory_map(t_game *game);
 int					get_map(char *file, t_game *game);
 int					check_valid_chars(char *line);
+int 				split_path_c(t_game *game);
+int					split_path_f(t_game *game);
+int 				parser_color(t_game *game);
 
 // Render Function
 uint32_t			create_color(int r, int g, int b);
