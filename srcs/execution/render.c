@@ -1,19 +1,10 @@
 #include "../../includes/cub3d.h"
 
-uint32_t	create_color(int r, int g, int b)
-{
-	return (r << 24 | g << 16 | b << 8 | 0xFF);
-}
-
 void	render_background(t_game *game)
 {
 	int			x;
 	int			y;
-	uint32_t	ceiling;
-	uint32_t	floor;
 
-	ceiling = create_color(14, 14, 125);
-	floor = create_color(47, 61, 40);
 	y = 0;
 	while (y < W_HEIGHT)
 	{
@@ -21,9 +12,9 @@ void	render_background(t_game *game)
 		while (x < W_WIDTH)
 		{
 			if (y < W_HEIGHT / 2)
-				mlx_put_pixel(game->img, x, y, ceiling);
+				mlx_put_pixel(game->img, x, y, game->ceiling_color);
 			else
-				mlx_put_pixel(game->img, x, y, floor);
+				mlx_put_pixel(game->img, x, y, game->floor_color);
 			x++;
 		}
 		y++;

@@ -27,13 +27,13 @@ void	match_paths_c_f(char *line, t_game *game)
 {
 	char	*temp_path;
 
-	if (!game->textures.east_path)
+	/* if (!game->textures.east_path)
 	{
 		temp_path = paths_of_textures(line, "EA ");
 		if (temp_path)
 			game->textures.east_path = temp_path;
 	}
-	if (!game->textures.ceiling)
+	if (!game->textures.ceiling) */
 	{
 		temp_path = paths_c_f(line, "C ");
 		if (temp_path)
@@ -76,25 +76,41 @@ char	*paths_of_textures(char *line, const char *name)
 
 void	match_paths(char *line, t_game *game)
 {
-	char	*temp_path;
-
 	if (!game->textures.north_path)
 	{
-		temp_path = paths_of_textures(line, "NO ");
-		if (temp_path)
-			game->textures.north_path = temp_path;
+		game->textures.tmp_path = paths_of_textures(line, "NO ");
+		if (game->textures.tmp_path)
+		{
+			game->textures.north_path = game->textures.tmp_path;
+			printf("valor de tmp: %s\n", game->textures.tmp_path);
+		}
 	}
 	if (!game->textures.south_path)
 	{
-		temp_path = paths_of_textures(line, "SO ");
-		if (temp_path)
-			game->textures.south_path = temp_path;
+		game->textures.tmp_path = paths_of_textures(line, "SO ");
+		if (game->textures.tmp_path)
+		{
+			game->textures.south_path = game->textures.tmp_path;
+			printf("valor de tmp: %s\n", game->textures.tmp_path);
+		}
 	}
 	if (!game->textures.west_path)
 	{
-		temp_path = paths_of_textures(line, "WE ");
-		if (temp_path)
-			game->textures.west_path = temp_path;
+		game->textures.tmp_path = paths_of_textures(line, "WE ");
+		if (game->textures.tmp_path)
+		{
+			game->textures.west_path = game->textures.tmp_path;
+			printf("valor de tmp: %s\n", game->textures.tmp_path);
+		}
+	}
+	if (!game->textures.east_path)
+	{
+		game->textures.tmp_path = paths_of_textures(line, "EA ");
+		if (game->textures.tmp_path)
+		{
+			game->textures.east_path = game->textures.tmp_path;
+			printf("valor de tmp: %s\n", game->textures.tmp_path);
+		}
 	}
 }
 
