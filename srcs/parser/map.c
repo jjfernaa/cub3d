@@ -42,11 +42,11 @@ int	memory_map(t_game *game)
 {
 	int	i;
 
-	game->map = malloc((game->height + 1) * sizeof(char *));
+	game->map = malloc((game->map_height + 1) * sizeof(char *));
 	if (!game->map)
 		return (1);
 	i = 0;
-	while (i <= game->height)
+	while (i <= game->map_height)
 	{
 		game->map[i] = NULL; //Lo ponemos a NULL para evitar memoria residual
 		i++;
@@ -58,17 +58,21 @@ int get_map(char *file, t_game *game) //funciona, pero hay que rescribir un poco
 {
 	int		fd;
 	int		i;
+	int		len;
 	char	*line;
 
 	fd = open(file, O_RDONLY);
 	if(fd < 0)
 		return (print_error("Error: Failed opening the file\n"));
 	i = 0;
+	game->map_width = 0;
 	line = get_next_line(fd);
 	while(line)
 	{
 		game->map[i] = ft_strdup(line); //copia para evitar segmentation fault
-		//check_valid_chars(line);
+		len = ft_strlen(line);
+		if (len > game->map_width) // Encontrar el ancho maximo
+			game->map_width = len;
 		i++;
 		free(line);
 		line = get_next_line(fd);
@@ -76,10 +80,11 @@ int get_map(char *file, t_game *game) //funciona, pero hay que rescribir un poco
 	close(fd);
 	return(i);
 }
-int	load_map(char *argv, t_game *game) // funcion principal donde cargaremos el mapa y vadilaremos		
+
+int	load_map(char *argv, t_game *game)// funcion principal donde cargaremos el mapa y vadilaremos		
 {
-	game->height = count_lines(argv, game);
-	if(game == NULL || game->height < 0)
+	game->map_height = count_lines(argv, game);
+	if(game == NULL || game->map_height < 0)
 		return (print_error("Error: Invalid map structure\n"));
 	if(memory_map(game) != 0)
 		return (print_error("Error: Failed to allocate memory on map\n"));
