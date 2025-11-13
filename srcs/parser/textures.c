@@ -139,3 +139,5 @@ int	load_textures(t_game *game)
 	}
 	return (0);
 }
+
+//CONTROLAR QUE al poner una coordenada distinta hace segmentation fault
