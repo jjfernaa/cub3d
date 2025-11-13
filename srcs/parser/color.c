@@ -88,3 +88,38 @@ int	split_path_f(t_game *game)
 }*/
 
 //añadir una variable color donde se almacene el valor int ya spliteado y conertido a int obviamente
+
+
+
+// Añadir en textures.c:
+int parse_color_value(char *str)
+{
+    char    **split;
+    int     r, g, b;
+    int     color;
+
+    split = ft_split(str, ',');
+    if (!split || !split[0] || !split[1] || !split[2])
+    {
+        // free split si es necesario
+        return (-1);
+    }
+    
+    r = ft_atoi(split[0]);
+    g = ft_atoi(split[1]);
+    b = ft_atoi(split[2]);
+    
+    // Liberar split
+    int i = 0;
+    while (split[i])
+        free(split[i++]);
+    free(split);
+    
+    // Validar rangos
+    if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
+        return (-1);
+    
+    // Convertir a formato MLX (RGBA)
+    color = (r << 24) | (g << 16) | (b << 8) | 0xFF;
+    return (color);
+}
