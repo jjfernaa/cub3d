@@ -10,8 +10,8 @@
 # include <unistd.h>
 # include <math.h>
 
-# define W_WIDTH 1920
-# define W_HEIGHT 1080
+# define W_WIDTH 1280
+# define W_HEIGHT 720
 # define MOVE_SPEED 0.05
 # define ROT_SPEED 0.03
 # define MOUSE_SENSITIVITY 0.002

@@ -39,8 +39,8 @@ int	init_textures(t_game *game)
 
 int	init_player(t_game *game)
 {
-	game->player.x = 5.0;
-	game->player.y = 5.0;	
+	game->player.x = 0.5; //Agrego posicion real del jugador eje x 
+	game->player.y = 0.5; //Agrego posicion real del jugador eje y;
 	game->player.dir_x = -1.0;
 	game->player.dir_y = 0.0;	
 	game->player.plane_x = 0.0;
