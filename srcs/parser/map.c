@@ -22,7 +22,7 @@ int	count_lines(char *file, t_game *game)
 	fd = open(file, O_RDONLY);
 	//printf("valor fd: %d\n", fd);
 	if(fd < 0)
-		print_error("Error: Failed opening the file\n");
+		return (print_error("Error: Failed opening the file\n"));
 	count = 0;
 	line = get_next_line(fd);
 	while(line)
@@ -62,7 +62,7 @@ int get_map(char *file, t_game *game) //funciona, pero hay que rescribir un poco
 
 	fd = open(file, O_RDONLY);
 	if(fd < 0)
-		print_error("Error: Failed opening the file\n");
+		return (print_error("Error: Failed opening the file\n"));
 	i = 0;
 	line = get_next_line(fd);
 	while(line)
@@ -80,11 +80,11 @@ int	load_map(char *argv, t_game *game) // funcion principal donde cargaremos el 
 {
 	game->height = count_lines(argv, game);
 	if(game == NULL || game->height < 0)
-		print_error("Error: Invalid map structure\n");
+		return (print_error("Error: Invalid map structure\n"));
 	if(memory_map(game) != 0)
-		print_error("Error: Failed to allocate memory on map\n");
+		return (print_error("Error: Failed to allocate memory on map\n"));
 	if(get_map(argv, game) <= 0)
-		print_error("Error: Failed to get map\n");
+		return (print_error("Error: Failed to get map\n"));
 	// gestionamos aqui el parseo del mapa
 	return (0);
 }

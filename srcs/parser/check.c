@@ -15,9 +15,9 @@ int	check_extension(char *str)
 int	validate_arguments(int argc, char **argv)
 {
 	if (argc != 2)
-		print_error("Error: Invalid arguments\n");
+		return print_error("Error: Invalid arguments\n");
 	if (check_extension(argv[1]) != 0)
-		print_error("Error: Invalid map extension\n");
+		return print_error("Error: Invalid map extension\n");
 	return (0);
 }
 
@@ -40,7 +40,7 @@ int	validate_arguments(int argc, char **argv)
 			if(line[i] != 'N' && line[i] != '1' && line[i] != '0' && line[i] != 'S' && line[i] != 'E' && line[i] != 'O' && line[i] != ' ' && line[i] != '\n' && line[i] != '\t' && line[i] != 'W')
 			{
 				real_line = 0;
-				print_error("Error: Invalid characters");
+				return print_error("Error: Invalid characters");
 				break; 
 			}
 			i++;
@@ -56,8 +56,8 @@ int	validate_arguments(int argc, char **argv)
            line[i] != 'S' && line[i] != 'E' && line[i] != 'W' &&
            line[i] != ' ' && line[i] != '\n' && line[i] != '\t')
         {
-            print_error("Error: Invalid characters");
-             break;;
+        	return print_error("Error: Invalid characters");
+            break;;
         }
         i++;
     }

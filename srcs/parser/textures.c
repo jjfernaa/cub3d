@@ -105,21 +105,21 @@ int	load_textures(t_game *game)
 	game->textures.east = NULL;
 	game->textures.west = NULL;
 	if (!(game->textures.north = mlx_load_png(game->textures.north_path)))
-		return (-1);
+		return print_error("Error: North texture are not found");
 	if (!(game->textures.south = mlx_load_png(game->textures.south_path)))
 	{
 		free_mlx_textures(game);
-		return (-1);
+		return print_error("Error: South texture are not found");
 	}
 	if (!(game->textures.east = mlx_load_png(game->textures.east_path)))
 	{
 		free_mlx_textures(game);
-		return (-1);
+		return print_error("Error: East texture are not found");
 	}
 	if (!(game->textures.west = mlx_load_png(game->textures.west_path)))
 	{
 		free_mlx_textures(game);
-		return (-1);
+		return print_error("Error: West texture are not found");
 	}
 	return (0);
 }

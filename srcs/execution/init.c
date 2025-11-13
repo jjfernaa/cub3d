@@ -11,20 +11,20 @@ int	init_window(t_game *game)
 	game->mlx = mlx_init(W_WIDTH, W_HEIGHT, "cub3D", true);
 	if (!game->mlx)
 	{
-		print_error("Error: Failed to initialize MLX\n");
+		return (print_error("Error: Failed to initialize MLX\n"));
 		return (-1);
 	}
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	game->img = mlx_new_image(game->mlx, W_WIDTH, W_HEIGHT);
 	if (!game->img)
 	{
-		print_error("Error: Failed to create image\n");
+		return (print_error("Error: Failed to create image\n"));
 		mlx_terminate(game->mlx);
 		return (-1);
 	}
 	if (mlx_image_to_window(game->mlx, game->img, 0, 0) < 0)
 	{
-		print_error("Error: Failed to display image\n");
+		return (print_error("Error: Failed to display image\n"));
 		mlx_terminate(game->mlx);
 		return (-1);
 	}
