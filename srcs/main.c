@@ -26,7 +26,6 @@ int	main(int argc, char **argv)
 		cleanup_game(&game);
 		return (1);
 	}
-	parser_color(&game);
 	run_game(&game); // nueva funcion
 	cleanup_game(&game);
 	return (0);

@@ -40,3 +40,15 @@ void	free_map(t_game *game)
 	game->map = NULL;
 }
 
+void	free_split(char **str)
+{
+	int	i;
+
+	if (str)
+	{
+		i = 0;
+		while (str[i])
+			free(str[i++]);
+		free(str);
+	}
+}

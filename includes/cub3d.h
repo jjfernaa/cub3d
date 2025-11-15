@@ -5,10 +5,10 @@
 # include "../gnl/get_next_line_bonus.h"
 # include "../libft/libft.h"
 # include <fcntl.h>
+# include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include <math.h>
 
 # define W_WIDTH 1280
 # define W_HEIGHT 720
@@ -45,22 +45,21 @@ typedef struct s_textures
 
 typedef struct t_ray
 {
-
-	double			camera_x; //Posicion en el plano de la camara
-	double			ray_dir_x; // Direccion del rayo
-	double			ray_dir_y;	
-	int				map_x;		// Coordenadas del mapa
+	double camera_x;  // Posicion en el plano de la camara
+	double ray_dir_x; // Direccion del rayo
+	double			ray_dir_y;
+	int map_x; // Coordenadas del mapa
 	int				map_y;
-	double			side_dist_x; // Distancia al siguiente lado X/Y
+	double side_dist_x; // Distancia al siguiente lado X/Y
 	double			side_dist_y;
-	double			delta_dist_x; 	 // Distancia entre cada lado X/Y
+	double delta_dist_x; // Distancia entre cada lado X/Y
 	double			delta_dist_y;
-	double			perp_wall_dist;  // Distancia perpendicular a la pared
-	int				step_x;			 // Direccion del paso (-1 o +1)
+	double perp_wall_dist; // Distancia perpendicular a la pared
+	int step_x;            // Direccion del paso (-1 o +1)
 	int				step_y;
-	int				hit;		// flag para choque de pared
-	int				side;  		// Lado NS o EW
-}	t_ray;
+	int hit;  // flag para choque de pared
+	int side; // Lado NS o EW
+}					t_ray;
 
 typedef struct s_game
 {
@@ -68,16 +67,16 @@ typedef struct s_game
 	mlx_image_t		*img;
 	t_player		player;
 	t_textures		textures;
-	int				floor_color;
-	int				ceiling_color;
+	uint32_t		floor_color;
+	uint32_t		ceiling_color;
 	int				fd;
 	char			**map;
-	int				map_width; // Agrego variable para almacenar tamaño del mapa
-	int				map_height; // Agrego variable para almacenar tamaño del mapa
+	int map_width;  // Agrego variable para almacenar tamaño del mapa
+	int map_height; // Agrego variable para almacenar tamaño del mapa
 }					t_game;
 
 // Utils Function
-int				print_error(char *msg);
+int					print_error(char *msg);
 void				path_to_null(t_game *game);
 
 // Init Function
@@ -95,15 +94,15 @@ char				*paths_of_textures(char *line, const char *name);
 void				match_paths(char *line, t_game *game);
 char				*paths_c_f(char *line, const char *name);
 void				match_paths_c_f(char *line, t_game *game);
-int					is_wall(t_game *game, double x, double y); // Agrego funcion chequeo de muro
-int 				load_textures(t_game *game);
-int 				load_map(char *argv, t_game *game);
+int	is_wall(t_game *game, double x, double y); // Agrego funcion chequeo de muro
+int					load_textures(t_game *game);
+int					load_map(char *argv, t_game *game);
 int					memory_map(t_game *game);
 int					get_map(char *file, t_game *game);
 int					check_valid_chars(char *line);
-int 				split_path_c(t_game *game);
-int					split_path_f(t_game *game);
-int 				parser_color(t_game *game);
+uint32_t			split_path(char *path);
+uint32_t			check_path_colors(int a, int b, int c);
+int					validate_char_color(char *str);
 
 // Render Function
 uint32_t			create_color(int r, int g, int b);
@@ -115,18 +114,18 @@ void				updates_game(void *param);
 void				run_game(t_game *game);
 
 // Movement functions
-void	move_vertical(t_game *game, int direction);
-void	move_side(t_game *game, int direction);
-void	move_rotate(t_game *game, double angle);
-void	mouse_callback(double xpos, double ypos, void *param);
+void				move_vertical(t_game *game, int direction);
+void				move_side(t_game *game, int direction);
+void				move_rotate(t_game *game, double angle);
+void				mouse_callback(double xpos, double ypos, void *param);
 
 // Cleanup Functions
 void				cleanup_game(t_game *game);
 void				clean_mlx(t_game *game);
-void 				free_mlx_textures(t_game *game);
-void 				free_path_textures(t_game *game);
+void				free_mlx_textures(t_game *game);
+void				free_path_textures(t_game *game);
 void				free_textures(t_game *game);
 void				free_map(t_game *game);
-
+void				free_split(char **str);
 
 #endif

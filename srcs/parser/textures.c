@@ -22,28 +22,32 @@ char	*paths_c_f(char *line, const char *name)
 	}
 	return (NULL);
 }
-//hay que tener en cuenta las comas en el parseo del formato del suelo y del color
+
 void	match_paths_c_f(char *line, t_game *game)
 {
-	char	*temp_path;
-
-	/* if (!game->textures.east_path)
+	if (!game->textures.ceiling)
 	{
-		temp_path = paths_of_textures(line, "EA ");
-		if (temp_path)
-			game->textures.east_path = temp_path;
-	}
-	if (!game->textures.ceiling) */
-	{
-		temp_path = paths_c_f(line, "C ");
-		if (temp_path)
-			game->textures.ceiling = temp_path;
+		game->textures.tmp_path = paths_c_f(line, "C ");
+		if (game->textures.tmp_path)
+		{
+			game->textures.ceiling = game->textures.tmp_path;
+			printf("valor de tmp: %s\n", game->textures.tmp_path);
+			game->ceiling_color = split_path(game->textures.ceiling);
+			if (game->ceiling_color == 1)
+				exit(1);
+		}
 	}
 	if (!game->textures.floor)
 	{
-		temp_path = paths_c_f(line, "F ");
-		if (temp_path)
-			game->textures.floor = temp_path;
+		game->textures.tmp_path = paths_c_f(line, "F ");
+		if (game->textures.tmp_path)
+		{
+			game->textures.floor = game->textures.tmp_path;
+			printf("valor de tmp: %s\n", game->textures.tmp_path);
+			game->floor_color = split_path(game->textures.floor);
+			if (game->floor_color == 1)
+				exit(1);
+		}
 	}
 }
 
@@ -80,37 +84,25 @@ void	match_paths(char *line, t_game *game)
 	{
 		game->textures.tmp_path = paths_of_textures(line, "NO ");
 		if (game->textures.tmp_path)
-		{
 			game->textures.north_path = game->textures.tmp_path;
-			printf("valor de tmp: %s\n", game->textures.tmp_path);
-		}
 	}
 	if (!game->textures.south_path)
 	{
 		game->textures.tmp_path = paths_of_textures(line, "SO ");
 		if (game->textures.tmp_path)
-		{
 			game->textures.south_path = game->textures.tmp_path;
-			printf("valor de tmp: %s\n", game->textures.tmp_path);
-		}
 	}
 	if (!game->textures.west_path)
 	{
 		game->textures.tmp_path = paths_of_textures(line, "WE ");
 		if (game->textures.tmp_path)
-		{
 			game->textures.west_path = game->textures.tmp_path;
-			printf("valor de tmp: %s\n", game->textures.tmp_path);
-		}
 	}
 	if (!game->textures.east_path)
 	{
 		game->textures.tmp_path = paths_of_textures(line, "EA ");
 		if (game->textures.tmp_path)
-		{
 			game->textures.east_path = game->textures.tmp_path;
-			printf("valor de tmp: %s\n", game->textures.tmp_path);
-		}
 	}
 }
 
@@ -121,23 +113,23 @@ int	load_textures(t_game *game)
 	game->textures.east = NULL;
 	game->textures.west = NULL;
 	if (!(game->textures.north = mlx_load_png(game->textures.north_path)))
-		return print_error("Error: North texture are not found");
+		return (print_error("Error: North texture are not found"));
 	if (!(game->textures.south = mlx_load_png(game->textures.south_path)))
 	{
 		free_mlx_textures(game);
-		return print_error("Error: South texture are not found");
+		return (print_error("Error: South texture are not found"));
 	}
 	if (!(game->textures.east = mlx_load_png(game->textures.east_path)))
 	{
 		free_mlx_textures(game);
-		return print_error("Error: East texture are not found");
+		return (print_error("Error: East texture are not found"));
 	}
 	if (!(game->textures.west = mlx_load_png(game->textures.west_path)))
 	{
 		free_mlx_textures(game);
-		return print_error("Error: West texture are not found");
+		return (print_error("Error: West texture are not found"));
 	}
 	return (0);
 }
 
-//CONTROLAR QUE al poner una coordenada distinta hace segmentation fault
+// CONTROLAR QUE al poner una coordenada distinta hace segmentation fault
