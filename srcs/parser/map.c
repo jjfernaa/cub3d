@@ -84,7 +84,7 @@ int get_map(char *file, t_game *game) //funciona, pero hay que rescribir un poco
 int	load_map(char *argv, t_game *game)// funcion principal donde cargaremos el mapa y vadilaremos		
 {
 	game->map_height = count_lines(argv, game);
-	if(game == NULL || game->map_height < 0)
+	if(game == NULL || game->map_height < 0 || game->map_width < 0)
 		return (print_error("Error: Invalid map structure\n"));
 	if(memory_map(game) != 0)
 		return (print_error("Error: Failed to allocate memory on map\n"));

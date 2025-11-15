@@ -83,4 +83,3 @@ int	validate_char_color(char *str)
 		return (1);
 	return (0);
 }
-// hay que gestionar que no se puedan poner vocales en los colores rgb ni que se pudan añadir ningun tipo de comilla o algo despues del ultimo
