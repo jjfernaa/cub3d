@@ -53,8 +53,8 @@ int	memory_map(t_game *game)
 	}
 	return (0);
 }
-
-int get_map(char *file, t_game *game) //funciona, pero hay que rescribir un poco en funcion del propposito de la funcion
+//funciona, pero hay que rescribir un poco en funcion del propposito de la funcion
+int	get_map(char *file, t_game *game)
 {
 	int		fd;
 	int		i;
@@ -80,8 +80,8 @@ int get_map(char *file, t_game *game) //funciona, pero hay que rescribir un poco
 	close(fd);
 	return(i);
 }
-
-int	load_map(char *argv, t_game *game)// funcion principal donde cargaremos el mapa y vadilaremos		
+// funcion principal donde cargaremos el mapa y vadilaremos
+int	load_map(char *argv, t_game *game)
 {
 	game->map_height = count_lines(argv, game);
 	if(game == NULL || game->map_height < 0)

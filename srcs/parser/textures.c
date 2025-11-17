@@ -108,10 +108,6 @@ void	match_paths(char *line, t_game *game)
 
 int	load_textures(t_game *game)
 {
-	game->textures.north = NULL;
-	game->textures.south = NULL;
-	game->textures.east = NULL;
-	game->textures.west = NULL;
 	if (!(game->textures.north = mlx_load_png(game->textures.north_path)))
 		return (print_error("Error: North texture are not found"));
 	if (!(game->textures.south = mlx_load_png(game->textures.south_path)))

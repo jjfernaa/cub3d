@@ -33,6 +33,10 @@ int	init_window(t_game *game)
 int	init_textures(t_game *game)
 {
 	(void)game;
+	game->textures.north = NULL;
+	game->textures.south = NULL;
+	game->textures.east = NULL;
+	game->textures.west = NULL;
 	return (0);
 }
 
