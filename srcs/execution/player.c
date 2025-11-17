@@ -1,5 +1,61 @@
 #include "../../includes/cub3d.h"
 
+// Funcion para detectar la posicion del jugaror
+// Recorre el mapa buscando N,S,E,W , Cuando lo encuentra, coloca al jugador en el centro de la celda
+// Llama a la funcion player_direction() para cinfigurar hacia donde mira.
+int	player_position(t_game *game)
+{
+	int	y;
+	int	x;
+
+	y = 0;
+	while (y < game->map_height)
+	{
+		x = 0;
+		while (game->map[y][x])
+		{
+			if (game->map[y][x] == 'N' || game->map[y][x] == 'S'
+				|| game->map[y][x] == 'E' ||  game->map[y][x] == 'W')
+			{
+				game->player.x = x + 0.5; // ubica al jugador en el centro de la celda
+				game->player.y = y + 0.5;
+				player_direction(game, game->map[y][x]); // esta funcion setea la direccion
+				game->map[y][x] = '0'; // convertit a 0 una vez encontrado para evitar errores
+ 				return (0); // Si lo encuentra
+			}
+			x++;
+		}
+		y++;
+	}
+	return (1); // salimos con uno en caso de no encontrar al jugador!
+}
+
+/* Funcion para setear la direccion del jugador, funciona con dos funciones auxiliares que estan en utils_player que ayudan a setear la direccion y el plano del mismo para reducir el tamaño de esta 
+funcion */
+void	player_direction(t_game *game, char direction)
+{
+	if (direction == 'N')
+	{
+		set_direction(game, 0.0, -1.0);
+		set_plane(game, 0.66, 0.0);
+	}
+	else if (direction == 'S')
+	{
+		set_direction(game, 0.0, 1.0);
+		set_plane(game, -0.66, 0.0);
+	}
+	else if (direction == 'E')
+	{
+		set_direction(game, 1.0, 0.0);
+		set_plane(game, 0.0, 0.66);
+	}
+	else if (direction == 'W')
+	{
+		set_direction(game, -1.0, 0.0);
+		set_plane(game, 0.0, -0.66);
+	}
+}
+
 // Necesito mejorar esta funcion para que detectr la colision con un margen
 int	is_wall(t_game *game, double x, double y)
 {
@@ -16,77 +72,17 @@ int	is_wall(t_game *game, double x, double y)
 		return (1);
 	return (0);
 }
-
-void	move_vertical(t_game *game, int direction)
+int	check_collision(t_game *game, double x, double y)
 {
-	double	new_x;
-	double	new_y;
-	double	speed;
-
-	speed = MOVE_SPEED * direction;
-	new_x = game->player.x + game->player.dir_x * speed;
-	new_y = game->player.y + game->player.dir_y * speed;
-	if (!is_wall(game, new_x, game->player.y))
-		game->player.x = new_x;
-	if (!is_wall(game, game->player.x, new_y))
-		game->player.y = new_y;
+	if (is_wall(game, x, y))
+		return (1);
+	if (is_wall(game, x + COLLISION_MARGEN, y))
+		return (1);
+	if (is_wall(game, x - COLLISION_MARGEN, y))
+		return (1);
+	if (is_wall(game, x, y + COLLISION_MARGEN))
+		return (1);
+	if (is_wall(game, x, y - COLLISION_MARGEN))
+		return (1);
+	return (0);
 }
-
-void	move_side(t_game *game, int direction)
-{
-	double	new_x;
-	double	new_y;
-	double	speed;
-
-	speed = MOVE_SPEED * direction;
-	new_x = game->player.x + game->player.plane_x * speed;
-	new_y = game->player.y + game->player.plane_y * speed;
-	if(!is_wall(game, new_x, game->player.y))
-		game->player.x = new_x;
-	if (!is_wall(game, game->player.x, new_y))
-		game->player.y = new_y;
-}
-
-void	move_rotate(t_game *game, double angle)
-{
-	double	old_dir_x;
-	double	old_plane_x;
-
-	// Guardo valores antiguos
-	old_dir_x = game->player.dir_x;
-	old_plane_x = game->player.plane_x;
-	// Rotar vector direccion
-	game->player.dir_x = game->player.dir_x * cos(angle)
-		- game->player.dir_y * sin(angle);
-	game->player.dir_y = old_dir_x * sin(angle)
-		+ game->player.dir_y * cos(angle);
-	// Rotar plano de la camara
-	game->player.plane_x = game->player.plane_x * cos(angle)
-		- game->player.plane_y * sin(angle);
-	game->player.plane_y = old_plane_x * sin(angle)
-		+ game->player.plane_y * cos(angle);
-}
-
-void	mouse_callback(double xpos, double ypos, void *param)
-{
-	t_game	*game;
-	double	x_off;
-
-	//Ignorar el primer movimiento
-	game = (t_game *)param;
-	(void)ypos;
-	if (game->player.first_mouse)
-	{
-		game->player.mouse_x = xpos;
-		game->player.first_mouse = 0;
-		return ;
-	}
-	// Calcular desplazamiento
-	x_off = xpos - game->player.mouse_x;
-	game->player.mouse_x = xpos;
-	// Sensibilidad del raton
-	x_off *= MOUSE_SENSITIVITY;
-	move_rotate(game, x_off);
-}
-
-

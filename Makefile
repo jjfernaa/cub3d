@@ -32,6 +32,8 @@ SRCS = \
 	$(SRCS_DIR)/execution/player.c \
 	$(SRCS_DIR)/execution/render.c \
 	$(SRCS_DIR)/execution/game_loop.c \
+	$(SRCS_DIR)/execution/moves.c \
+	$(SRCS_DIR)/execution/utils_player.c \
 	$(GNL_DIR)/get_next_line_bonus.c \
 	$(GNL_DIR)/get_next_line_utils_bonus.c \
 
