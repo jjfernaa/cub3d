@@ -3,6 +3,9 @@
 int	init_game(t_game *game)
 {
 	ft_memset(game, 0, sizeof(t_game));
+	game->map = NULL;
+	game->map_width = 0;
+	game->map_height = 0;
 	return (0);
 }
 
@@ -10,23 +13,19 @@ int	init_window(t_game *game)
 {
 	game->mlx = mlx_init(W_WIDTH, W_HEIGHT, "cub3D", true);
 	if (!game->mlx)
-	{
 		return (print_error("Error: Failed to initialize MLX\n"));
-		return (-1);
-	}
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	game->img = mlx_new_image(game->mlx, W_WIDTH, W_HEIGHT);
 	if (!game->img)
 	{
-		return (print_error("Error: Failed to create image\n"));
 		mlx_terminate(game->mlx);
-		return (-1);
+		return (print_error("Error: Failed to create image\n"));
 	}
 	if (mlx_image_to_window(game->mlx, game->img, 0, 0) < 0)
 	{
-		return (print_error("Error: Failed to display image\n"));
+		mlx_delete_image(game->mlx, game->img);
 		mlx_terminate(game->mlx);
-		return (-1);
+		return (print_error("Error: Failed to display image\n"));
 	}
 	return (0);
 }
@@ -39,12 +38,8 @@ int	init_textures(t_game *game)
 
 int	init_player(t_game *game)
 {
-	game->player.x = 0.5; //Agrego posicion real del jugador eje x 
-	game->player.y = 0.5; //Agrego posicion real del jugador eje y;
-	game->player.dir_x = -1.0;
-	game->player.dir_y = 0.0;	
-	game->player.plane_x = 0.0;
-	game->player.plane_y = 0.66;
+	if (player_position(game) != 0)
+		return (print_error("Error : Player not found in map\n"));
 	game->player.mouse_x = W_WIDTH / 2.0;
 	game->player.first_mouse = 1;
 	return (0);
@@ -65,6 +60,5 @@ int	init_graphics(t_game *game)
 		clean_mlx(game);
 		return (-1);
 	}
-	render_background(game);
 	return (0);
 }

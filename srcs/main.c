@@ -12,8 +12,9 @@ int	main(int argc, char **argv)
 	if (load_map(argv[1], &game) != 0)
 		// nueva funcion que valida y carga el mapa
 	{
-		return (print_error("Error: Failed to read map\n"));
+		print_error("Error : Failed to read map\n"); // Cambie el orden de esra funcion!!
 		cleanup_game(&game);
+		return (print_error("Error: Failed to read map\n"));
 	}
 	if (init_graphics(&game) != 0)
 	{
@@ -26,6 +27,7 @@ int	main(int argc, char **argv)
 		cleanup_game(&game);
 		return (1);
 	}
+	render_background(&game);
 	run_game(&game); // nueva funcion
 	cleanup_game(&game);
 	return (0);
