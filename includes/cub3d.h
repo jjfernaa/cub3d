@@ -104,6 +104,9 @@ int					check_valid_chars(char *line); // Chequear si debemos borrar
 uint32_t			split_path(char *path);
 uint32_t			check_path_colors(int a, int b, int c);
 int					validate_char_color(char *str);
+int					is_config_line(char *line);
+int					is_map_line(char *line);
+int 				check_rows(char *line);
 
 // Render Function
 uint32_t			create_color(int r, int g, int b); // Chequear si debemos borrar

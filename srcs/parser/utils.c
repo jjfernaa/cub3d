@@ -44,5 +44,3 @@ void	path_to_null(t_game *game)
 	game->textures.ceiling = NULL;
 }
 // se podría liberar memoria o parte del mapa en esta funcion
-
-// Tendriamos que implementar free_textures(t_game *game), free_map(t_game *game)

@@ -21,7 +21,7 @@ int	validate_arguments(int argc, char **argv)
 	return (0);
 }
 
-static int	is_config_line(char *line)
+int	is_config_line(char *line)
 {
 	if(!line || !line[0])
 		return(0);
@@ -40,7 +40,7 @@ static int	is_config_line(char *line)
 	return(0);
 }
 
-static int	is_map_line(char *line)
+int	is_map_line(char *line)
 {
 	int	i;
 
@@ -58,14 +58,15 @@ int	check_valid_chars(char *line)
 {
 	int	i;
 
-	if(is_config_line(line))
+	if(is_config_line(line)) //comprueba las coordenadas
 		return(0); 
-	if(!is_map_line(line)) 
+	if(!is_map_line(line)) //comprueba si hemos llegado al mapa como tal
 	{
-		if(line[0] == '\0' || line[0] == '\n')
+		if(line[0] == '\0' || line[0] == '\n') //si esta vacía
 			return(0);
 		return(print_error("Error: Invalid line of map\n"));
 	}
+	
 	i = 0;
 	while (line[i])
 	{
@@ -77,3 +78,5 @@ int	check_valid_chars(char *line)
 	}
 	return (0);
 }
+
+

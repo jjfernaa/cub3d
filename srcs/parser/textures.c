@@ -31,7 +31,6 @@ void	match_paths_c_f(char *line, t_game *game)
 		if (game->textures.tmp_path)
 		{
 			game->textures.ceiling = game->textures.tmp_path;
-			printf("valor de tmp: %s\n", game->textures.tmp_path);
 			game->ceiling_color = split_path(game->textures.ceiling);
 			if (game->ceiling_color == 1)
 				exit(1);
@@ -43,7 +42,6 @@ void	match_paths_c_f(char *line, t_game *game)
 		if (game->textures.tmp_path)
 		{
 			game->textures.floor = game->textures.tmp_path;
-			printf("valor de tmp: %s\n", game->textures.tmp_path);
 			game->floor_color = split_path(game->textures.floor);
 			if (game->floor_color == 1)
 				exit(1);
