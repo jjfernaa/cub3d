@@ -16,6 +16,7 @@
 # define ROT_SPEED 0.03
 # define MOUSE_SENSITIVITY 0.002
 # define COLLISION_MARGEN 0.2
+# define TILE_SIZE 10 // Minimapa
 
 typedef struct s_player
 {
@@ -106,7 +107,6 @@ uint32_t			check_path_colors(int a, int b, int c);
 int					validate_char_color(char *str);
 
 // Render Function
-uint32_t			create_color(int r, int g, int b); // Chequear si debemos borrar
 void				render_background(t_game *game);
 
 // Game Function
@@ -125,6 +125,10 @@ int					check_collision(t_game *game, double x, double y);
 void				set_direction(t_game *game, double x, double y); // Seteo direccion del jugador
 void				set_plane(t_game *game, double x, double y); // Seteo el plano del jugador
 
+// Minimap Functions
+void				d_tile(t_game *game, int x, int y, uint32_t color);
+void				d_minimap(t_game *game);
+void				d_player(t_game *game);
 
 // Cleanup Functions
 void				cleanup_game(t_game *game);

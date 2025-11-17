@@ -11,7 +11,7 @@ int	main(int argc, char **argv)
 	if (load_map(argv[1], &game) != 0) // nueva funcion que valida y carga el mapa
 	{
 		cleanup_game(&game);
-		return (print_error("Error: Failed to read map\n"));
+		return (1);
 	}
 	if (init_graphics(&game) != 0)
 	{
@@ -21,7 +21,7 @@ int	main(int argc, char **argv)
 	if (load_textures(&game) != 0)
 	{
 		cleanup_game(&game);
-		return (print_error("Error: textures are not loading"));
+		return (1);
 	}
 	run_game(&game); // nueva funcion
 	cleanup_game(&game);
