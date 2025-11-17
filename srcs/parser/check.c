@@ -77,5 +77,3 @@ int	check_valid_chars(char *line)
 	}
 	return (0);
 }
-
-//HAY QUE PARSEAR QUE ESTEN TODAS LAS COORDENADAS POR IGUAL
