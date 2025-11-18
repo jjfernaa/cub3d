@@ -84,3 +84,8 @@ int	check_valid_chars(char *line)
 	}
 	return (0);
 }
+
+int count_chars(char *line)
+{
+	tengo que arreglar la funcion de arriba
+}
