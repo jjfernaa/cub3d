@@ -23,21 +23,27 @@ int	validate_arguments(int argc, char **argv)
 
 int	is_config_line(char *line)
 {
-	if(!line || !line[0])
-		return(0);
-	if(ft_strncmp(line, "NO ", 3) == 0)
-		return(1);
-	if(ft_strncmp(line, "SO ", 3) == 0)
-		return(1);
-	if(ft_strncmp(line, "WE ", 3) == 0)
-		return(1);
-	if(ft_strncmp(line, "EA ", 3) == 0)
-		return(1);
-	if(ft_strncmp(line, "F ", 2) == 0)
-		return(1);
-	if(ft_strncmp(line, "C ", 2) == 0)
-		return(1); //validacion, no error
-	return(0);
+	int			value;
+	static int	count = 0; //comprobar que esto sea correcto
+
+	value = 0;
+	if (!line || !line[0])
+		return (0);
+	if (ft_strncmp(line, "NO ", 3) == 0 || ft_strncmp(line, "SO ", 3) == 0
+		|| ft_strncmp(line, "WE ", 3) == 0 || ft_strncmp(line, "EA ", 3) == 0
+		|| ft_strncmp(line, "F ", 2) == 0 || ft_strncmp(line, "C ", 2) == 0)
+	{
+		value = 1;
+		count++;
+	}
+	else
+		value = 0;
+	if (count > 6)
+	{
+		print_error("Error: Invalid map format\n");
+		exit(1);
+	}
+	return (value);
 }
 
 int	is_map_line(char *line)
@@ -45,38 +51,36 @@ int	is_map_line(char *line)
 	int	i;
 
 	if (!line || !line[0])
-		return(0);
+		return (0);
 	i = 0;
-	while(line[i] && (line[i] >= 9 && line[i] <= 32))
+	while (line[i] && (line[i] >= 9 && line[i] <= 32))
 		i++;
-	if(line[i] == '1' || line[i] == '0') //la primera linea como 
-		return(1);
+	if (line[i] == '1' || line[i] == '0') // la primera linea de mapa
+		return (1);
 	return (0);
 }
 
-int	check_valid_chars(char *line) 
+int	check_valid_chars(char *line)
 {
 	int	i;
 
-	if(is_config_line(line)) //comprueba las coordenadas
-		return(0); 
-	if(!is_map_line(line)) //comprueba si hemos llegado al mapa como tal
+	if (is_config_line(line)) // comprueba las coordenadas
+		return (0);
+	if (!is_map_line(line)) // comprueba si hemos llegado al mapa como tal
 	{
-		if(line[0] == '\0' || line[0] == '\n') //si esta vacía
-			return(0);
-		return(print_error("Error: Invalid line of map\n"));
+		if (line[0] == '\0' || line[0] == '\n') // si esta vacía
+			return (0);
+		print_error("Error: Invalid line of map\n");
+		exit(1);
 	}
-	
 	i = 0;
 	while (line[i])
 	{
 		if (line[i] != '1' && line[i] != '0' && line[i] != 'N' && line[i] != 'S'
 			&& line[i] != 'E' && line[i] != 'W' && line[i] != ' '
 			&& line[i] != '\t' && line[i] != '\n')
-			return(print_error("Error: Invalid map character\n"));
+			return (print_error("Error: Invalid map character\n"));
 		i++;
 	}
 	return (0);
 }
-
-
