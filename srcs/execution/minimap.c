@@ -18,8 +18,8 @@ void	d_tile(t_game *game, int x, int y, uint32_t color)
 		while (px < TILE_SIZE)
 		{
 			if (x * TILE_SIZE + px < W_WIDTH && y * TILE_SIZE + py < W_HEIGHT)
-			mlx_put_pixel(game->img, x * TILE_SIZE + px,
-				y * TILE_SIZE + py, color);
+				mlx_put_pixel(game->img, x * TILE_SIZE + px, y * TILE_SIZE + py,
+					color);
 			px++;
 		}
 		py++;
@@ -41,6 +41,8 @@ void	d_minimap(t_game *game)
 				d_tile(game, x, y, 0x000000FF); // Negro (pared)
 			else if (game->map[y][x] == '0')
 				d_tile(game, x, y, 0xFFFFFFFF); // Blanco (espacio)
+			else if (game->map[y][x] == ' ')
+				d_tile(game, x, y, 0x808080FF); // Gris (espacio vacío)
 			x++;
 		}
 		y++;
@@ -63,10 +65,11 @@ void	d_player(t_game *game)
 		px = -player_size;
 		while (px <= player_size)
 		{
-			if ( px * px + py * py <= player_size * player_size)
+			if (px * px + py * py <= player_size * player_size)
 			{
 				if (in_bounds(center_x + px, center_y + py))
-				mlx_put_pixel(game->img, center_x + px, center_y + py, COL_P);
+					mlx_put_pixel(game->img, center_x + px, center_y + py,
+						COL_P);
 			}
 			px++;
 		}
@@ -86,11 +89,10 @@ void	d_direction(t_game *game)
 	i = 0;
 	while (i < line_length)
 	{
-		if (in_bounds(start_x + (int)(game->player.dir_x * i),
-			start_y + (int)(game->player.dir_y * i)))
+		if (in_bounds(start_x + (int)(game->player.dir_x * i), start_y
+				+ (int)(game->player.dir_y * i)))
 			mlx_put_pixel(game->img, start_x + (int)(game->player.dir_x * i),
 				start_y + (int)(game->player.dir_y * i), 0xFFFF00FF);
 		i++;
 	}
 }
-

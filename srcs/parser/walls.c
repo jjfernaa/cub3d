@@ -61,3 +61,18 @@ int	is_wall(t_game *game, double x, double y) //FUNCION SACADA DE JUAN
 		return (1);
 	return (0);
 }
+
+int	check_collision(t_game *game, double x, double y)
+{
+	if (is_wall(game, x, y))
+		return (1);
+	if (is_wall(game, x + COLLISION_MARGEN, y))
+		return (1);
+	if (is_wall(game, x - COLLISION_MARGEN, y))
+		return (1);
+	if (is_wall(game, x, y + COLLISION_MARGEN))
+		return (1);
+	if (is_wall(game, x, y - COLLISION_MARGEN))
+		return (1);
+	return (0);
+}

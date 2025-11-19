@@ -285,5 +285,3 @@ int	load_map(char *argv, t_game *game)
         return (print_error("Error: Failed to get map\n"));
     return (0);
 }
-
-dup2()
