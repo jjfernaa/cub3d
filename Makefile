@@ -33,6 +33,8 @@ SRCS = \
 	$(SRCS_DIR)/execution/game_loop.c \
 	$(SRCS_DIR)/execution/moves.c \
 	$(SRCS_DIR)/execution/utils_player.c \
+	$(SRCS_DIR)/execution/minimap.c \
+	$(SRCS_DIR)/execution/raycasting.c \
 	$(GNL_DIR)/get_next_line_bonus.c \
 	$(GNL_DIR)/get_next_line_utils_bonus.c \
 

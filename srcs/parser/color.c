@@ -38,8 +38,8 @@ uint32_t	split_path(char *path)
 	if (validate_char_color(split[0]) || validate_char_color(split[1])
 		|| validate_char_color(split[2]))
 	{
-		return(print_error("Error: Invalid RGB component\n"));
 		free_split(split);
+		return(print_error("Error: Invalid RGB component\n"));
 	}
 	r = ft_atoi(split[0]);
 	g = ft_atoi(split[1]);

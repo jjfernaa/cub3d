@@ -16,6 +16,8 @@
 # define ROT_SPEED 0.03
 # define MOUSE_SENSITIVITY 0.002
 # define COLLISION_MARGEN 0.2
+# define TILE_SIZE 10 // Minimapa
+# define COL_P 0xFF0000FF // color del jugador en el minimapa
 
 typedef struct s_player
 {
@@ -86,6 +88,8 @@ int					init_graphics(t_game *game);
 int					init_window(t_game *game);
 int					init_textures(t_game *game);
 int					init_player(t_game *game);
+void				init_ray(t_game *game, t_ray *ray, int x);
+
 
 // Parser Function
 int					validate_arguments(int argc, char **argv);
@@ -108,10 +112,14 @@ int					is_config_line(char *line);
 int					is_map_line(char *line);
 int 				check_rows(char *line);
 int					count_chars(char *line);
+void				render_background(t_game *game);
+
+// Luego borrar
+
+int					count_map_lines(char *file, t_game *game);
 
 // Render Function
-uint32_t			create_color(int r, int g, int b); // Chequear si debemos borrar
-void				render_background(t_game *game);
+
 
 // Game Function
 void				handle_input(t_game *game);
@@ -129,6 +137,11 @@ int					check_collision(t_game *game, double x, double y);
 void				set_direction(t_game *game, double x, double y); // Seteo direccion del jugador
 void				set_plane(t_game *game, double x, double y); // Seteo el plano del jugador
 
+// Minimap Functions
+void				d_tile(t_game *game, int x, int y, uint32_t color);
+void				d_minimap(t_game *game);
+void				d_player(t_game *game);
+void				d_direction(t_game *game);
 
 // Cleanup Functions
 void				cleanup_game(t_game *game);
@@ -138,5 +151,8 @@ void				free_path_textures(t_game *game);
 void				free_textures(t_game *game);
 void				free_map(t_game *game);
 void				free_split(char **str);
+
+// Raycasting Functions
+void				cast_rays(t_game *game);
 
 #endif
