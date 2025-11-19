@@ -107,6 +107,7 @@ int					validate_char_color(char *str);
 int					is_config_line(char *line);
 int					is_map_line(char *line);
 int 				check_rows(char *line);
+int					count_chars(char *line);
 
 // Render Function
 uint32_t			create_color(int r, int g, int b); // Chequear si debemos borrar

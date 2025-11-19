@@ -23,9 +23,9 @@ int	validate_arguments(int argc, char **argv)
 
 int	is_config_line(char *line)
 {
-	int			value;
-	static int	count = 0; //comprobar que esto sea correcto
+	int	value;
 
+	static int count = 0; // comprobar que esto sea correcto
 	value = 0;
 	if (!line || !line[0])
 		return (0);
@@ -70,7 +70,7 @@ int	check_valid_chars(char *line)
 	{
 		if (line[0] == '\0' || line[0] == '\n') // si esta vacía
 			return (0);
-		print_error("Error: Invalid line of map\n");
+		return (print_error("Error: Invalid line of map\n"));
 		exit(1);
 	}
 	i = 0;
@@ -79,13 +79,43 @@ int	check_valid_chars(char *line)
 		if (line[i] != '1' && line[i] != '0' && line[i] != 'N' && line[i] != 'S'
 			&& line[i] != 'E' && line[i] != 'W' && line[i] != ' '
 			&& line[i] != '\t' && line[i] != '\n')
-			return (print_error("Error: Invalid map character\n"));
+			{
+				print_error("Error: Invalid map character\n");
+				exit(1);
+			}
 		i++;
 	}
+	if (count_chars(line))
+		return (0);
 	return (0);
 }
 
-int count_chars(char *line)
+int	count_chars(char *line)
 {
-	tengo que arreglar la funcion de arriba
+	int			value;
+	int			i;
+	static int	count = 0;
+
+	i = 0;
+	value = 0;
+	if (!line)
+		return (0);
+	while(line[i])
+	{
+		if (line[i] == 'N' || line[i] == 'S' || line[i] == 'E'
+			|| line[i] == 'W')
+		{
+			value = 1;
+			count++;
+		}
+		else
+			value = 0;
+		i++;
+	}
+	if (count > 1)
+	{
+		print_error("Error: Invalid map character\n");
+		exit(1);
+	}
+	return (value);
 }

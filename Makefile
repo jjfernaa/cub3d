@@ -30,7 +30,6 @@ SRCS = \
 	$(SRCS_DIR)/parser/color.c \
 	$(SRCS_DIR)/execution/init.c \
 	$(SRCS_DIR)/execution/player.c \
-	$(SRCS_DIR)/execution/render.c \
 	$(SRCS_DIR)/execution/game_loop.c \
 	$(SRCS_DIR)/execution/moves.c \
 	$(SRCS_DIR)/execution/utils_player.c \
