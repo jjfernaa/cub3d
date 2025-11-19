@@ -1,5 +1,13 @@
 #include "../../includes/cub3d.h"
 
+int	init_player(t_game *game)
+{
+	if (player_position(game) != 0)
+		return (print_error("Error : Player not found in map\n"));
+	game->player.mouse_x = W_WIDTH / 2.0;
+	game->player.first_mouse = 1;
+	return (0);
+}
 // Funcion para detectar la posicion del jugaror
 // Recorre el mapa buscando N,S,E,W , Cuando lo encuentra, coloca al jugador en el centro de la celda
 // Llama a la funcion player_direction() para cinfigurar hacia donde mira.

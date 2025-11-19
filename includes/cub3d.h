@@ -88,6 +88,8 @@ int					init_graphics(t_game *game);
 int					init_window(t_game *game);
 int					init_textures(t_game *game);
 int					init_player(t_game *game);
+void				init_ray(t_game *game, t_ray *ray, int x);
+
 
 // Parser Function
 int					validate_arguments(int argc, char **argv);
@@ -106,13 +108,14 @@ int					check_valid_chars(char *line); // Chequear si debemos borrar
 uint32_t			split_path(char *path);
 uint32_t			check_path_colors(int a, int b, int c);
 int					validate_char_color(char *str);
+void				render_background(t_game *game);
 
 // Luego borrar
 
 int					count_map_lines(char *file, t_game *game);
 
 // Render Function
-void				render_background(t_game *game);
+
 
 // Game Function
 void				handle_input(t_game *game);

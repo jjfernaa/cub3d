@@ -3,7 +3,7 @@
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*save[OPEN_MAX];//OPEN_MAX   __FD_SETSIZE
+	static char	*save[__FD_SETSIZE];//OPEN_MAX   __FD_SETSIZE
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 	{
