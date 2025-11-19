@@ -54,7 +54,7 @@ static int	is_map_line(char *line)
 	return (0);
 }
 
-int	check_valid_chars(char *line) 
+/* int	check_valid_chars(char *line) 
 {
 	int	i;
 
@@ -76,4 +76,54 @@ int	check_valid_chars(char *line)
 		i++;
 	}
 	return (0);
+} */
+
+// 🛑⚠️ Arego este cambio, luego borrar ⚠️🛑
+
+static int	is_empty_line(char *line)
+{
+    int	i;
+
+    if (!line || !line[0])
+        return (1);
+    i = 0;
+    while (line[i])
+    {
+        if (line[i] != ' ' && line[i] != '\t' && line[i] != '\n')
+            return (0);
+        i++;
+    }
+    return (1);
+}
+
+/*
+** check_valid_chars - Valida caracteres SOLO en líneas de mapa
+*/
+int	check_valid_chars(char *line)
+{
+    int	i;
+
+    // ✅ Ignorar líneas de configuración
+    if (is_config_line(line))
+        return (0);
+    
+    // ✅ Ignorar líneas vacías ANTES del mapa
+    if (is_empty_line(line))
+        return (0);
+    
+    // ✅ Si NO es línea de mapa, es inválida (después de config)
+    if (!is_map_line(line))
+        return (print_error("Error: Invalid line in map section\n"));
+    
+    // ✅ Validar caracteres SOLO en líneas de mapa
+    i = 0;
+    while (line[i])
+    {
+        if (line[i] != '1' && line[i] != '0' && line[i] != 'N' 
+            && line[i] != 'S' && line[i] != 'E' && line[i] != 'W' 
+            && line[i] != ' ' && line[i] != '\t' && line[i] != '\n')
+            return (print_error("Error: Invalid map character\n"));
+        i++;
+    }
+    return (0);
 }

@@ -15,8 +15,10 @@ void	updates_game(void *param)
 	game = (t_game *)param;
 	handle_input(game);
 	render_background(game);// Agrego render del fondo en la actualizacion del juego
+	cast_rays(game);
 	d_minimap(game);
 	d_player(game);
+	d_direction(game);
     //draw_direction(t_game *game);
 	// implementar update_player
 	// implementar render_frame

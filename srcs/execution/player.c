@@ -68,6 +68,10 @@ int	is_wall(t_game *game, double x, double y)
 		return (1);
 	if (map_x < 0 || map_x >= game->map_width) // Necesito el ancho del mapa
 		return (1);
+	if (!game->map[map_y]) // Verifica que fila existe
+		return (1);
+	if (map_x >= (int)ft_strlen(game->map[map_y])) // Verifica columna
+		return (1);
 	if (game->map[map_y][map_x] == '1')
 		return (1);
 	return (0);

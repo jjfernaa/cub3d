@@ -1,5 +1,9 @@
 #include "../../includes/cub3d.h"
 
+static int	in_bounds(int x, int y)
+{
+	return (x >= 0 && x < W_WIDTH && y >= 0 && y < W_HEIGHT);
+}
 // Funcion ppara imprimir suelo del minimapa
 
 void	d_tile(t_game *game, int x, int y, uint32_t color)
@@ -47,23 +51,46 @@ void	d_player(t_game *game)
 	int	px;
 	int	py;
 	int	player_size;
-	int	screen_x;
-	int	screen_y;
+	int	center_x;
+	int	center_y;
 
-	player_size = TILE_SIZE / 2;
+	player_size = TILE_SIZE / 3;
+	center_x = (int)(game->player.x * TILE_SIZE);
+	center_y = (int)(game->player.y * TILE_SIZE);
 	py = -player_size;
-	while (py < player_size)
+	while (py <= player_size)
 	{
 		px = -player_size;
-		while (px < player_size)
+		while (px <= player_size)
 		{
-			screen_x = (int)(game->player.x * TILE_SIZE) + px;
-			screen_y = (int)(game->player.y * TILE_SIZE) + py;
-			if (screen_x >= 0 && screen_x < W_WIDTH &&
-				screen_y >= 0 && screen_y < W_HEIGHT)
-			mlx_put_pixel(game->img, screen_x, screen_y, 0xFF0000FF); // Rojo 
+			if ( px * px + py * py <= player_size * player_size)
+			{
+				if (in_bounds(center_x + px, center_y + py))
+				mlx_put_pixel(game->img, center_x + px, center_y + py, COL_P);
+			}
 			px++;
 		}
 		py++;
 	}
 }
+void	d_direction(t_game *game)
+{
+	int	i;
+	int	start_x;
+	int	start_y;
+	int	line_length;
+
+	start_x = (int)(game->player.x * TILE_SIZE);
+	start_y = (int)(game->player.y * TILE_SIZE);
+	line_length = TILE_SIZE * 2;
+	i = 0;
+	while (i < line_length)
+	{
+		if (in_bounds(start_x + (int)(game->player.dir_x * i),
+			start_y + (int)(game->player.dir_y * i)))
+			mlx_put_pixel(game->img, start_x + (int)(game->player.dir_x * i),
+				start_y + (int)(game->player.dir_y * i), 0xFFFF00FF);
+		i++;
+	}
+}
+

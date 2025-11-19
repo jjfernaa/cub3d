@@ -17,6 +17,7 @@
 # define MOUSE_SENSITIVITY 0.002
 # define COLLISION_MARGEN 0.2
 # define TILE_SIZE 10 // Minimapa
+# define COL_P 0xFF0000FF // color del jugador en el minimapa
 
 typedef struct s_player
 {
@@ -106,6 +107,10 @@ uint32_t			split_path(char *path);
 uint32_t			check_path_colors(int a, int b, int c);
 int					validate_char_color(char *str);
 
+// Luego borrar
+
+int					count_map_lines(char *file, t_game *game);
+
 // Render Function
 void				render_background(t_game *game);
 
@@ -129,6 +134,7 @@ void				set_plane(t_game *game, double x, double y); // Seteo el plano del jugad
 void				d_tile(t_game *game, int x, int y, uint32_t color);
 void				d_minimap(t_game *game);
 void				d_player(t_game *game);
+void				d_direction(t_game *game);
 
 // Cleanup Functions
 void				cleanup_game(t_game *game);
@@ -138,5 +144,8 @@ void				free_path_textures(t_game *game);
 void				free_textures(t_game *game);
 void				free_map(t_game *game);
 void				free_split(char **str);
+
+// Raycasting Functions
+void				cast_rays(t_game *game);
 
 #endif
