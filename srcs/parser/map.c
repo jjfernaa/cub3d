@@ -31,7 +31,7 @@ int	count_lines(char *file, t_game *game)
 		match_paths_c_f(line, game);
 		// luego gestionas las texturas A PARTE(O NO)
 		// Solo contar líneas que sean realmente del mapa
-		if (is_map_start(line))
+		if (is_map_line(line))
 			count++;
 		free(line);
 		line = get_next_line(fd);
@@ -57,37 +57,6 @@ int	memory_map(t_game *game)
 	return (0);
 }
 
-// Función auxiliar para verificar si una línea es parte del mapa real
-int	is_map_start(char *line)
-{
-	int	i;
-
-	if (!line)
-		return (0);
-	i = 0;
-	// Saltar espacios en blanco iniciales
-	while (line[i] && (line[i] == ' ' || line[i] == '\t'))
-		i++;
-	// Si la línea está vacía o es solo whitespace
-	if (!line[i] || line[i] == '\n')
-		return (0);
-	// Si es una línea de configuración (NO, SO, WE, EA, F, C)
-	if (ft_strncmp(line + i, "NO ", 3) == 0 || ft_strncmp(line + i, "SO ",
-			3) == 0 || ft_strncmp(line + i, "WE ", 3) == 0 || ft_strncmp(line
-			+ i, "EA ", 3) == 0 || ft_strncmp(line + i, "F ", 2) == 0
-		|| ft_strncmp(line + i, "C ", 2) == 0)
-		return (0);
-	// Si contiene caracteres del mapa (1, 0, espacio, N, S, E, W)
-	while (line[i] && line[i] != '\n')
-	{
-		if (line[i] == '1' || line[i] == '0' || line[i] == ' ' || line[i] == 'N'
-			|| line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
 int	get_map(char *file, t_game *game)
 {
 	int		fd;
@@ -104,7 +73,7 @@ int	get_map(char *file, t_game *game)
 	while (line)
 	{
 		// Solo procesar líneas que sean realmente del mapa
-		if (is_map_start(line))
+		if (is_map_line(line))
 		{
 			game->map[i] = ft_strdup(line);
 			// copia para evitar segmentation fault
