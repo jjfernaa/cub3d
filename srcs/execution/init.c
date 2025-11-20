@@ -40,9 +40,7 @@ int	init_textures(t_game *game)
 	return (0);
 }
 
-
 // cree esta funcion para descomprimir el main
-
 int	init_graphics(t_game *game)
 {
 	if (init_window(game) != 0)
@@ -59,6 +57,7 @@ int	init_graphics(t_game *game)
 	}
 	return (0);
 }
+
 void	init_ray(t_game *game, t_ray *ray, int x)
 {
 	// Calcular posicion en el plano de la camara (-1 a 1)
@@ -74,7 +73,6 @@ void	init_ray(t_game *game, t_ray *ray, int x)
 		ray->delta_dist_x = 1e30;
 	else
 		ray->delta_dist_x = fabs(1 / ray->ray_dir_x);
-	
 	if (ray->ray_dir_y == 0)
 		ray->delta_dist_y = 1e30;
 	else

@@ -1,5 +1,5 @@
-#ifndef CUB3D_h
-# define CUB3D_h
+#ifndef CUB3D_H
+# define CUB3D_H
 
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "../gnl/get_next_line_bonus.h"
@@ -48,20 +48,20 @@ typedef struct s_textures
 
 typedef struct t_ray
 {
-	double camera_x;  // Posicion en el plano de la camara
-	double ray_dir_x; // Direccion del rayo
+	double			camera_x;// Posicion en el plano de la camara
+	double			ray_dir_x;// Direccion del rayo
 	double			ray_dir_y;
-	int map_x; // Coordenadas del mapa
+	int				map_x;// Coordenadas del mapa
 	int				map_y;
-	double side_dist_x; // Distancia al siguiente lado X/Y
+	double			side_dist_x;// Distancia al siguiente lado X/Y
 	double			side_dist_y;
-	double delta_dist_x; // Distancia entre cada lado X/Y
+	double			delta_dist_x;// Distancia entre cada lado X/Y
 	double			delta_dist_y;
-	double perp_wall_dist; // Distancia perpendicular a la pared
-	int step_x;            // Direccion del paso (-1 o +1)
+	double			perp_wall_dist;// Distancia perpendicular a la pared
+	int				step_x;// Direccion del paso (-1 o +1)
 	int				step_y;
-	int hit;  // flag para choque de pared
-	int side; // Lado NS o EW
+	int				hit;// flag para choque de pared
+	int				side;// Lado NS o EW
 }					t_ray;
 
 typedef struct s_game
@@ -74,8 +74,8 @@ typedef struct s_game
 	uint32_t		ceiling_color;
 	int				fd;
 	char			**map;
-	int map_width;  // Agrego variable para almacenar tamaño del mapa
-	int map_height; // Agrego variable para almacenar tamaño del mapa
+	int				map_width;// Agrego variable para almacenar tamaño del mapa
+	int				map_height;// Agrego variable para almacenar tamaño del mapa
 }					t_game;
 
 // Utils Function
@@ -98,13 +98,14 @@ char				*paths_of_textures(char *line, const char *name);
 void				match_paths(char *line, t_game *game);
 char				*paths_c_f(char *line, const char *name);
 void				match_paths_c_f(char *line, t_game *game);
-int	is_wall(t_game *game, double x, double y); // Agrego funcion chequeo de muro
+int					is_wall(t_game *game, double x, double y);
+int					check_collision(t_game *game, double x, double y);
 int					load_textures(t_game *game);
 int					load_map(char *argv, t_game *game);
 int					memory_map(t_game *game);
 int					get_map(char *file, t_game *game);
 int					is_map_start(char *line);
-int	check_valid_chars(char *line); // Chequear si debemos borrar
+int					check_valid_chars(char *line);
 uint32_t			split_path(char *path);
 uint32_t			check_path_colors(int a, int b, int c);
 int					validate_char_color(char *str);
@@ -118,25 +119,20 @@ void				render_background(t_game *game);
 
 int					count_map_lines(char *file, t_game *game);
 
-// Render Function
-
 // Game Function
 void				handle_input(t_game *game);
 void				updates_game(void *param);
 void				run_game(t_game *game);
 
 // Player functions
-int	player_position(t_game *game);                   // Agrego funcion
-void	player_direction(t_game *game, char direction); // Agrego funcion
+int					player_position(t_game *game);
+void				player_direction(t_game *game, char direction);
 void				move_vertical(t_game *game, int direction);
 void				move_side(t_game *game, int direction);
 void				move_rotate(t_game *game, double angle);
 void				mouse_callback(double xpos, double ypos, void *param);
-int					check_collision(t_game *game, double x, double y);
-void	set_direction(t_game *game, double x, double y);
-		// Seteo direccion del jugador
-void	set_plane(t_game *game, double x, double y);    
-		// Seteo el plano del jugador
+void				set_direction(t_game *game, double x, double y);// Seteo direccion del jugador
+void				set_plane(t_game *game, double x, double y);// Seteo el plano del jugador
 
 // Minimap Functions
 void				d_tile(t_game *game, int x, int y, uint32_t color);

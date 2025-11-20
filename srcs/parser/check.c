@@ -1,4 +1,3 @@
-
 #include "../../includes/cub3d.h"
 
 int	check_extension(char *str)
@@ -23,9 +22,10 @@ int	validate_arguments(int argc, char **argv)
 
 int	is_config_line(char *line)
 {
-	int	value;
+	static int	count; //comprobar que esto sea correcto
+	int			value;
 
-	static int count = 0; // comprobar que esto sea correcto
+	count = 0;
 	value = 0;
 	if (!line || !line[0])
 		return (0);
@@ -79,10 +79,10 @@ int	check_valid_chars(char *line)
 		if (line[i] != '1' && line[i] != '0' && line[i] != 'N' && line[i] != 'S'
 			&& line[i] != 'E' && line[i] != 'W' && line[i] != ' '
 			&& line[i] != '\t' && line[i] != '\n')
-			{
-				print_error("Error: Invalid map character\n");
-				exit(1);
-			}
+		{
+			print_error("Error: Invalid map character\n");
+			exit(1);
+		}
 		i++;
 	}
 	if (count_chars(line))
@@ -100,7 +100,7 @@ int	count_chars(char *line)
 	value = 0;
 	if (!line)
 		return (0);
-	while(line[i])
+	while (line[i])
 	{
 		if (line[i] == 'N' || line[i] == 'S' || line[i] == 'E'
 			|| line[i] == 'W')

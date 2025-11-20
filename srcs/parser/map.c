@@ -56,6 +56,7 @@ int	memory_map(t_game *game)
 	}
 	return (0);
 }
+
 // Función auxiliar para verificar si una línea es parte del mapa real
 int	is_map_start(char *line)
 {
@@ -119,6 +120,7 @@ int	get_map(char *file, t_game *game)
 	close(fd);
 	return (i);
 }
+
 // funcion principal donde cargaremos el mapa y vadilaremos
 int	load_map(char *argv, t_game *game)
 {

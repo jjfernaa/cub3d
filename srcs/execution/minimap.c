@@ -38,16 +38,17 @@ void	d_minimap(t_game *game)
 		while (game->map[y][x] && x * TILE_SIZE < W_WIDTH)
 		{
 			if (game->map[y][x] == '1')
-				d_tile(game, x, y, 0x000000FF); // Negro (pared)
+				d_tile(game, x, y, 0x000000FF);// Negro (pared)
 			else if (game->map[y][x] == '0')
-				d_tile(game, x, y, 0xFFFFFFFF); // Blanco (espacio)
+				d_tile(game, x, y, 0xFFFFFFFF);// Blanco (espacio)
 			else if (game->map[y][x] == ' ')
-				d_tile(game, x, y, 0x808080FF); // Gris (espacio vacío)
+				d_tile(game, x, y, 0x808080FF);// Gris (espacio vacío)
 			x++;
 		}
 		y++;
 	}
 }
+
 void	d_player(t_game *game)
 {
 	int	px;
@@ -76,6 +77,7 @@ void	d_player(t_game *game)
 		py++;
 	}
 }
+
 void	d_direction(t_game *game)
 {
 	int	i;
@@ -90,7 +92,7 @@ void	d_direction(t_game *game)
 	while (i < line_length)
 	{
 		if (in_bounds(start_x + (int)(game->player.dir_x * i), start_y
-				+ (int)(game->player.dir_y * i)))
+			+ (int)(game->player.dir_y * i)))
 			mlx_put_pixel(game->img, start_x + (int)(game->player.dir_x * i),
 				start_y + (int)(game->player.dir_y * i), 0xFFFF00FF);
 		i++;

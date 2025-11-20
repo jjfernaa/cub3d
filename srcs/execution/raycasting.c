@@ -49,22 +49,22 @@ static void	perform_dda(t_game *game, t_ray *ray)
 		// Verificar si golpeo una pared
 		if (is_wall(game, ray->map_x, ray->map_y))
 			ray->hit = 1;
-		}
+	}
 }
 // Calcular distancia perpendicular a la pared
 
 static void	calculate_wall_dist(t_game *game, t_ray *ray)
 {
 	if (ray->side == 0)
-		ray->perp_wall_dist = (ray->map_x - game->player.x +
-			(1 - ray->step_x) / 2) / ray->ray_dir_x;
+		ray->perp_wall_dist = (ray->map_x - game->player.x
+				+ (1 - ray->step_x) / 2) / ray->ray_dir_x;
 	else
-		ray->perp_wall_dist = (ray->map_y - game->player.y +
-			(1 - ray->step_y) / 2) / ray->ray_dir_y;
+		ray->perp_wall_dist = (ray->map_y - game->player.y
+				+ (1 - ray->step_y) / 2) / ray->ray_dir_y;
 }
 // Dibuja una linea vertical de pared
 
-static void draw_wall_stripe(t_game *game, t_ray *ray, int x)
+static void	draw_wall_stripe(t_game *game, t_ray *ray, int x)
 {
 	int			line_height;
 	int			draw_start;
@@ -94,6 +94,7 @@ static void draw_wall_stripe(t_game *game, t_ray *ray, int x)
 		y++;
 	}
 }
+
 void	cast_rays(t_game *game)
 {
 	t_ray	ray;

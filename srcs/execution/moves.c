@@ -24,7 +24,7 @@ void	move_side(t_game *game, int direction)
 	speed = MOVE_SPEED * direction;
 	new_x = game->player.x + game->player.plane_x * speed;
 	new_y = game->player.y + game->player.plane_y * speed;
-	if(!check_collision(game, new_x, game->player.y))
+	if (!check_collision(game, new_x, game->player.y))
 		game->player.x = new_x;
 	if (!check_collision(game, game->player.x, new_y))
 		game->player.y = new_y;

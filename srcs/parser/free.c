@@ -11,6 +11,7 @@ void	free_mlx_textures(t_game *game)
 	if (game->textures.west)
 		mlx_delete_texture(game->textures.west);
 }
+
 void	free_path_textures(t_game *game)
 {
 	if (game->textures.north_path)
@@ -27,9 +28,10 @@ void	free_path_textures(t_game *game)
 		free(game->textures.ceiling);
 	path_to_null(game);
 }
+
 void	free_map(t_game *game)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (game->map == NULL)

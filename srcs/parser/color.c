@@ -3,7 +3,7 @@
 static int	count_split_elements(char *str)
 {
 	int	count;
-	int i;
+	int	i;
 
 	if (!str)
 		return (1);
@@ -11,14 +11,15 @@ static int	count_split_elements(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if(str[i] == ',')
+		if (str[i] == ',')
 			count++;
 		i++;
 	}
-	if(count != 2)
-		return(1);
-	return(0);
+	if (count != 2)
+		return (1);
+	return (0);
 }
+
 uint32_t	split_path(char *path)
 {
 	char	**split;
@@ -33,13 +34,13 @@ uint32_t	split_path(char *path)
 	if (!path)
 		return (print_error("Error: Paths are not loading\n"));
 	split = ft_split(path, ',');
-	if(count_split_elements(path) == 1)
-		return(print_error("Error: Invalid RGB component\n"));
+	if (count_split_elements(path) == 1)
+		return (print_error("Error: Invalid RGB component\n"));
 	if (validate_char_color(split[0]) || validate_char_color(split[1])
 		|| validate_char_color(split[2]))
 	{
 		free_split(split);
-		return(print_error("Error: Invalid RGB component\n"));
+		return (print_error("Error: Invalid RGB component\n"));
 	}
 	r = ft_atoi(split[0]);
 	g = ft_atoi(split[1]);
@@ -57,9 +58,11 @@ uint32_t	check_path_colors(int a, int b, int c)
 		print_error("Error: RGB values out of range (0-255)\n");
 		return (1);
 	}
-	color = ((uint32_t)a << 24) | ((uint32_t)b << 16) | ((uint32_t)c << 8) | 0xFF;
+	color = ((uint32_t)a << 24) | ((uint32_t)b << 16)
+		| ((uint32_t)c << 8) | 0xFF;
 	return (color);
 }
+
 int	validate_char_color(char *str)
 {
 	int	i;

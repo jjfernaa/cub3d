@@ -8,6 +8,7 @@ int	init_player(t_game *game)
 	game->player.first_mouse = 1;
 	return (0);
 }
+
 // Funcion para detectar la posicion del jugaror
 // Recorre el mapa buscando N,S,E,W , Cuando lo encuentra, coloca al jugador en el centro de la celda
 // Llama a la funcion player_direction() para cinfigurar hacia donde mira.
@@ -23,13 +24,13 @@ int	player_position(t_game *game)
 		while (game->map[y][x])
 		{
 			if (game->map[y][x] == 'N' || game->map[y][x] == 'S'
-				|| game->map[y][x] == 'E' ||  game->map[y][x] == 'W')
+				|| game->map[y][x] == 'E' || game->map[y][x] == 'W')
 			{
 				game->player.x = x + 0.5; // ubica al jugador en el centro de la celda
 				game->player.y = y + 0.5;
 				player_direction(game, game->map[y][x]); // esta funcion setea la direccion
-				game->map[y][x] = '0'; // convertit a 0 una vez encontrado para evitar errores
- 				return (0); // Si lo encuentra
+				game->map[y][x] = '0';// convertit a 0 una vez encontrado para evitar errores
+				return (0);// Si lo encuentra
 			}
 			x++;
 		}
@@ -72,9 +73,9 @@ int	is_wall(t_game *game, double x, double y)
 
 	map_x = (int)x;
 	map_y = (int)y;
-	if (map_y < 0 || map_y >= game->map_height)// Necesito altura del mapa
+	if (map_y < 0 || map_y >= game->map_height) //Necesito altura del mapa
 		return (1);
-	if (map_x < 0 || map_x >= game->map_width) // Necesito el ancho del mapa
+	if (map_x < 0 || map_x >= game->map_width) //Necesito el ancho del mapa
 		return (1);
 	if (!game->map[map_y]) // Verifica que fila existe
 		return (1);
@@ -84,6 +85,7 @@ int	is_wall(t_game *game, double x, double y)
 		return (1);
 	return (0);
 }
+
 int	check_collision(t_game *game, double x, double y)
 {
 	if (is_wall(game, x, y))

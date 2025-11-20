@@ -19,6 +19,7 @@ void	clean_mlx(t_game *game)
 		game->mlx = NULL;
 	}
 }
+
 void	free_textures(t_game *game)
 {
 	free_mlx_textures(game);
