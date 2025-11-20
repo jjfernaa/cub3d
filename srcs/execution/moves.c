@@ -54,10 +54,15 @@ void	mouse_callback(double xpos, double ypos, void *param)
 {
 	t_game	*game;
 	double	x_off;
-
+	double	center_x;
+	double	center_y;
 	//Ignorar el primer movimiento
 	game = (t_game *)param;
 	(void)ypos;
+	if (!game->mouse_locked)
+		return ;
+	center_x = W_WIDTH / 2.0;
+	center_y = W_HEIGHT / 2.0;
 	if (game->player.first_mouse)
 	{
 		game->player.mouse_x = xpos;
@@ -65,9 +70,11 @@ void	mouse_callback(double xpos, double ypos, void *param)
 		return ;
 	}
 	// Calcular desplazamiento
-	x_off = xpos - game->player.mouse_x;
-	game->player.mouse_x = xpos;
+	x_off = xpos - center_x;
+	if (fabs(x_off) < 1.0)
+		return ;
 	// Sensibilidad del raton
 	x_off *= MOUSE_SENSITIVITY;
 	move_rotate(game, x_off);
+	mlx_set_mouse_pos(game->mlx, (int)center_x, (int)center_y);
 }
