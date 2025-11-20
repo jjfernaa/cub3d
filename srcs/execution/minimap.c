@@ -42,7 +42,7 @@ void	d_minimap(t_game *game)
 			else if (game->map[y][x] == '0')
 				d_tile(game, x, y, 0xFFFFFFFF);// Blanco (espacio)
 			else if (game->map[y][x] == ' ')
-				d_tile(game, x, y, 0x808080FF);// Gris (espacio vacío)
+				d_tile(game, x, y, 0x000000FF);// Gris (espacio vacío)
 			x++;
 		}
 		y++;
@@ -94,7 +94,7 @@ void	d_direction(t_game *game)
 		if (in_bounds(start_x + (int)(game->player.dir_x * i), start_y
 			+ (int)(game->player.dir_y * i)))
 			mlx_put_pixel(game->img, start_x + (int)(game->player.dir_x * i),
-				start_y + (int)(game->player.dir_y * i), 0xFFFF00FF);
+				start_y + (int)(game->player.dir_y * i), 0x0000FFFF);
 		i++;
 	}
 }
