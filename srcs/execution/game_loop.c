@@ -68,7 +68,10 @@ void	run_game(t_game *game)
 void	handle_input(t_game *game)
 {
 	// Movimientos adelante y atras
-	if (mlx_is_key_down(game->mlx, MLX_KEY_W))
+	if (mlx_is_key_down(game->mlx, MLX_KEY_W)
+		&& mlx_is_key_down(game->mlx, MLX_KEY_LEFT_SHIFT))
+		move_vertical(game, 3);
+	else if (mlx_is_key_down(game->mlx, MLX_KEY_W))
 		move_vertical(game, 1);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_S))
 		move_vertical(game, -1);

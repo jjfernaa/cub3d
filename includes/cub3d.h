@@ -14,7 +14,7 @@
 # define W_HEIGHT 720
 # define MOVE_SPEED 0.05
 # define ROT_SPEED 0.03
-# define MOUSE_SENSITIVITY 0.002
+# define MOUSE_SENSITIVITY 0.0008
 # define COLLISION_MARGEN 0.2
 # define TILE_SIZE 10     // Minimapa
 # define COL_P 0xFF0000FF // color del jugador en el minimapa

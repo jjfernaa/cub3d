@@ -22,10 +22,9 @@ int	validate_arguments(int argc, char **argv)
 
 int	is_config_line(char *line)
 {
-	static int	count; //comprobar que esto sea correcto
+	static int	count = 0; //comprobar que esto sea correcto
 	int			value;
 
-	count = 0;
 	value = 0;
 	if (!line || !line[0])
 		return (0);
