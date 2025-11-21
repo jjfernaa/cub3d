@@ -72,12 +72,12 @@ typedef struct s_game
 	t_textures		textures;
 	uint32_t		floor_color;
 	uint32_t		ceiling_color;
-	int show_minimap; // add
-	int mouse_locked; // add
+	int 			show_minimap; // add
+	int 			mouse_locked; // add
 	int				fd;
 	char			**map;
-	int map_width;  // Almacena tamaño del mapa
-	int map_height; // Almacena tamaño del mapa
+	int 			map_width;  // Almacena tamaño del mapa
+	int 			map_height; // Almacena tamaño del mapa
 }					t_game;
 
 // Utils Function
