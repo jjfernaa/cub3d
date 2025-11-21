@@ -48,20 +48,20 @@ typedef struct s_textures
 
 typedef struct t_ray
 {
-	double camera_x;  // Posicion en el plano de la camara
-	double ray_dir_x; // Direccion del rayo
+	double			camera_x; // Posicion en el plano de la camara
+	double			ray_dir_x; // Direccion del rayo
 	double			ray_dir_y;
-	int map_x; // Coordenadas del mapa
+	int				map_x; // Coordenadas del mapa
 	int				map_y;
-	double side_dist_x; // Distancia al siguiente lado X/Y
+	double			side_dist_x; // Distancia al siguiente lado X/Y
 	double			side_dist_y;
-	double delta_dist_x; // Distancia entre cada lado X/Y
+	double			delta_dist_x; // Distancia entre cada lado X/Y
 	double			delta_dist_y;
-	double perp_wall_dist; // Distancia perpendicular a la pared
-	int step_x;            // Direccion del paso (-1 o +1)
+	double			perp_wall_dist; // Distancia perpendicular a la pared
+	int				step_x; // Direccion del paso (-1 o +1)
 	int				step_y;
-	int hit;  // flag para choque de pared
-	int side; // Lado NS o EW
+	int				hit; // flag para choque de pared
+	int				side; // Lado NS o EW
 }					t_ray;
 
 typedef struct s_game
