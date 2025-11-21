@@ -1,0 +1,28 @@
+# AddressSanitizer suppressions for MLX42
+# Suppress false positives from MLX42 library
+
+# MLX42 internal memory management
+leak:mlx_*
+leak:lodepng_*
+leak:glad_*
+leak:glfwInit
+leak:glfwCreateWindow
+leak:glfwMakeContextCurrent
+
+# OpenGL/Mesa shader cache warnings (not real errors)
+deadlysignal:mesa_shader_cache
+
+# MLX42 texture loading (false positives in library)
+leak:mlx_load_png
+leak:mlx_new_image
+leak:mlx_image_to_window
+
+# GLFW library internals
+leak:__glfw*
+leak:_glfwPlatform*
+
+# System OpenGL drivers
+leak:dri*
+leak:nouveau*
+leak:radeon*
+leak:intel*

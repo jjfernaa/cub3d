@@ -33,9 +33,9 @@ uint32_t	split_path(char *path)
 	split = NULL;
 	if (!path)
 		return (print_error("Error: Paths are not loading\n"));
-	split = ft_split(path, ',');
 	if (count_split_elements(path) == 1)
 		return (print_error("Error: Invalid RGB component\n"));
+	split = ft_split(path, ',');
 	if (validate_char_color(split[0]) || validate_char_color(split[1])
 		|| validate_char_color(split[2]))
 	{
@@ -58,8 +58,7 @@ uint32_t	check_path_colors(int a, int b, int c)
 		print_error("Error: RGB values out of range (0-255)\n");
 		return (1);
 	}
-	color = ((uint32_t)a << 24) | ((uint32_t)b << 16)
-		| ((uint32_t)c << 8) | 0xFF;
+	color = ((uint32_t)a << 24) | ((uint32_t)b << 16) | ((uint32_t)c << 8) | 0xFF;
 	return (color);
 }
 
@@ -89,8 +88,8 @@ int	validate_char_color(char *str)
 
 void	render_background(t_game *game)
 {
-	int			x;
-	int			y;
+	int	x;
+	int	y;
 
 	y = 0;
 	while (y < W_HEIGHT)

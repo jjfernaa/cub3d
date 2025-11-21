@@ -65,38 +65,3 @@ void	player_direction(t_game *game, char direction)
 	}
 }
 
-// Necesito mejorar esta funcion para que detectr la colision con un margen
-int	is_wall(t_game *game, double x, double y)
-{
-	int	map_x;
-	int	map_y;
-
-	map_x = (int)x;
-	map_y = (int)y;
-	if (map_y < 0 || map_y >= game->map_height) //Necesito altura del mapa
-		return (1);
-	if (map_x < 0 || map_x >= game->map_width) //Necesito el ancho del mapa
-		return (1);
-	if (!game->map[map_y]) // Verifica que fila existe
-		return (1);
-	if (map_x >= (int)ft_strlen(game->map[map_y])) // Verifica columna
-		return (1);
-	if (game->map[map_y][map_x] == '1')
-		return (1);
-	return (0);
-}
-
-int	check_collision(t_game *game, double x, double y)
-{
-	if (is_wall(game, x, y))
-		return (1);
-	if (is_wall(game, x + COLLISION_MARGEN, y))
-		return (1);
-	if (is_wall(game, x - COLLISION_MARGEN, y))
-		return (1);
-	if (is_wall(game, x, y + COLLISION_MARGEN))
-		return (1);
-	if (is_wall(game, x, y - COLLISION_MARGEN))
-		return (1);
-	return (0);
-}

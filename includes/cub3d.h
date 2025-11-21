@@ -132,10 +132,10 @@ void				move_vertical(t_game *game, int direction);
 void				move_side(t_game *game, int direction);
 void				move_rotate(t_game *game, double angle);
 void				mouse_callback(double xpos, double ypos, void *param);
-void	set_direction(t_game *game, double x, double y);
-		// Seteo direccion del jugador
-void	set_plane(t_game *game, double x, double y);    
-		// Seteo el plano del jugador
+void				set_direction(t_game *game, double x, double y);
+// Seteo direccion del jugador
+void				set_plane(t_game *game, double x, double y);
+// Seteo el plano del jugador
 
 // Minimap Functions
 void				d_tile(t_game *game, int x, int y, uint32_t color);

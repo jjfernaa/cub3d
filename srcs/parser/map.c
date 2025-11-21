@@ -75,13 +75,13 @@ int	get_map(char *file, t_game *game)
 		// Solo procesar líneas que sean realmente del mapa
 		if (is_map_line(line))
 		{
-			game->map[i] = ft_strdup(line);
-			// copia para evitar segmentation fault
+			game->map[i] = ft_strdup(line);// copia para evitar segmentation fault
 			len = ft_strlen(line);
 			if (len > game->map_width) // Encontrar el ancho maximo
 				game->map_width = len;
 			check_valid_chars(line);
 			i++;
+			//printf("")
 		}
 		free(line);
 		line = get_next_line(fd);
@@ -106,5 +106,4 @@ int	load_map(char *argv, t_game *game)
 
 /*Hay que controlar que no se puedan poner algo más que no sean coordenadas en el inicio,
 gestionar tambien que solo existan un solo tipo de	coordenada(que no haya dos NO). Tambien que solo aparezca una N,E,S
-en el mapa, que no haya repeticiones,
-	como tambien hay que añadir el flood_fill modificado para que acepte mapas irregulares,*/
+en el mapa, que no haya repeticiones, como tambien hay que añadir el flood_fill modificado para que acepte mapas irregulares,*/

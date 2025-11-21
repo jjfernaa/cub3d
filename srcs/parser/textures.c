@@ -33,7 +33,7 @@ void	match_paths_c_f(char *line, t_game *game)
 			game->textures.ceiling = game->textures.tmp_path;
 			game->ceiling_color = split_path(game->textures.ceiling);
 			if (game->ceiling_color == 1)
-				return ;
+				exit(1);
 		}
 	}
 	if (!game->textures.floor)
@@ -44,7 +44,7 @@ void	match_paths_c_f(char *line, t_game *game)
 			game->textures.floor = game->textures.tmp_path;
 			game->floor_color = split_path(game->textures.floor);
 			if (game->floor_color == 1)
-				return ;
+				exit(1);
 		}
 	}
 }
@@ -100,6 +100,7 @@ void	match_paths(char *line, t_game *game)
 	{
 		game->textures.tmp_path = paths_of_textures(line, "EA ");
 		if (game->textures.tmp_path)
+
 			game->textures.east_path = game->textures.tmp_path;
 	}
 }
@@ -107,21 +108,21 @@ void	match_paths(char *line, t_game *game)
 int	load_textures(t_game *game)
 {
 	if (!(game->textures.north = mlx_load_png(game->textures.north_path)))
-		return (print_error("Error: North texture are not found"));
+		return (print_error("Error: North texture are not found\n"));
 	if (!(game->textures.south = mlx_load_png(game->textures.south_path)))
 	{
 		free_mlx_textures(game);
-		return (print_error("Error: South texture are not found"));
+		return (print_error("Error: South texture are not found\n"));
 	}
 	if (!(game->textures.east = mlx_load_png(game->textures.east_path)))
 	{
 		free_mlx_textures(game);
-		return (print_error("Error: East texture are not found"));
+		return (print_error("Error: East texture are not found\n"));
 	}
 	if (!(game->textures.west = mlx_load_png(game->textures.west_path)))
 	{
 		free_mlx_textures(game);
-		return (print_error("Error: West texture are not found"));
+		return (print_error("Error: West texture are not found\n"));
 	}
 	return (0);
 }

@@ -13,12 +13,12 @@ int	main(int argc, char **argv)
 		cleanup_game(&game);
 		return (1);
 	}
-	if (init_graphics(&game) != 0)
+	if (load_textures(&game) != 0)
 	{
 		cleanup_game(&game);
 		return (1);
 	}
-	if (load_textures(&game) != 0)
+	if (init_graphics(&game) != 0)
 	{
 		cleanup_game(&game);
 		return (1);

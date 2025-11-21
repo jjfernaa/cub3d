@@ -1,8 +1,11 @@
 NAME := cub3D
 CC := cc
 CFLAGS := -g -Wall -Werror -Wextra \
-		#-fsanitize=address,undefined \
+		-fsanitize=address,undefined \
 		#-Wunreachable-code -Ofast \
+
+ASAN_OPTIONS := suppressions=asan_suppressions.txt:detect_leaks=1:abort_on_error=1
+export ASAN_OPTIONS
 
 LIBFT_DIR := libft
 LIBFT := $(LIBFT_DIR)/libft.a
@@ -28,6 +31,7 @@ SRCS = \
 	$(SRCS_DIR)/parser/textures.c \
 	$(SRCS_DIR)/parser/free.c \
 	$(SRCS_DIR)/parser/color.c \
+	$(SRCS_DIR)/parser/walls.c \
 	$(SRCS_DIR)/execution/init.c \
 	$(SRCS_DIR)/execution/player.c \
 	$(SRCS_DIR)/execution/game_loop.c \

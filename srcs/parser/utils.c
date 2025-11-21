@@ -17,6 +17,7 @@ void	clean_mlx(t_game *game)
 		}
 		mlx_terminate(game->mlx);
 		game->mlx = NULL;
+		printf("✅ Clean_mlx\n"); 
 	}
 }
 
@@ -24,15 +25,18 @@ void	free_textures(t_game *game)
 {
 	free_mlx_textures(game);
 	free_path_textures(game);
+	printf("✅ Clean_all_textures\n"); 
 }
 
 void	cleanup_game(t_game *game)
 {
 	if (!game)
 		return ;
+	printf("🧹 Cleaning up game...\n");  // ← Debug temporal
 	free_textures(game);
 	free_map(game);
 	clean_mlx(game);
+	printf("✅ Cleanup completed\n");    // ← Debug temporal
 }
 
 void	path_to_null(t_game *game)
@@ -44,4 +48,4 @@ void	path_to_null(t_game *game)
 	game->textures.floor = NULL;
 	game->textures.ceiling = NULL;
 }
-// se podría liberar memoria o parte del mapa en esta funcion
+

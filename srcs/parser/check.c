@@ -70,7 +70,6 @@ int	check_valid_chars(char *line)
 		if (line[0] == '\0' || line[0] == '\n') // si esta vacía
 			return (0);
 		return (print_error("Error: Invalid line of map\n"));
-		exit(1);
 	}
 	i = 0;
 	while (line[i])
@@ -84,7 +83,7 @@ int	check_valid_chars(char *line)
 		}
 		i++;
 	}
-	if (count_chars(line))
+	if (count_chars(line)) //validar aqui el error mejor
 		return (0);
 	return (0);
 }
