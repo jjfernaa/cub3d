@@ -76,8 +76,8 @@ typedef struct s_game
 	int mouse_locked; // add
 	int				fd;
 	char			**map;
-	int map_width;  // Agrego variable para almacenar tamaño del mapa
-	int map_height; // Agrego variable para almacenar tamaño del mapa
+	int map_width;  // Almacena tamaño del mapa
+	int map_height; // Almacena tamaño del mapa
 }					t_game;
 
 // Utils Function
