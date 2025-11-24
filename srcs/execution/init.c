@@ -27,7 +27,7 @@ int	init_window(t_game *game)
 	return (0);
 }
 
-int	init_textures(t_game *game)
+int	init_textures(t_game *game) //esta funcion no sirve de mucho
 {
 	(void)game;
 	/*game->textures.north = NULL;

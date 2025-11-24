@@ -114,6 +114,3 @@ int	load_map(char *argv, t_game *game)
 	return (0);
 }
 
-/*Hay que controlar que no se puedan poner algo más que no sean coordenadas en el inicio,
-gestionar tambien que solo existan un solo tipo de	coordenada(que no haya dos NO). Tambien que solo aparezca una N,E,S
-en el mapa, que no haya repeticiones, como tambien hay que añadir el flood_fill modificado para que acepte mapas irregulares,*/

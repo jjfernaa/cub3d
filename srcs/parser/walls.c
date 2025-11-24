@@ -7,8 +7,7 @@ int	check_border(char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] != '1' && line[i] != ' ' && line[i] != '\n'
-			&& line[i] != '\t')
+		if (line[i] != '1' && line[i] != ' ' && line[i] != '\n')
 			return (1);
 		i++;
 	}

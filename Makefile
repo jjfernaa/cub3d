@@ -32,6 +32,7 @@ SRCS = \
 	$(SRCS_DIR)/parser/free.c \
 	$(SRCS_DIR)/parser/color.c \
 	$(SRCS_DIR)/parser/walls.c \
+	$(SRCS_DIR)/parser/utils_map.c \
 	$(SRCS_DIR)/execution/init.c \
 	$(SRCS_DIR)/execution/player.c \
 	$(SRCS_DIR)/execution/game_loop.c \

@@ -25,7 +25,7 @@ int	is_config_line(char *line)
 	static int count = 0;
 
 	if (!line || !line[0])
-		return (0);
+		return (-1);
 	if (ft_strncmp(line, "NO ", 3) == 0 || ft_strncmp(line, "SO ", 3) == 0
 		|| ft_strncmp(line, "WE ", 3) == 0 || ft_strncmp(line, "EA ", 3) == 0
 		|| ft_strncmp(line, "F ", 2) == 0 || ft_strncmp(line, "C ", 2) == 0)
@@ -35,22 +35,6 @@ int	is_config_line(char *line)
 			return (-1);
 		return (1);
 	}
-	return (0);
-}
-
-int	is_map_line(char *line)
-{
-	int	i;
-
-	if (!line || !line[0])
-		return (0);
-	i = 0;
-	while (line[i] && (line[i] >= 9 && line[i] <= 32))
-		i++;
-	if (line[i] == '\0' || line[i] == '\n') // Si después de los espacios no hay nada o solo newline, no es mapa
-		return (0);
-	if (line[i] == '1' || line[i] == '0')
-		return (1);
 	return (0);
 }
 
@@ -66,7 +50,7 @@ int	check_valid_chars(char *line)
 		if (line[i] != '1' && line[i] != '0' && line[i] != 'N' && line[i] != 'S'
 			&& line[i] != 'E' && line[i] != 'W' && line[i] != ' '
 			&& line[i] != '\n')
-			return (print_error("Error: Invalid map character\n"));
+			return (1);
 		i++;
 	}
 	if (count_chars(line) != 0)
@@ -77,10 +61,9 @@ int	check_valid_chars(char *line)
 int	count_chars(char *line)
 {
 	int	i;
-	int	count;
+	static int	count = 0;
 
 	i = 0;
-	count = 0;
 	if (!line)
 		return (0);
 	while (line[i])
@@ -91,7 +74,7 @@ int	count_chars(char *line)
 		i++;
 	}
 	if (count > 1)
-		return (print_error("Error: Multiple player positions in line\n"));
+		return (1);
 	return (0);
 }
 

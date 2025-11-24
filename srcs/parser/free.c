@@ -2,9 +2,9 @@
 
 void	free_mlx_textures(t_game *game)
 {
-	printf("Debug: north=%p, south=%p, west=%p, east=%p\n", 
+	/*printf("Debug: north=%p, south=%p, west=%p, east=%p\n", 
     game->textures.north, game->textures.south, 
-	game->textures.west, game->textures.east);
+	game->textures.west, game->textures.east);*/
 	if (game->textures.north)
 	{
 		mlx_delete_texture(game->textures.north);
@@ -25,7 +25,7 @@ void	free_mlx_textures(t_game *game)
 		mlx_delete_texture(game->textures.west);
 		game->textures.west = NULL;
 	}
-	printf("✅ free_mlx_textures\n"); 
+	//printf("✅ free_mlx_textures\n"); 
 }
 
 void	free_path_textures(t_game *game)
@@ -43,7 +43,7 @@ void	free_path_textures(t_game *game)
 	if (game->textures.ceiling)
 		free(game->textures.ceiling);
 	path_to_null(game);
-	printf("✅ free_path_textures\n"); 
+	//printf("✅ free_path_textures\n"); 
 }
 
 
@@ -58,7 +58,7 @@ void	free_map(t_game *game)
 		free(game->map[i++]);
 	free(game->map);
 	game->map = NULL;
-	printf("✅ free_map\n"); 
+	//printf("✅ free_map\n"); 
 }
 
 void	free_split(char **str)
@@ -72,5 +72,5 @@ void	free_split(char **str)
 			free(str[i++]);
 		free(str);
 	}
-	printf("✅ free_split\n"); 
+	//printf("✅ free_split\n"); 
 }
