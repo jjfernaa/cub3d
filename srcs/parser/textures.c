@@ -23,7 +23,7 @@ char	*paths_c_f(char *line, const char *name)
 	return (NULL);
 }
 
-void	match_paths_c_f(char *line, t_game *game)
+int	match_paths_c_f(char *line, t_game *game)
 {
 	if (!game->textures.ceiling)
 	{
@@ -33,7 +33,7 @@ void	match_paths_c_f(char *line, t_game *game)
 			game->textures.ceiling = game->textures.tmp_path;
 			game->ceiling_color = split_path(game->textures.ceiling);
 			if (game->ceiling_color == 1)
-				exit(1);
+				return (print_error("Error: Invalid ceiling color format\n"));
 		}
 	}
 	if (!game->textures.floor)
@@ -44,9 +44,10 @@ void	match_paths_c_f(char *line, t_game *game)
 			game->textures.floor = game->textures.tmp_path;
 			game->floor_color = split_path(game->textures.floor);
 			if (game->floor_color == 1)
-				exit(1);
+				return (print_error("Error: Invalid floor color format\n"));
 		}
 	}
+	return (0);
 }
 
 char	*paths_of_textures(char *line, const char *name)

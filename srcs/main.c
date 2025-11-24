@@ -6,24 +6,24 @@ int	main(int argc, char **argv)
 
 	if (validate_arguments(argc, argv) != 0)
 		return (1);
-	if (init_game(&game) != 0) //aqui para evitar que borre las texturas
+	if (init_game(&game) != 0)
 		return (1);
-	if (load_map(argv[1], &game) != 0) //valida y carga el mapa
+	if (load_map(argv[1], &game) != 0) // Carga mapa y paths de texturas
 	{
 		cleanup_game(&game);
 		return (1);
 	}
-	if (load_textures(&game) != 0)
+	if (load_textures(&game) != 0) // Cargar texturas ANTES de abrir ventana
 	{
 		cleanup_game(&game);
 		return (1);
 	}
-	if (init_graphics(&game) != 0)
+	if (init_graphics(&game) != 0) // Después abrir ventana
 	{
 		cleanup_game(&game);
 		return (1);
 	}
-	run_game(&game); // nueva funcion
+	run_game(&game); //nueva funcion
 	cleanup_game(&game);
 	return (0);
 }

@@ -3,9 +3,6 @@
 int	init_game(t_game *game)
 {
 	ft_memset(game, 0, sizeof(t_game));
-	game->map = NULL;
-	game->map_width = 0;
-	game->map_height = 0;
 	return (0);
 }
 
@@ -33,10 +30,10 @@ int	init_window(t_game *game)
 int	init_textures(t_game *game)
 {
 	(void)game;
-	game->textures.north = NULL;
+	/*game->textures.north = NULL;
 	game->textures.south = NULL;
 	game->textures.east = NULL;
-	game->textures.west = NULL;
+	game->textures.west = NULL;*/  
 	return (0);
 }
 

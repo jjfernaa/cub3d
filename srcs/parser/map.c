@@ -18,25 +18,31 @@ int	count_lines(char *file, t_game *game)
 	int		count;
 	char	*line;
 
-	// printf("Intentando abrir: '%s'\n", file);
 	fd = open(file, O_RDONLY);
-	// printf("valor fd: %d\n", fd);
 	if (fd < 0)
 		return (print_error("Error: Failed opening the file\n"));
 	count = 0;
 	line = get_next_line(fd);
 	while (line)
 	{
+		if (is_config_line(line) == -1)
+		{
+			free(line);
+			close(fd);
+			return (-1);
+		}
 		match_paths(line, game);
-		match_paths_c_f(line, game);
-		// luego gestionas las texturas A PARTE(O NO)
-		// Solo contar líneas que sean realmente del mapa
+		if (match_paths_c_f(line, game) == 1)
+		{
+			free(line);
+			close(fd);
+			return (-1);
+		}
 		if (is_map_line(line))
 			count++;
 		free(line);
 		line = get_next_line(fd);
 	}
-	// printf("Total: %d líneas\n", count);
 	close(fd);
 	return (count);
 }
@@ -79,9 +85,13 @@ int	get_map(char *file, t_game *game)
 			len = ft_strlen(line);
 			if (len > game->map_width) // Encontrar el ancho maximo
 				game->map_width = len;
-			check_valid_chars(line);
+			if (check_valid_chars(line) != 0)
+			{
+				free(line);
+				close(fd);
+				return (-1);
+			}
 			i++;
-			//printf("")
 		}
 		free(line);
 		line = get_next_line(fd);
