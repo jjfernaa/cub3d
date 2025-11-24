@@ -107,7 +107,7 @@ void	cast_rays(t_game *game)
 		calculate_step(game, &ray);
 		perform_dda(game, &ray);
 		calculate_wall_dist(game, &ray);
-		draw_wall_stripe(game, &ray, x);
+		draw_texture_wall(game, &ray, x);
 		x++;
 	}
 }

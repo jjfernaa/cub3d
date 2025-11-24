@@ -29,7 +29,7 @@ typedef struct s_player
 	double			plane_y;
 	double			mouse_x;
 	int				first_mouse;
-}					t_player;
+	}					t_player;
 
 typedef struct s_textures
 {
@@ -62,7 +62,21 @@ typedef struct t_ray
 	int				step_y;
 	int				hit; // flag para choque de pared
 	int				side; // Lado NS o EW
+	double			wall_x; //Posicion exacta donde el rayo golpea
+	int				tex_x; // coordenada x en la textura
+	int				tex_y; // coordenada y en la textura
+	mlx_texture_t	*texture; // Textura a usar (N/S/E/W) 
 }					t_ray;
+
+typedef struct s_draw
+{
+	int				line_height; //Altura de la linea
+	int				draw_start; // Inicio del dibujo
+	int				draw_end; // Fin del dibujo
+	double			step;	// Paso para recorrer textura
+	double			tex_pos; // Posicion actual en textura	
+}	t_draw;
+
 
 typedef struct s_game
 {
