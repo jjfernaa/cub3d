@@ -69,21 +69,23 @@ int	get_map(char *file, t_game *game)
 	int		i;
 	int		len;
 	char	*line;
+	int		map_started;
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		return (print_error("Error: Failed opening the file\n"));
 	i = 0;
+	map_started = 0;
 	game->map_width = 0;
 	line = get_next_line(fd);
 	while (line)
 	{
-		// Solo procesar líneas que sean realmente del mapa
 		if (is_map_line(line))
 		{
-			game->map[i] = ft_strdup(line);// copia para evitar segmentation fault
+			map_started = 1;
+			game->map[i] = ft_strdup(line);
 			len = ft_strlen(line);
-			if (len > game->map_width) // Encontrar el ancho maximo
+			if (len > game->map_width)
 				game->map_width = len;
 			if (check_valid_chars(line) != 0)
 			{
@@ -91,13 +93,28 @@ int	get_map(char *file, t_game *game)
 				close(fd);
 				return (-1);
 			}
+			if (control_spaces(line) != 0)
+			{
+				free(line);
+				close(fd);
+				return (-1);
+			}
 			i++;
+		}
+		else
+		{
+			if (map_started && control_empty_line(line) != 0)
+			{
+				free(line);
+				close(fd);
+				return (-1);
+			}
 		}
 		free(line);
 		line = get_next_line(fd);
 	}
 	close(fd);
-	return (i);
+	return (0);
 }
 
 // funcion principal donde cargaremos el mapa y vadilaremos
@@ -108,9 +125,15 @@ int	load_map(char *argv, t_game *game)
 		return (print_error("Error: Invalid map structure\n"));
 	if (memory_map(game) != 0)
 		return (print_error("Error: Failed to allocate memory on map\n"));
-	if (get_map(argv, game) <= 0)
+	if (get_map(argv, game) != 0)
 		return (print_error("Error: Failed to get map\n"));
+	/*if (validate_walls(game) != 0)
+    {
+        free_map(game);
+        return (print_error("Error: Invalid walls\n"));
+    }*/
+	print_map(game);
+	printf("DEBUG: el width del mapa es: %d\n", game->map_width);
 	// gestionamos aqui el parseo del mapa
 	return (0);
 }
-

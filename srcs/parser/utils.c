@@ -55,4 +55,3 @@ void	path_to_null(t_game *game)
 	game->textures.ceiling = NULL;
 }
 
-

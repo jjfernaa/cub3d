@@ -115,6 +115,10 @@ int					is_map_line(char *line);
 int					check_rows(char *line);
 int					count_chars(char *line);
 void				render_background(t_game *game);
+int 				control_spaces(char *line);
+int 				control_empty_line(char *line);
+int					validate_walls(t_game *game);
+void 					print_map(t_game *game);
 
 // Luego borrar
 

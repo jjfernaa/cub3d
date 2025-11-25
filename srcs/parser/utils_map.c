@@ -3,8 +3,6 @@
 /*
 Si la fila actual es la fila 0 o la fila final, solo aceptar '1' y ' '.
 De lo contrario, el primer y el último carácter siempre deben ser un '1'
-En el caso de espacios en blanco no iniciales,
-	los únicos caracteres aceptables adyacentes al espacio son '1' o ' '.
 Si la longitud de la fila actual es mayor que la longitud de la fila superior y la columna actual es mayor que la longitud de la fila superior,
 	el carácter actual debe ser '1'.
 Si la longitud de la fila actual es mayor que la longitud de la fila inferior y la columna actual es mayor que la longitud de la fila inferior,
@@ -27,25 +25,63 @@ int	is_map_line(char *line)
 	return (0);
 }
 
-int control_spaces(char *line) //gestionar los errores fuera, no dentro
+int control_spaces(char *line)
+{
+	int i;
+	int start_map;
+
+	if (!line)
+		return (1);
+	i = 0;
+	while(line[i] && (line[i] == ' '))
+		i++;
+	start_map = i;
+	while(line[i] && (line[i] != '\n')) //validamos espacios no iniciales
+	{
+		if(line[i] == ' ' && (i > start_map))
+		{
+			if (i > 0 && line[i - 1] != '1' && line[i - 1] != ' ')
+                return (1);
+            if (line[i + 1] != '\0' && line[i + 1] != '\n' && // Siguiente debe ser '1', ' ', '\n' o '\0'
+                line[i + 1] != '1' && line[i + 1] != ' ')
+					return (1);
+		}
+		i++;
+	}
+	return(0);
+}
+
+int control_empty_line(char *line)
 {
 	int i;
 
-	//partimos de la condicion is_map_line, por lo que no hace falta comprobar si estamos ya dentro
-	if (!line)
-		return (1);
-	//esto te sirve para más adelante, ya que en el momento en el que aparezca una linea vacia, da ERROR	
-	if(line[i] == '\0' || line[i] == '\n')
-		return(1);
 	i = 0;
-	if((line[i + 1] == '1') && (line[i - 1] == '1' ) && i == ' ')
-			i++;
-	else
-		return(print_error("Error: Invalid format\n"));
-	
+	while(line[i] && line[i] == ' ')
+		i++;
+	if (line[i] == '\0' || line[i] == '\n')
+		return(1);
+	return(0);
 }
 
-void	flood_fill(t_game *game, char **copy, int y, int x) //modificar para que acepte mapas irregulares
+/*int normalize_map(t_game *game) 
+{
+	int i;
+	int	height;
+	int	width;
+	int max_len;
+
+	if (!game || !game->map)
+		return (1);
+	i = 0;
+	max_len = game->map_width;
+	while(max_len < game->map[0][i]) //en width esta almacenada la linea más larga
+	{
+		if(game->map[0][i] == ' ' && i != max_len)
+			
+	}
+}*/
+
+/*void	flood_fill(t_game *game, char **copy, int y, int x) //modificar para que acepte mapas irregulares
 {
 	if (copy[y][x] != '1')
 	{
@@ -57,5 +93,4 @@ void	flood_fill(t_game *game, char **copy, int y, int x) //modificar para que ac
 	}
 }
 
-/*tambien hay que añadir el flood_fill modificado para que acepte mapas irregulares, controlar que el mapa no pueda
-romperse por la mitad con lineas vacias, y controlar los espacios iniciales que estan bien*/
+tambien hay que añadir el flood_fill modificado para que acepte mapas irregulares*/
