@@ -20,7 +20,7 @@ static void	init_draw_params(t_ray *ray, t_draw *draw)
 }
 
 // Dibuja una columna vertical con textura
-void	draw_textured_wall(t_game *game, t_ray *ray, int x)
+void	draw_texture_wall(t_game *game, t_ray *ray, int x)
 {
 	t_draw		draw;
 	int			y;

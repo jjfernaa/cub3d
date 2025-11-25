@@ -32,11 +32,11 @@ int	init_window(t_game *game)
 
 int	init_textures(t_game *game)
 {
-	(void)game;
-	game->textures.north = NULL;
-	game->textures.south = NULL;
-	game->textures.east = NULL;
-	game->textures.west = NULL;
+	if (load_textures(game)!= 0)
+		return (-1);
+	if (!game->textures.north || !game->textures.south
+		|| !game->textures.east || !game->textures.west)
+		return (print_error("Error: Failed to load one more textures\n"));
 	return (0);
 }
 

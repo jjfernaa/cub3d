@@ -64,7 +64,7 @@ static void	calculate_wall_dist(t_game *game, t_ray *ray)
 }
 // Dibuja una linea vertical de pared
 
-static void	draw_wall_stripe(t_game *game, t_ray *ray, int x)
+/* static void	draw_wall_stripe(t_game *game, t_ray *ray, int x)
 {
 	int			line_height;
 	int			draw_start;
@@ -93,7 +93,7 @@ static void	draw_wall_stripe(t_game *game, t_ray *ray, int x)
 		mlx_put_pixel(game->img, x, y, color);
 		y++;
 	}
-}
+} */
 
 void	cast_rays(t_game *game)
 {
@@ -107,6 +107,9 @@ void	cast_rays(t_game *game)
 		calculate_step(game, &ray);
 		perform_dda(game, &ray);
 		calculate_wall_dist(game, &ray);
+		calculate_wall_x(game, &ray);
+		select_texture(game, &ray);
+		calculate_tex_x(&ray);
 		draw_texture_wall(game, &ray, x);
 		x++;
 	}

@@ -168,5 +168,9 @@ void				free_split(char **str);
 
 // Raycasting Functions
 void				cast_rays(t_game *game);
-
+void				draw_texture_wall(t_game *game, t_ray *ray, int x);
+void				calculate_wall_x(t_game *game, t_ray *ray);
+void				select_texture(t_game *game, t_ray *ray);
+void				calculate_tex_x(t_ray *ray);
+uint32_t			get_texture_color(mlx_texture_t *texture, int x, int y);
 #endif
