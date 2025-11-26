@@ -40,6 +40,8 @@ SRCS = \
 	$(SRCS_DIR)/execution/utils_player.c \
 	$(SRCS_DIR)/execution/minimap.c \
 	$(SRCS_DIR)/execution/raycasting.c \
+	$(SRCS_DIR)/execution/raycast_render.c \
+	$(SRCS_DIR)/execution/raycast_texture.c \
 	$(GNL_DIR)/get_next_line_bonus.c \
 	$(GNL_DIR)/get_next_line_utils_bonus.c \
 
