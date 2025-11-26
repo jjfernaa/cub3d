@@ -118,7 +118,8 @@ void				render_background(t_game *game);
 int 				control_spaces(char *line);
 int 				control_empty_line(char *line);
 int					validate_walls(t_game *game);
-void 					print_map(t_game *game);
+int 				validate_side_walls(t_game *game);
+void 				print_map(t_game *game);
 
 // Luego borrar
 

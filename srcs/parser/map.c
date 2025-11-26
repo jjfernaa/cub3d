@@ -127,13 +127,12 @@ int	load_map(char *argv, t_game *game)
 		return (print_error("Error: Failed to allocate memory on map\n"));
 	if (get_map(argv, game) != 0)
 		return (print_error("Error: Failed to get map\n"));
-	/*if (validate_walls(game) != 0)
+	if (validate_walls(game) != 0)
     {
         free_map(game);
         return (print_error("Error: Invalid walls\n"));
-    }*/
-	print_map(game);
-	printf("DEBUG: el width del mapa es: %d\n", game->map_width);
+    }
+	//print_map(game);
 	// gestionamos aqui el parseo del mapa
 	return (0);
 }
