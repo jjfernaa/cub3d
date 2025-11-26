@@ -62,35 +62,3 @@ int control_empty_line(char *line)
 		return(1);
 	return(0);
 }
-
-/*int normalize_map(t_game *game) 
-{
-	int i;
-	int	height;
-	int	width;
-	int max_len;
-
-	if (!game || !game->map)
-		return (1);
-	i = 0;
-	max_len = game->map_width;
-	while(max_len < game->map[0][i]) //en width esta almacenada la linea más larga
-	{
-		if(game->map[0][i] == ' ' && i != max_len)
-			
-	}
-}*/
-
-/*void	flood_fill(t_game *game, char **copy, int y, int x) //modificar para que acepte mapas irregulares
-{
-	if (copy[y][x] != '1')
-	{
-		copy[y][x] = '1' ;
-		flood_fill(game, copy, y - 1, x);
-		flood_fill(game, copy, y + 1, x);
-		flood_fill(game, copy, y, x + 1);
-		flood_fill(game, copy, y, x - 1);
-	}
-}
-
-tambien hay que añadir el flood_fill modificado para que acepte mapas irregulares*/

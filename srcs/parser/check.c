@@ -78,5 +78,3 @@ int	count_chars(char *line)
 	return (0);
 }
 
-/*Hay que modificar count_chars y el bucle de check_valid_chars, meter esas dos quitando
-el bucle y meterlo en una funcion nueva para ahorras lineas de la norma*/

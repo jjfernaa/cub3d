@@ -52,9 +52,10 @@ int validate_side_walls(t_game *game)
                i, first_char, game->map[i][first_char], 
                last_char, game->map[i][last_char]);*/
 		if (game->map[i][first_char] != '1' || game->map[i][last_char] != '1')
-			return (print_error("Error: Side columns must be walls\n"));
+			return (1);
 		i++;
 	}
+	//validar bordes irregulares aqui
 	return (0);
 }
 

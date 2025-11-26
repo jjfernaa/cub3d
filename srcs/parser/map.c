@@ -1,11 +1,6 @@
 #include "../../includes/cub3d.h"
 
 /*
-Ignorar todos los espacios en blanco iniciales.
-Si la fila actual es la fila 0 o la fila final, solo aceptar '1' y ' '.
-De lo contrario, el primer y el último carácter siempre deben ser un '1'
-En el caso de espacios en blanco no iniciales,
-	los únicos caracteres aceptables adyacentes al espacio son '1' o ' '.
 Si la longitud de la fila actual es mayor que la longitud de la fila superior y la columna actual es mayor que la longitud de la fila superior,
 	el carácter actual debe ser '1'.
 Si la longitud de la fila actual es mayor que la longitud de la fila inferior y la columna actual es mayor que la longitud de la fila inferior,
@@ -128,10 +123,7 @@ int	load_map(char *argv, t_game *game)
 	if (get_map(argv, game) != 0)
 		return (print_error("Error: Failed to get map\n"));
 	if (validate_walls(game) != 0)
-    {
-        free_map(game);
         return (print_error("Error: Invalid walls\n"));
-    }
 	//print_map(game);
 	// gestionamos aqui el parseo del mapa
 	return (0);
