@@ -92,6 +92,7 @@ typedef struct s_game
 	char			**map;
 	int				map_width;  // Almacena tamaño del mapa
 	int				map_height; // Almacena tamaño del mapa
+
 }					t_game;
 
 // Utils Function
@@ -134,6 +135,7 @@ int 				control_empty_line(char *line);
 int					validate_walls(t_game *game);
 int 				validate_side_walls(t_game *game);
 void 				print_map(t_game *game);
+int 				validate_irregular_walls(t_game *game, int current_len);
 
 // Luego borrar
 

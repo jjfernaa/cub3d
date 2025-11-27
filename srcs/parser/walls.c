@@ -1,8 +1,8 @@
 #include "../../includes/cub3d.h"
 
-int	check_border(char *line) //para comprobar tanto las fila primera e ultima
+int	check_border(char *line) // para comprobar tanto las fila primera e ultima
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (line[i] && line[i] != '\n')
@@ -25,99 +25,88 @@ int	validate_walls(t_game *game)
 	width = game->map_width;
 	if (check_border(game->map[0]) || check_border(game->map[height - 1]))
 		return (1);
-	if(validate_side_walls(game) != 0)
-		return(1);
+	if (validate_side_walls(game) != 0)
+		return (1);
 	return (0);
 }
-int validate_side_walls(t_game *game)
+int	validate_side_walls(t_game *game)
 {
 	int	i;
-	int j;
-	int first_char;
-	int last_char;
+	int	j;
+	int	first_char;
+	int	last_char;
 
 	i = 0;
 	while (i < game->map_height)
 	{
-		if(!game->map[i])
+		if (!game->map[i])
 			i++;
 		j = 0;
-		while(game->map[i][j] && (game->map[i][j] == ' '))
-			j++;
+		while (game->map[i][j++] && (game->map[i][j++] == ' '))
 		first_char = j;
-		last_char = ft_strlen(game->map[i]) - 1;
-		while(last_char >= 0 && (game->map[i][last_char] == ' ' || game->map[i][last_char] == '\n'))
+		last_char = ft_strlen(game->map[i - 1]);
+		while (last_char >= 0 && (game->map[i][last_char] == ' '
+				|| game->map[i][last_char] == '\n'))
 			last_char--;
-		/*printf("DEBUG: Fila %d: primer[%d]='%c' último[%d]='%c'\n", 
-               i, first_char, game->map[i][first_char], 
-               last_char, game->map[i][last_char]);*/
 		if (game->map[i][first_char] != '1' || game->map[i][last_char] != '1')
+			return (1);
+		if (validate_irregular_walls(game, (int)ft_strlen(game->map[i]),
+				last_char) != 0)
 			return (1);
 		i++;
 	}
-	//validar bordes irregulares aqui
 	return (0);
 }
 
-/*void print_map(t_game *game)
+int	validate_irregular_walls(t_game *game, int current_len, int last_char)
 {
-    int i;
-    int j;
+	int	max_len;
+	int	y;
+	int	x;
+	int	before_char;
 
-    if (!game || !game->map)
-    {
-        printf("❌ Map is NULL\n");
-        return;
-    }
-
-    printf("\n🗺️  MAP DEBUG INFO:\n");
-    printf("═══════════════════════════════════════\n");
-    printf("Map Height: %d\n", game->map_height);
-    printf("Map Width:  %d\n", game->map_width);
-    printf("═══════════════════════════════════════\n\n");
-
-    i = 0;
-    while (i < game->map_height)
-    {
-        if (!game->map[i])
-        {
-            printf("Row [%2d]: NULL ❌\n", i);
-            i++;
-            continue;
-        }
-
-        int len = ft_strlen(game->map[i]);
-        printf("Row [%2d] (len=%2d): '", i, len);
-
-        j = 0;
-        while (game->map[i][j])
-        {
-            if (game->map[i][j] == '\n')
-                printf("\\n");
-            else if (game->map[i][j] == '\t')
-                printf("\\t");
-            else if (game->map[i][j] == ' ')
-                printf("·");  // Punto medio para ver espacios
-            else
-                printf("%c", game->map[i][j]);
-            j++;
-        }
-        printf("'\n");
-
-        i++;
-    }
-    printf("═══════════════════════════════════════\n\n");
-}*/
-int	is_wall(t_game *game, double x, double y) //FUNCION SACADA DE JUAN
+	y = 0;
+	max_len = game->map_width;
+	before_char = ft_strlen(game->map[y + 1]);
+	while (current_len < max_len)
+	{
+		if (y > 0 && y < game->map_height - 1)
+		{
+			irregular_loop(game, x, current_len, last_char, before_char)
+		}
+		y++;
+		current_len++;
+	}
+	return (0);
+}
+int	irregular_loop(t_game *game, int x, int current_len, int last_char, int before_char)
 {
-	int	map_x;
-	int	map_y;
+	x = current_len - 1;
+	while (++x < game->map_width)
+	{
+		if (x < last_char)
+		{
+			if (game->map[last_char][x] != '1'
+				&& game->map[last_char][x] != ' ')
+				return (1);
+		}
+		if (x < before_char)
+		{
+			if (game->map[before_char][x] != '1'
+				&& game->map[before_char][x] != ' ')
+				return (1);
+		}
+	}
+	return(0);
+}
 
-	map_x = (int)x;
-	map_y = (int)y;
-	if (map_y < 0 || map_y >= game->map_height) //Necesito altura del mapa
+int	is_wall(t_game *game, double x, double y) // FUNCION SACADA DE JUAN
+{
+	int map_x = (int)x;
+	int map_y = (int)y;
+	if (map_y < 0 || map_y >= game->map_height) // Necesito altura del mapa
 		return (1);
-	if (map_x < 0 || map_x >= game->map_width) //Necesito el ancho del mapa
+	if (map_x < 0 || map_x >= game->map_width) // Necesito el ancho del mapa
 		return (1);
 	if (!game->map[map_y]) // Verifica que fila existe
 		return (1);
@@ -143,4 +132,4 @@ int	check_collision(t_game *game, double x, double y)
 	return (0);
 }
 
-//comprobar en que momento se rellenan los huecos de espacios y gestionar el mapa rectangular para validar bordes irregulares(mapa rectangular)
+// comprobar en que momento se rellenan los huecos de espacios y gestionar el mapa rectangular para validar bordes irregulares(mapa rectangular)
