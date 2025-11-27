@@ -26,10 +26,13 @@ void	draw_texture_wall(t_game *game, t_ray *ray, int x)
 	int			y;
 	uint32_t	color;
 
-	calculate_wall_x(game, ray);
-	select_texture(game, ray);
-	calculate_tex_x(ray);
 	init_draw_params(ray, &draw);
+	y = 0;
+	while (y < draw.draw_start) // Pintar techo 
+	{
+		mlx_put_pixel(game->img, x, y, game->ceiling_color);
+		y++;
+	}
 	y = draw.draw_start;
 	while (y < draw.draw_end) // dibuja cada pixel en la textura
 	{
@@ -37,6 +40,11 @@ void	draw_texture_wall(t_game *game, t_ray *ray, int x)
 		draw.tex_pos += draw.step;
 		color = get_texture_color(ray->texture, ray->tex_x, ray->tex_y);
 		mlx_put_pixel(game->img, x, y, color);
+		y++;
+	}
+	while (y < W_HEIGHT)
+	{
+		mlx_put_pixel(game->img, x, y, game->floor_color);
 		y++;
 	}
 }

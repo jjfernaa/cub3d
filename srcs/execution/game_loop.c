@@ -40,17 +40,14 @@ void	updates_game(void *param)
 
 	game = (t_game *)param;
 	handle_input(game);
-	render_background(game);
 	cast_rays(game);
 	if (game->show_minimap)
 	{
 		d_minimap(game);
+		draw_minimap_border(game);
 		d_player(game);
 		d_direction(game);
 	}
-	//draw_direction(t_game *game);
-	// implementar update_player
-	// implementar render_frame
 }
 
 void	run_game(t_game *game)
