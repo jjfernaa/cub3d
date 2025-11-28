@@ -1,3 +1,4 @@
+
 #include "../../includes/cub3d.h"
 
 static int	count_split_elements(char *str)
@@ -34,11 +35,17 @@ uint32_t	split_path(char *path)
 	if (!path)
 		return (print_error("Error: Paths are not loading\n"));
 	if (count_split_elements(path) == 1)
-		return (print_error("Error: Invalid RGB component\n"));
+		return (print_error("Error: Invalid RGB component comilla\n"));
 	split = ft_split(path, ',');
+	// printf("debug: %s\n", split[0]);
+	// printf("debug: %s\n", split[1]);
+	// printf("debug: %s\n", split[2]);
 	if (validate_char_color(split[0]) || validate_char_color(split[1])
-		|| validate_char_color(split[2]))
+		|| validate_char_color(split[2]) == 1)
 	{
+		// printf("debug: %s\n", split[0]);
+		// printf("debug: %s\n", split[1]);
+		// printf("debug: %s\n", split[2]);
 		free_split(split);
 		return (print_error("Error: Invalid RGB component\n"));
 	}
@@ -72,7 +79,9 @@ int	validate_char_color(char *str)
 	while (str[i])
 	{
 		if (str[i] == ' ' || str[i] == '\t' || str[i] == '\n' || str[i] == '\r')
+		{
 			return (1);
+		}
 		if (ft_isalpha(str[i]))
 			return (1);
 		if (!ft_isdigit(str[i]) && str[i] != '+' && str[i] != '-')
@@ -81,6 +90,8 @@ int	validate_char_color(char *str)
 			return (1);
 		i++;
 	}
+	if ((i > 3) || (i < 1))
+		return (1);
 	if (i == 1 && (str[0] == '+' || str[0] == '-'))
 		return (1);
 	return (0);

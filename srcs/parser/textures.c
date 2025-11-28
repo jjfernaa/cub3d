@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   textures.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lginer-m <lginer-m@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/28 17:09:25 by lginer-m          #+#    #+#             */
+/*   Updated: 2025/11/28 17:13:52 by lginer-m         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
 char	*paths_c_f(char *line, const char *name)
@@ -101,31 +113,32 @@ void	match_paths(char *line, t_game *game)
 	{
 		game->textures.tmp_path = paths_of_textures(line, "EA ");
 		if (game->textures.tmp_path)
-
 			game->textures.east_path = game->textures.tmp_path;
 	}
 }
 
 int	load_textures(t_game *game)
 {
-	if (!(game->textures.north = mlx_load_png(game->textures.north_path)))
+	game->textures.north = mlx_load_png(game->textures.north_path);
+	if (!game->textures.north)
 		return (print_error("Error: North texture are not found\n"));
-	if (!(game->textures.south = mlx_load_png(game->textures.south_path)))
+	game->textures.south = mlx_load_png(game->textures.south_path);
+	if (!game->textures.south)
 	{
 		free_mlx_textures(game);
 		return (print_error("Error: South texture are not found\n"));
 	}
-	if (!(game->textures.east = mlx_load_png(game->textures.east_path)))
+	game->textures.east = mlx_load_png(game->textures.east_path);
+	if (!game->textures.east)
 	{
 		free_mlx_textures(game);
 		return (print_error("Error: East texture are not found\n"));
 	}
-	if (!(game->textures.west = mlx_load_png(game->textures.west_path)))
+	game->textures.west = mlx_load_png(game->textures.west_path);
+	if (!game->textures.west)
 	{
 		free_mlx_textures(game);
 		return (print_error("Error: West texture are not found\n"));
 	}
 	return (0);
 }
-
-// CONTROLAR QUE al poner una coordenada distinta hace segmentation fault

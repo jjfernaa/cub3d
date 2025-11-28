@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   walls.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lginer-m <lginer-m@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/28 17:27:18 by lginer-m          #+#    #+#             */
+/*   Updated: 2025/11/28 17:31:50 by lginer-m         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
-int	check_border(char *line) // para comprobar tanto las fila primera e ultima
+int	check_border(char *line)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (line[i] && line[i] != '\n')
@@ -27,88 +39,53 @@ int	validate_walls(t_game *game)
 		return (1);
 	if (validate_side_walls(game) != 0)
 		return (1);
+	if (validate_irregular(game) != 0)
+		return (1);
 	return (0);
 }
+
 int	validate_side_walls(t_game *game)
 {
 	int	i;
 	int	j;
-	int	first_char;
 	int	last_char;
 
 	i = 0;
 	while (i < game->map_height)
 	{
 		if (!game->map[i])
+		{
 			i++;
+			continue ;
+		}
 		j = 0;
-		while (game->map[i][j++] && (game->map[i][j++] == ' '))
-		first_char = j;
-		last_char = ft_strlen(game->map[i - 1]);
+		while (game->map[i][j] && (game->map[i][j] == ' '))
+			j++;
+		last_char = ft_strlen(game->map[i]) - 1;
 		while (last_char >= 0 && (game->map[i][last_char] == ' '
-				|| game->map[i][last_char] == '\n'))
+			|| game->map[i][last_char] == '\n'))
 			last_char--;
-		if (game->map[i][first_char] != '1' || game->map[i][last_char] != '1')
-			return (1);
-		if (validate_irregular_walls(game, (int)ft_strlen(game->map[i]),
-				last_char) != 0)
+		if (game->map[i][j] != '1' || game->map[i][last_char] != '1')
 			return (1);
 		i++;
 	}
 	return (0);
 }
 
-int	validate_irregular(t_game *g)
+int	is_wall(t_game *game, double x, double y)
 {
-	int	y;
-	int	x;
-	int	len;
-	int	next_len;
+	int	map_x;
+	int	map_y;
 
-	y = 0;
-	while (y < g->map_height - 1)
-	{
-		len = ft_strlen(g->map[y]);
-		next_len = ft_strlen(g->map[y + 1]);
-		x = 0;
-		while (x < g->map_width)
-		{
-			// Caso 1: existe "0" arriba pero fuera del rango del de abajo
-			if (x < len && g->map[y][x] == '0' && x >= next_len)
-				return (1);
-
-			// Caso 2: existe "0" abajo pero fuera del rango del de arriba
-			if (x < next_len && g->map[y + 1][x] == '0' && x >= len)
-				return (1);
-
-			// Caso 3: hay "0" arriba y abajo pero alguno NO está rodeado por muros
-			if (x < len && g->map[y][x] == '0')
-				if (g->map[y + 1][x] == ' ' || g->map[y + 1][x] == '\n')
-					return (1);
-
-			if (x < next_len && g->map[y + 1][x] == '0')
-				if (g->map[y][x] == ' ' || g->map[y][x] == '\n')
-					return (1);
-
-			x++;
-		}
-		y++;
-	}
-	return (0);
-}
-
-
-int	is_wall(t_game *game, double x, double y) // FUNCION SACADA DE JUAN
-{
-	int map_x = (int)x;
-	int map_y = (int)y;
-	if (map_y < 0 || map_y >= game->map_height) // Necesito altura del mapa
+	map_x = (int)x;
+	map_y = (int)y;
+	if (map_y < 0 || map_y >= game->map_height)
 		return (1);
-	if (map_x < 0 || map_x >= game->map_width) // Necesito el ancho del mapa
+	if (map_x < 0 || map_x >= game->map_width)
 		return (1);
-	if (!game->map[map_y]) // Verifica que fila existe
+	if (!game->map[map_y])
 		return (1);
-	if (map_x >= (int)ft_strlen(game->map[map_y])) // Verifica columna
+	if (map_x >= (int)ft_strlen(game->map[map_y]))
 		return (1);
 	if (game->map[map_y][map_x] == '1')
 		return (1);
@@ -129,5 +106,3 @@ int	check_collision(t_game *game, double x, double y)
 		return (1);
 	return (0);
 }
-
-// comprobar en que momento se rellenan los huecos de espacios y gestionar el mapa rectangular para validar bordes irregulares(mapa rectangular)

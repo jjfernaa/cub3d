@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lginer-m <lginer-m@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/28 17:06:19 by lginer-m          #+#    #+#             */
+/*   Updated: 2025/11/28 17:06:22 by lginer-m         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
 int	check_extension(char *str)
@@ -22,7 +34,7 @@ int	validate_arguments(int argc, char **argv)
 
 int	is_config_line(char *line)
 {
-	static int count = 0;
+	static int	count = 0;
 
 	if (!line || !line[0])
 		return (-1);
@@ -60,7 +72,7 @@ int	check_valid_chars(char *line)
 
 int	count_chars(char *line)
 {
-	int	i;
+	int			i;
 	static int	count = 0;
 
 	i = 0;
@@ -77,4 +89,3 @@ int	count_chars(char *line)
 		return (1);
 	return (0);
 }
-
