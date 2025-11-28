@@ -27,31 +27,17 @@ int	init_window(t_game *game)
 	return (0);
 }
 
-int	init_textures(t_game *game) //esta funcion no sirve de mucho
-{
-	if (load_textures(game)!= 0)
-		return (-1);
-	if (!game->textures.north || !game->textures.south
-		|| !game->textures.east || !game->textures.west)
-		return (print_error("Error: Failed to load one more textures\n"));
-	return (0);
-}
-
 // cree esta funcion para descomprimir el main
 int	init_graphics(t_game *game)
 {
 	if (init_window(game) != 0)
 		return (-1);
-	if (init_textures(game) != 0)
-	{
-		clean_mlx(game);
-		return (-1);
-	}
 	if (init_player(game) != 0)
 	{
 		clean_mlx(game);
 		return (-1);
 	}
+	
 	return (0);
 }
 

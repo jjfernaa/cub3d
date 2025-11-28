@@ -16,7 +16,10 @@
 # define ROT_SPEED 0.03
 # define MOUSE_SENSITIVITY 0.0008
 # define COLLISION_MARGEN 0.2
-# define TILE_SIZE 10     // Minimapa
+# define TILE_SIZE 6     // Minimapa
+# define MINIMAP_RADIUS 8 // solo lo que se ve del minimapa
+# define MINIM_OFFSET_X 10 
+# define MINIM_OFFSET_Y (W_HEIGHT - (MINIMAP_RADIUS * 2 + 1) * TILE_SIZE - 10)
 # define COL_P 0xFF0000FF // color del jugador en el minimapa
 
 typedef struct s_player
@@ -163,6 +166,11 @@ void				d_tile(t_game *game, int x, int y, uint32_t color);
 void				d_minimap(t_game *game);
 void				d_player(t_game *game);
 void				d_direction(t_game *game);
+uint32_t			get_tile_color(char c);
+int					is_valid_map_pos(t_game *game, int map_x, int map_y);
+void				draw_minimap_row(t_game *game, int map_y, int *screen_y);
+void				draw_minimap_border(t_game *game);
+void				draw_minimap_background(t_game *game);
 
 // Cleanup Functions
 void				cleanup_game(t_game *game);

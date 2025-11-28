@@ -39,6 +39,7 @@ SRCS = \
 	$(SRCS_DIR)/execution/moves.c \
 	$(SRCS_DIR)/execution/utils_player.c \
 	$(SRCS_DIR)/execution/minimap.c \
+	$(SRCS_DIR)/execution/utils_minimap.c \
 	$(SRCS_DIR)/execution/raycasting.c \
 	$(SRCS_DIR)/execution/raycast_render.c \
 	$(SRCS_DIR)/execution/raycast_texture.c \
