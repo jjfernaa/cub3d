@@ -58,47 +58,45 @@ int	validate_side_walls(t_game *game)
 	return (0);
 }
 
-int	validate_irregular_walls(t_game *game, int current_len, int last_char)
+int	validate_irregular(t_game *g)
 {
-	int	max_len;
 	int	y;
 	int	x;
-	int	before_char;
+	int	len;
+	int	next_len;
 
 	y = 0;
-	max_len = game->map_width;
-	before_char = ft_strlen(game->map[y + 1]);
-	while (current_len < max_len)
+	while (y < g->map_height - 1)
 	{
-		if (y > 0 && y < game->map_height - 1)
+		len = ft_strlen(g->map[y]);
+		next_len = ft_strlen(g->map[y + 1]);
+		x = 0;
+		while (x < g->map_width)
 		{
-			irregular_loop(game, x, current_len, last_char, before_char)
+			// Caso 1: existe "0" arriba pero fuera del rango del de abajo
+			if (x < len && g->map[y][x] == '0' && x >= next_len)
+				return (1);
+
+			// Caso 2: existe "0" abajo pero fuera del rango del de arriba
+			if (x < next_len && g->map[y + 1][x] == '0' && x >= len)
+				return (1);
+
+			// Caso 3: hay "0" arriba y abajo pero alguno NO está rodeado por muros
+			if (x < len && g->map[y][x] == '0')
+				if (g->map[y + 1][x] == ' ' || g->map[y + 1][x] == '\n')
+					return (1);
+
+			if (x < next_len && g->map[y + 1][x] == '0')
+				if (g->map[y][x] == ' ' || g->map[y][x] == '\n')
+					return (1);
+
+			x++;
 		}
 		y++;
-		current_len++;
 	}
 	return (0);
 }
-int	irregular_loop(t_game *game, int x, int current_len, int last_char, int before_char)
-{
-	x = current_len - 1;
-	while (++x < game->map_width)
-	{
-		if (x < last_char)
-		{
-			if (game->map[last_char][x] != '1'
-				&& game->map[last_char][x] != ' ')
-				return (1);
-		}
-		if (x < before_char)
-		{
-			if (game->map[before_char][x] != '1'
-				&& game->map[before_char][x] != ' ')
-				return (1);
-		}
-	}
-	return(0);
-}
+
 
 int	is_wall(t_game *game, double x, double y) // FUNCION SACADA DE JUAN
 {

@@ -135,7 +135,7 @@ int 				control_empty_line(char *line);
 int					validate_walls(t_game *game);
 int 				validate_side_walls(t_game *game);
 void 				print_map(t_game *game);
-int 				validate_irregular_walls(t_game *game, int current_len);
+int					validate_irregular(t_game *game);
 
 // Luego borrar
 
