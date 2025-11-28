@@ -7,16 +7,14 @@ Si la longitud de la fila actual es mayor que la longitud de la fila inferior y 
 	el carácter actual debe ser '1'.
 Estas reglas deben cumplir con todos los requisitos del mapa.*/
 
-int	count_lines(char *file, t_game *game)
+int	count_lines(char *file, t_game **game)
 {
 	int		fd;
-	int		count;
 	char	*line;
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		return (print_error("Error: Failed opening the file\n"));
-	count = 0;
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -24,22 +22,22 @@ int	count_lines(char *file, t_game *game)
 		{
 			free(line);
 			close(fd);
-			return (-1);
+			return (1);
 		}
-		match_paths(line, game);
-		if (match_paths_c_f(line, game) == 1)
+		match_paths(line, *game);
+		if (match_paths_c_f(line, *game) == 1)
 		{
 			free(line);
 			close(fd);
-			return (-1);
+			return (1);
 		}
 		if (is_map_line(line))
-			count++;
+			(*game)->map_height++;
 		free(line);
 		line = get_next_line(fd);
 	}
 	close(fd);
-	return (count);
+	return (0);
 }
 
 int	memory_map(t_game *game)
@@ -115,16 +113,20 @@ int	get_map(char *file, t_game *game)
 // funcion principal donde cargaremos el mapa y vadilaremos
 int	load_map(char *argv, t_game *game)
 {
-	game->map_height = count_lines(argv, game);
+	int	error;
+
+	error = count_lines(argv, &game);
 	if (game == NULL || game->map_height < 0 || game->map_width < 0)
 		return (print_error("Error: Invalid map structure\n"));
-	if (memory_map(game) != 0)
+	if (error == 0 && memory_map(game) != 0)
 		return (print_error("Error: Failed to allocate memory on map\n"));
-	if (get_map(argv, game) != 0)
+	if (error == 0 && get_map(argv, game) != 0)
 		return (print_error("Error: Failed to get map\n"));
-	if (validate_walls(game) != 0)
-        return (print_error("Error: Invalid walls\n"));
-	//print_map(game);
+	if (error == 0 && validate_walls(game) != 0)
+		return (print_error("Error: Invalid walls\n"));
+	if (error)
+		return (1);
+	// print_map(game);
 	// gestionamos aqui el parseo del mapa
 	return (0);
 }

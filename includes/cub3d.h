@@ -113,7 +113,7 @@ void				init_ray(t_game *game, t_ray *ray, int x);
 // Parser Function
 int					validate_arguments(int argc, char **argv);
 int					check_extension(char *str);
-int					count_lines(char *file, t_game *game);
+int					count_lines(char *file, t_game **game);
 char				*paths_of_textures(char *line, const char *name);
 void				match_paths(char *line, t_game *game);
 char				*paths_c_f(char *line, const char *name);

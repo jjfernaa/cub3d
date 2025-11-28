@@ -37,7 +37,6 @@ int	init_graphics(t_game *game)
 		clean_mlx(game);
 		return (-1);
 	}
-	
 	return (0);
 }
 
