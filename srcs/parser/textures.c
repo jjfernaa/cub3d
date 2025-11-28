@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lginer-m <lginer-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juan-jof <juan-jof@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 17:09:25 by lginer-m          #+#    #+#             */
-/*   Updated: 2025/11/28 17:13:52 by lginer-m         ###   ########.fr       */
+/*   Updated: 2025/11/28 20:13:07 by juan-jof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*paths_c_f(char *line, const char *name)
 		while (line[start] && (line[start] == ' ' || line[start] == '\t'))
 			start++;
 		end = start;
-		while (line[end] && line[end] != ' ' && line[end] != '\t'
+		while (line[end] && line[end] != '\t'
 			&& line[end] != '\n')
 			end++;
 		path = ft_substr(line, start, end - start);
@@ -43,9 +43,10 @@ int	match_paths_c_f(char *line, t_game *game)
 		if (game->textures.tmp_path)
 		{
 			game->textures.ceiling = game->textures.tmp_path;
+			printf("ceiling: %s\n", game->textures.ceiling);
 			game->ceiling_color = split_path(game->textures.ceiling);
 			if (game->ceiling_color == 1)
-				return (print_error("Error: Invalid ceiling color format\n"));
+			return (print_error("Error: Invalid ceiling color format\n"));
 		}
 	}
 	if (!game->textures.floor)
@@ -54,6 +55,7 @@ int	match_paths_c_f(char *line, t_game *game)
 		if (game->textures.tmp_path)
 		{
 			game->textures.floor = game->textures.tmp_path;
+			printf("floor: %s\n", game->textures.floor);
 			game->floor_color = split_path(game->textures.floor);
 			if (game->floor_color == 1)
 				return (print_error("Error: Invalid floor color format\n"));
@@ -76,7 +78,7 @@ char	*paths_of_textures(char *line, const char *name)
 		while (line[start] && (line[start] == ' ' || line[start] == '\t'))
 			start++;
 		end = start;
-		while (line[end] && line[end] != ' ' && line[end] != '\t'
+		while (line[end] && line[end] != '\t'
 			&& line[end] != '\n')
 			end++;
 		if (end <= start || start < 0 || end < 0)

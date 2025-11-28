@@ -16,7 +16,7 @@
 # define ROT_SPEED 0.03
 # define MOUSE_SENSITIVITY 0.0008
 # define COLLISION_MARGEN 0.2
-# define TILE_SIZE 6     // Minimapa
+# define TILE_SIZE 10     // Minimapa
 # define MINIMAP_RADIUS 8 // solo lo que se ve del minimapa
 # define MINIM_OFFSET_X 10 
 # define MINIM_OFFSET_Y (W_HEIGHT - (MINIMAP_RADIUS * 2 + 1) * TILE_SIZE - 10)
@@ -132,7 +132,6 @@ int					is_config_line(char *line);
 int					is_map_line(char *line);
 int					check_rows(char *line);
 int					count_chars(char *line);
-void				render_background(t_game *game);
 int 				control_spaces(char *line);
 int 				control_empty_line(char *line);
 int					validate_walls(t_game *game);

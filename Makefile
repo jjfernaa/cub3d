@@ -37,7 +37,6 @@ SRCS = \
 	$(SRCS_DIR)/execution/player.c \
 	$(SRCS_DIR)/execution/game_loop.c \
 	$(SRCS_DIR)/execution/moves.c \
-	$(SRCS_DIR)/execution/utils_player.c \
 	$(SRCS_DIR)/execution/minimap.c \
 	$(SRCS_DIR)/execution/utils_minimap.c \
 	$(SRCS_DIR)/execution/raycasting.c \

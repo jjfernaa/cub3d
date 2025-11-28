@@ -36,6 +36,7 @@ uint32_t	split_path(char *path)
 		return (print_error("Error: Paths are not loading\n"));
 	if (count_split_elements(path) == 1)
 		return (print_error("Error: Invalid RGB component comilla\n"));
+	printf("line: %s\n", path);
 	split = ft_split(path, ',');
 	// printf("debug: %s\n", split[0]);
 	// printf("debug: %s\n", split[1]);
@@ -74,6 +75,7 @@ int	validate_char_color(char *str)
 	int	i;
 
 	i = 0;
+	printf("str: %s\n", str);
 	if (!str || str[0] == '\0')
 		return (1);
 	while (str[i])
@@ -97,23 +99,3 @@ int	validate_char_color(char *str)
 	return (0);
 }
 
-void	render_background(t_game *game)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (y < W_HEIGHT)
-	{
-		x = 0;
-		while (x < W_WIDTH)
-		{
-			if (y < W_HEIGHT / 2)
-				mlx_put_pixel(game->img, x, y, game->ceiling_color);
-			else
-				mlx_put_pixel(game->img, x, y, game->floor_color);
-			x++;
-		}
-		y++;
-	}
-}
