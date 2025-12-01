@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lginer-m <lginer-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lauragm <lauragm@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 17:08:32 by lginer-m          #+#    #+#             */
-/*   Updated: 2025/11/28 17:08:53 by lginer-m         ###   ########.fr       */
+/*   Updated: 2025/11/30 23:03:53 by lauragm          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,10 @@ void	free_split(char **str)
 			free(str[i++]);
 		free(str);
 	}
+}
+
+void	free_textures(t_game *game)
+{
+	free_mlx_textures(game);
+	free_path_textures(game);
 }

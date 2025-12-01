@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   utils_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lginer-m <lginer-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lauragm <lauragm@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 17:23:55 by lginer-m          #+#    #+#             */
-/*   Updated: 2025/11/28 17:46:24 by lginer-m         ###   ########.fr       */
+/*   Updated: 2025/12/01 00:10:20 by lauragm          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
 
 int	is_map_line(char *line)
 {
@@ -97,3 +98,4 @@ int	validate_irregular(t_game *game)
 	}
 	return (0);
 }
+

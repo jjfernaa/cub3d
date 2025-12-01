@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan-jof <juan-jof@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: lauragm <lauragm@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 17:09:25 by lginer-m          #+#    #+#             */
-/*   Updated: 2025/11/28 20:13:07 by juan-jof         ###   ########.fr       */
+/*   Updated: 2025/12/01 00:34:49 by lauragm          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	match_paths_c_f(char *line, t_game *game)
 			printf("ceiling: %s\n", game->textures.ceiling);
 			game->ceiling_color = split_path(game->textures.ceiling);
 			if (game->ceiling_color == 1)
-			return (print_error("Error: Invalid ceiling color format\n"));
+				return (print_error("Error: Invalid ceiling color format\n"));
 		}
 	}
 	if (!game->textures.floor)
