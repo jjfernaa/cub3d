@@ -106,7 +106,6 @@ void				path_to_null(t_game *game);
 int					init_game(t_game *game);
 int					init_graphics(t_game *game);
 int					init_window(t_game *game);
-int					init_textures(t_game *game);
 int					init_player(t_game *game);
 void				init_ray(t_game *game, t_ray *ray, int x);
 
@@ -130,18 +129,13 @@ uint32_t			check_path_colors(int a, int b, int c);
 int					validate_char_color(char *str);
 int					is_config_line(char *line);
 int					is_map_line(char *line);
-int					check_rows(char *line);
 int					count_chars(char *line);
 int 				control_spaces(char *line);
 int 				control_empty_line(char *line);
 int					validate_walls(t_game *game);
 int 				validate_side_walls(t_game *game);
-void 				print_map(t_game *game);
 int					validate_irregular(t_game *game);
 
-// Luego borrar
-
-int					count_map_lines(char *file, t_game *game);
 
 // Game Function
 void				handle_input(t_game *game);
@@ -169,7 +163,6 @@ uint32_t			get_tile_color(char c);
 int					is_valid_map_pos(t_game *game, int map_x, int map_y);
 void				draw_minimap_row(t_game *game, int map_y, int *screen_y);
 void				draw_minimap_border(t_game *game);
-void				draw_minimap_background(t_game *game);
 
 // Cleanup Functions
 void				cleanup_game(t_game *game);
@@ -187,4 +180,5 @@ void				calculate_wall_x(t_game *game, t_ray *ray);
 void				select_texture(t_game *game, t_ray *ray);
 void				calculate_tex_x(t_ray *ray);
 uint32_t			get_texture_color(mlx_texture_t *texture, int x, int y);
+
 #endif

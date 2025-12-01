@@ -36,19 +36,10 @@ void	calculate_tex_x(t_ray *ray)
 uint32_t	get_texture_color(mlx_texture_t *texture, int x, int y)
 {
 	uint8_t		*pixel;
-	uint32_t	color;
 	int			index;
 
-	// Asegurar que las  coordenadas esten en rango
-	if (x < 0 || x >= (int)texture->width ||
-		y < 0 || y >= (int)texture->height)
-		return (0xFF00FFFF); // color de error(magenta)
-	index =  (y * texture->width + x) * texture->bytes_per_pixel;
+	index =  (y * texture->width + x) * 4;
 	pixel = &texture->pixels[index];
-	color = ((uint32_t)pixel[0] << 24) |
-			((uint32_t)pixel[1] << 16) |
-			((uint32_t)pixel[2] << 8) |
-			((uint32_t)pixel[3]);
-	return (color);
+    return ((pixel[0] << 24) | (pixel[1] << 16) | (pixel[2] << 8) | pixel[3]);
 }
 

@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   walls.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: lginer-m <lginer-m@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/28 17:27:18 by lginer-m          #+#    #+#             */
-/*   Updated: 2025/11/28 17:31:50 by lginer-m         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
@@ -85,7 +74,8 @@ int	is_wall(t_game *game, double x, double y)
 		return (1);
 	if (!game->map[map_y])
 		return (1);
-	if (map_x >= (int)ft_strlen(game->map[map_y]))
+	if (game->map[map_y][map_x] == '\0' || game->map[map_y][map_x] == '\n'
+		|| game->map[map_y][map_x] == ' ')
 		return (1);
 	if (game->map[map_y][map_x] == '1')
 		return (1);
