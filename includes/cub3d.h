@@ -140,6 +140,7 @@ void 				print_map(t_game *game);
 int					validate_irregular(t_game *game);
 int					check_split_rgb(char **split);
 
+
 // Luego borrar
 
 int					count_map_lines(char *file, t_game *game);

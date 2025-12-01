@@ -6,7 +6,7 @@
 /*   By: lginer-m <lginer-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 17:27:18 by lginer-m          #+#    #+#             */
-/*   Updated: 2025/11/28 17:31:50 by lginer-m         ###   ########.fr       */
+/*   Updated: 2025/12/01 19:56:28 by lginer-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,10 @@ int	check_border(char *line)
 int	validate_walls(t_game *game)
 {
 	int	height;
-	//int	width;
 
 	if (!game || !game->map)
 		return (1);
 	height = game->map_height;
-	//width = game->map_width;
 	if (check_border(game->map[0]) || check_border(game->map[height - 1]))
 		return (1);
 	if (validate_side_walls(game) != 0)

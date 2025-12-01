@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lauragm <lauragm@student.42.fr>            +#+  +:+       +#+        */
+/*   By: lginer-m <lginer-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 17:23:55 by lginer-m          #+#    #+#             */
-/*   Updated: 2025/12/01 00:10:20 by lauragm          ###   ########.fr       */
+/*   Updated: 2025/12/01 20:38:25 by lginer-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
 
 int	is_map_line(char *line)
 {
@@ -67,35 +66,42 @@ int	control_empty_line(char *line)
 	return (0);
 }
 
-int	validate_irregular(t_game *game)
+static int	check_irregulars(t_game *game, int y)
 {
-	int	y;
-	int	x;
 	int	len;
 	int	next_len;
+	int	x;
 
-	y = 0;
-	while (y < game->map_height - 1)
+	len = ft_strlen(game->map[y]);
+	next_len = ft_strlen(game->map[y + 1]);
+	x = 0;
+	while (x < game->map_width)
 	{
-		len = ft_strlen(game->map[y]);
-		next_len = ft_strlen(game->map[y + 1]);
-		x = 0;
-		while (x < game->map_width)
-		{
-			if (x < len && game->map[y][x] == '0' && x >= next_len)
+		if (x < len && game->map[y][x] == '0' && x >= next_len)
+			return (1);
+		if (x < next_len && game->map[y + 1][x] == '0' && x >= len)
+			return (1);
+		if (x < len && game->map[y][x] == '0')
+			if (game->map[y + 1][x] == ' ' || game->map[y + 1][x] == '\n')
 				return (1);
-			if (x < next_len && game->map[y + 1][x] == '0' && x >= len)
+		if (x < next_len && game->map[y + 1][x] == '0')
+			if (game->map[y][x] == ' ' || game->map[y][x] == '\n')
 				return (1);
-			if (x < len && game->map[y][x] == '0')
-				if (game->map[y + 1][x] == ' ' || game->map[y + 1][x] == '\n')
-					return (1);
-			if (x < next_len && game->map[y + 1][x] == '0')
-				if (game->map[y][x] == ' ' || game->map[y][x] == '\n')
-					return (1);
-			x++;
-		}
-		y++;
+		x++;
 	}
 	return (0);
 }
 
+int	validate_irregular(t_game *game)
+{
+	int	y;
+
+	y = 0;
+	while (y < game->map_height - 1)
+	{
+		if (check_irregulars(game, y))
+			return (1);
+		y++;
+	}
+	return (0);
+}
