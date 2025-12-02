@@ -18,12 +18,10 @@ int	check_border(char *line)
 int	validate_walls(t_game *game)
 {
 	int	height;
-	//int	width;
 
 	if (!game || !game->map)
 		return (1);
 	height = game->map_height;
-	//width = game->map_width;
 	if (check_border(game->map[0]) || check_border(game->map[height - 1]))
 		return (1);
 	if (validate_side_walls(game) != 0)

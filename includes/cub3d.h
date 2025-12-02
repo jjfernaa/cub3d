@@ -135,6 +135,8 @@ int 				control_empty_line(char *line);
 int					validate_walls(t_game *game);
 int 				validate_side_walls(t_game *game);
 int					validate_irregular(t_game *game);
+int					check_split_rgb(char **split);
+
 
 
 // Game Function

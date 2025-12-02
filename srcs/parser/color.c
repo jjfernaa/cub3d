@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   color.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lginer-m <lginer-m@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/01 19:56:54 by lginer-m          #+#    #+#             */
+/*   Updated: 2025/12/01 19:56:56 by lginer-m         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
@@ -21,6 +32,25 @@ static int	count_split_elements(char *str)
 	return (0);
 }
 
+static int	get_rgb_component(char *str, int *out)
+{
+	char	*trimmed;
+	int		num;
+
+	trimmed = ft_strtrim(str, " \t");
+	if (!trimmed)
+		return (1);
+	if (validate_char_color(trimmed))
+	{
+		free(trimmed);
+		return (1);
+	}
+	num = ft_atoi(trimmed);
+	free(trimmed);
+	*out = num;
+	return (0);
+}
+
 uint32_t	split_path(char *path)
 {
 	char	**split;
@@ -36,23 +66,15 @@ uint32_t	split_path(char *path)
 		return (print_error("Error: Paths are not loading\n"));
 	if (count_split_elements(path) == 1)
 		return (print_error("Error: Invalid RGB component comilla\n"));
-	printf("line: %s\n", path);
 	split = ft_split(path, ',');
-	// printf("debug: %s\n", split[0]);
-	// printf("debug: %s\n", split[1]);
-	// printf("debug: %s\n", split[2]);
-	if (validate_char_color(split[0]) || validate_char_color(split[1])
-		|| validate_char_color(split[2]) == 1)
+	if (check_split_rgb(split))
+		return (print_error("Error: Invalid RGB split\n"));
+	if (get_rgb_component(split[0], &r) || get_rgb_component(split[1], &g)
+		|| get_rgb_component(split[2], &b))
 	{
-		// printf("debug: %s\n", split[0]);
-		// printf("debug: %s\n", split[1]);
-		// printf("debug: %s\n", split[2]);
 		free_split(split);
 		return (print_error("Error: Invalid RGB component\n"));
 	}
-	r = ft_atoi(split[0]);
-	g = ft_atoi(split[1]);
-	b = ft_atoi(split[2]);
 	free_split(split);
 	return (check_path_colors(r, g, b));
 }
@@ -66,7 +88,8 @@ uint32_t	check_path_colors(int a, int b, int c)
 		print_error("Error: RGB values out of range (0-255)\n");
 		return (1);
 	}
-	color = ((uint32_t)a << 24) | ((uint32_t)b << 16) | ((uint32_t)c << 8) | 0xFF;
+	color = ((uint32_t)a << 24) | ((uint32_t)b << 16)
+		| ((uint32_t)c << 8) | 0xFF;
 	return (color);
 }
 
@@ -75,15 +98,10 @@ int	validate_char_color(char *str)
 	int	i;
 
 	i = 0;
-	printf("str: %s\n", str);
 	if (!str || str[0] == '\0')
 		return (1);
 	while (str[i])
 	{
-		if (str[i] == ' ' || str[i] == '\t' || str[i] == '\n' || str[i] == '\r')
-		{
-			return (1);
-		}
 		if (ft_isalpha(str[i]))
 			return (1);
 		if (!ft_isdigit(str[i]) && str[i] != '+' && str[i] != '-')
@@ -98,4 +116,3 @@ int	validate_char_color(char *str)
 		return (1);
 	return (0);
 }
-
