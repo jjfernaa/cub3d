@@ -24,10 +24,11 @@ int	init_window(t_game *game)
 		mlx_terminate(game->mlx);
 		return (print_error("Error: Failed to display image\n"));
 	}
+	game->mini_s_y = (W_HEIGHT - (MINIMAP_RADIUS * 2 + 1)
+		* TILE_SIZE - 10);
 	return (0);
 }
 
-// cree esta funcion para descomprimir el main
 int	init_graphics(t_game *game)
 {
 	if (init_window(game) != 0)

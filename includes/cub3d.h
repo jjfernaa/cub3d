@@ -18,8 +18,7 @@
 # define COLLISION_MARGEN 0.2
 # define TILE_SIZE 10     // Minimapa
 # define MINIMAP_RADIUS 8 // solo lo que se ve del minimapa
-# define MINIM_OFFSET_X 10 
-# define MINIM_OFFSET_Y (W_HEIGHT - (MINIMAP_RADIUS * 2 + 1) * TILE_SIZE - 10)
+# define MINI_S_X 10 
 # define COL_P 0xFF0000FF // color del jugador en el minimapa
 
 typedef struct s_player
@@ -32,7 +31,7 @@ typedef struct s_player
 	double			plane_y;
 	double			mouse_x;
 	int				first_mouse;
-	}					t_player;
+}					t_player;
 
 typedef struct s_textures
 {
@@ -80,7 +79,6 @@ typedef struct s_draw
 	double			tex_pos; // Posicion actual en textura	
 }	t_draw;
 
-
 typedef struct s_game
 {
 	mlx_t			*mlx;
@@ -91,11 +89,11 @@ typedef struct s_game
 	uint32_t		ceiling_color;
 	int				show_minimap; // add
 	int				mouse_locked; // add
+	int				mini_s_y; // Agregue esto por norma
 	int				fd;
 	char			**map;
-	int				map_width;  // Almacena tamaño del mapa
+	int				map_width; // Almacena tamaño del mapa
 	int				map_height; // Almacena tamaño del mapa
-
 }					t_game;
 
 // Utils Function
@@ -130,14 +128,12 @@ int					validate_char_color(char *str);
 int					is_config_line(char *line);
 int					is_map_line(char *line);
 int					count_chars(char *line);
-int 				control_spaces(char *line);
-int 				control_empty_line(char *line);
+int					control_spaces(char *line);
+int					control_empty_line(char *line);
 int					validate_walls(t_game *game);
-int 				validate_side_walls(t_game *game);
+int					validate_side_walls(t_game *game);
 int					validate_irregular(t_game *game);
 int					check_split_rgb(char **split);
-
-
 
 // Game Function
 void				handle_input(t_game *game);

@@ -9,6 +9,7 @@ uint32_t	get_tile_color(char c)
 	else
 		return (0x808080FF);
 }
+
 int	is_valid_map_pos(t_game *game, int map_x, int map_y)
 {
 	if (map_y < 0 || map_y >= game->map_height)
@@ -17,6 +18,7 @@ int	is_valid_map_pos(t_game *game, int map_x, int map_y)
 		return (0);
 	return (1);
 }
+
 void	draw_minimap_row(t_game *game, int map_y, int *screen_y)
 {
 	int			map_x;
@@ -24,7 +26,7 @@ void	draw_minimap_row(t_game *game, int map_y, int *screen_y)
 	uint32_t	color;
 	int			col;
 
-	screen_x = MINIM_OFFSET_X;
+	screen_x = MINI_S_X;
 	col = 0;
 	while (col < MINIMAP_RADIUS * 2 + 1)
 	{
@@ -32,29 +34,30 @@ void	draw_minimap_row(t_game *game, int map_y, int *screen_y)
 		if (is_valid_map_pos(game, map_x, map_y))
 			color = get_tile_color(game->map[map_y][map_x]);
 		else
-			color = 0x808080FF; 
+			color = 0x808080FF;
 		d_tile(game, screen_x, *screen_y, color);
 		screen_x += TILE_SIZE;
 		col++;
 	}
 }
+
 void	draw_minimap_border(t_game *game)
 {
 	int	i;
 	int	size;
-    int	offset_x;
-    int	offset_y;
+	int	offset_x;
+	int	offset_y;
 
-    size = (MINIMAP_RADIUS * 2 + 1) * TILE_SIZE;
-    offset_x = MINIM_OFFSET_X;
-    offset_y = MINIM_OFFSET_Y;
-    i = 0;
-    while (i <= size)
-    {
-        mlx_put_pixel(game->img, offset_x + i, offset_y, 0xFFFFFFFF);
-        mlx_put_pixel(game->img, offset_x + i, offset_y + size, 0xFFFFFFFF);
-        mlx_put_pixel(game->img, offset_x, offset_y + i, 0xFFFFFFFF);
-        mlx_put_pixel(game->img, offset_x + size, offset_y + i, 0xFFFFFFFF);
-        i++;
-    }
+	size = (MINIMAP_RADIUS * 2 + 1) * TILE_SIZE;
+	offset_x = MINI_S_X;
+	offset_y = game->mini_s_y;
+	i = 0;
+	while (i <= size)
+	{
+		mlx_put_pixel(game->img, offset_x + i, offset_y, 0xFFFFFFFF);
+		mlx_put_pixel(game->img, offset_x + i, offset_y + size, 0xFFFFFFFF);
+		mlx_put_pixel(game->img, offset_x, offset_y + i, 0xFFFFFFFF);
+		mlx_put_pixel(game->img, offset_x + size, offset_y + i, 0xFFFFFFFF);
+		i++;
+	}
 }

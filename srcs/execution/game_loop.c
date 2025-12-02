@@ -1,5 +1,5 @@
 #include "../../includes/cub3d.h"
-// Nueva fucnion para cerra ventana
+
 static void	close_hook(void *param)
 {
 	t_game	*game;
@@ -15,11 +15,11 @@ static void	key_callback(mlx_key_data_t keydata, void *param)
 	game = (t_game *)param;
 	if (keydata.action != MLX_PRESS)
 		return ;
-	if (keydata.key == MLX_KEY_ESCAPE) // cierra la ventana con ESC
+	if (keydata.key == MLX_KEY_ESCAPE)
 		mlx_close_window(game->mlx);
-	if (keydata.key == MLX_KEY_SPACE) // muestra el mapa SPACE
+	if (keydata.key == MLX_KEY_SPACE)
 		game->show_minimap = !game->show_minimap;
-	if (keydata.key == MLX_KEY_TAB) // bloquea raton
+	if (keydata.key == MLX_KEY_TAB)
 	{
 		game->mouse_locked = !game->mouse_locked;
 		if (game->mouse_locked)
@@ -33,7 +33,6 @@ static void	key_callback(mlx_key_data_t keydata, void *param)
 	}
 }
 
-// Funcion para ejecutar el juego constantemente, configuro tecla ESC por ahora,
 void	updates_game(void *param)
 {
 	t_game	*game;
@@ -55,7 +54,7 @@ void	run_game(t_game *game)
 	game->show_minimap = 0;
 	game->mouse_locked = 1;
 	mlx_cursor_hook(game->mlx, &mouse_callback, game);
-	mlx_key_hook(game->mlx, &key_callback, game); //Agrego funucion manejo teclas
+	mlx_key_hook(game->mlx, &key_callback, game);
 	mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
 	mlx_loop_hook(game->mlx, &updates_game, game);
 	mlx_close_hook(game->mlx, &close_hook, game);
@@ -64,7 +63,6 @@ void	run_game(t_game *game)
 
 void	handle_input(t_game *game)
 {
-	// Movimientos adelante y atras
 	if (mlx_is_key_down(game->mlx, MLX_KEY_W)
 		&& mlx_is_key_down(game->mlx, MLX_KEY_LEFT_SHIFT))
 		move_vertical(game, 3);
@@ -72,12 +70,10 @@ void	handle_input(t_game *game)
 		move_vertical(game, 1);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_S))
 		move_vertical(game, -1);
-	// Movimientos laterales
 	if (mlx_is_key_down(game->mlx, MLX_KEY_A))
 		move_side(game, -1);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_D))
 		move_side(game, 1);
-	// Flechas del teclado
 	if (mlx_is_key_down(game->mlx, MLX_KEY_LEFT))
 		move_rotate(game, -ROT_SPEED);
 	if (mlx_is_key_down(game->mlx, MLX_KEY_RIGHT))

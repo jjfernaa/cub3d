@@ -4,7 +4,6 @@ static void	init_draw_params(t_ray *ray, t_draw *draw)
 {
 	// Altura del la linea a dibujar
 	draw->line_height = (int)(W_HEIGHT / ray->perp_wall_dist);
-
 	// calcular inicio y fin del diibujo
 	draw->draw_start = -draw->line_height / 2 + W_HEIGHT / 2;
 	if (draw->draw_start < 0)

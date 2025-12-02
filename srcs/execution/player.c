@@ -9,9 +9,6 @@ int	init_player(t_game *game)
 	return (0);
 }
 
-// Funcion para detectar la posicion del jugaror
-// Recorre el mapa buscando N,S,E,W , Cuando lo encuentra, coloca al jugador en el centro de la celda
-// Llama a la funcion player_direction() para cinfigurar hacia donde mira.
 int	player_position(t_game *game)
 {
 	int	y;
@@ -26,21 +23,19 @@ int	player_position(t_game *game)
 			if (game->map[y][x] == 'N' || game->map[y][x] == 'S'
 				|| game->map[y][x] == 'E' || game->map[y][x] == 'W')
 			{
-				game->player.x = x + 0.5; // ubica al jugador en el centro de la celda
+				game->player.x = x + 0.5;
 				game->player.y = y + 0.5;
-				player_direction(game, game->map[y][x]); // esta funcion setea la direccion
-				game->map[y][x] = '0';// convertit a 0 una vez encontrado para evitar errores
-				return (0);// Si lo encuentra
+				player_direction(game, game->map[y][x]);
+				game->map[y][x] = '0';
+				return (0);
 			}
 			x++;
 		}
 		y++;
 	}
-	return (1); // salimos con uno en caso de no encontrar al jugador!
+	return (1);
 }
 
-/* Funcion para setear la direccion del jugador, funciona con dos funciones auxiliares que estan en utils_player que ayudan a setear la direccion y el plano del mismo para reducir el tamaño de esta 
-funcion */
 void	player_direction(t_game *game, char direction)
 {
 	if (direction == 'N')
@@ -64,6 +59,7 @@ void	player_direction(t_game *game, char direction)
 		set_plane(game, 0.0, -0.66);
 	}
 }
+
 void	set_direction(t_game *game, double x, double y)
 {
 	game->player.dir_x = x;

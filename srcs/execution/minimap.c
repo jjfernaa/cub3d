@@ -18,7 +18,7 @@ void	d_tile(t_game *game, int screen_x, int screen_y, uint32_t color)
 		while (px < TILE_SIZE)
 		{
 			if (in_bounds(screen_x + px, screen_y + py))
-				mlx_put_pixel(game->img,screen_x + px, screen_y + py, color);
+				mlx_put_pixel(game->img, screen_x + px, screen_y + py, color);
 			px++;
 		}
 		py++;
@@ -30,8 +30,8 @@ void	d_minimap(t_game *game)
 	int	map_y;
 	int	screen_y;
 	int	row;
-	
-	screen_y = MINIM_OFFSET_Y;
+
+	screen_y = game->mini_s_y;
 	row = 0;
 	while (row < MINIMAP_RADIUS * 2 + 1)
 	{
@@ -51,8 +51,8 @@ void	d_player(t_game *game)
 	int	center_y;
 
 	player_size = TILE_SIZE / 3;
-	center_x = MINIM_OFFSET_X + (MINIMAP_RADIUS * TILE_SIZE) + (TILE_SIZE / 2);
-	center_y = MINIM_OFFSET_Y + (MINIMAP_RADIUS * TILE_SIZE) + (TILE_SIZE / 2);
+	center_x = MINI_S_X + (MINIMAP_RADIUS * TILE_SIZE) + (TILE_SIZE / 2);
+	center_y = game->mini_s_y + (MINIMAP_RADIUS * TILE_SIZE) + (TILE_SIZE / 2);
 	py = -player_size;
 	while (py <= player_size)
 	{
@@ -76,9 +76,9 @@ void	d_direction(t_game *game)
 	int	i;
 	int	start_x;
 	int	start_y;
-	
-	start_x = MINIM_OFFSET_X + (MINIMAP_RADIUS * TILE_SIZE) + (TILE_SIZE / 2);
-	start_y = MINIM_OFFSET_Y + (MINIMAP_RADIUS * TILE_SIZE) + (TILE_SIZE / 2);
+
+	start_x = MINI_S_X + (MINIMAP_RADIUS * TILE_SIZE) + (TILE_SIZE / 2);
+	start_y = game->mini_s_y + (MINIMAP_RADIUS * TILE_SIZE) + (TILE_SIZE / 2);
 	i = 0;
 	while (i < TILE_SIZE * 2)
 	{
