@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lginer-m <lginer-m@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juan-jof <juan-jof@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 17:09:25 by lginer-m          #+#    #+#             */
-/*   Updated: 2025/12/01 20:40:06 by lginer-m         ###   ########.fr       */
+/*   Updated: 2025/12/02 17:59:24 by juan-jof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,5 +140,7 @@ int	load_textures(t_game *game)
 		free_mlx_textures(game);
 		return (print_error("Error: West texture are not found\n"));
 	}
+	if (!game->ceiling_color || !game->floor_color)
+		return (print_error("Error: Background not found\n"));
 	return (0);
 }
