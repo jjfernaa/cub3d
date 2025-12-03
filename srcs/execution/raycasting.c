@@ -1,7 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycasting.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: juan-jof <juan-jof@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/03 20:14:38 by juan-jof          #+#    #+#             */
+/*   Updated: 2025/12/03 20:14:39 by juan-jof         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
-// Inicializa un rayo para una columna x de la pantalla
-// Calcula direccion y distancia inicial
 static void	calculate_step(t_game *game, t_ray *ray)
 {
 	if (ray->ray_dir_x < 0)
@@ -27,18 +37,16 @@ static void	calculate_step(t_game *game, t_ray *ray)
 			* ray->delta_dist_y;
 	}
 }
-// Algoritmo DDA para encontrar pared
 
 static void	perform_dda(t_game *game, t_ray *ray)
 {
 	while (ray->hit == 0)
 	{
-		// Avanzar al siguiente lado
 		if (ray->side_dist_x < ray->side_dist_y)
 		{
 			ray->side_dist_x += ray->delta_dist_x;
 			ray->map_x += ray->step_x;
-			ray->side = 0; // Lado Vertical (E/W)
+			ray->side = 0;
 		}
 		else
 		{
@@ -46,12 +54,10 @@ static void	perform_dda(t_game *game, t_ray *ray)
 			ray->map_y += ray->step_y;
 			ray->side = 1;
 		}
-		// Verificar si golpeo una pared
 		if (is_wall(game, ray->map_x, ray->map_y))
 			ray->hit = 1;
 	}
 }
-// Calcular distancia perpendicular a la pared
 
 static void	calculate_wall_dist(t_game *game, t_ray *ray)
 {

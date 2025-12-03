@@ -16,10 +16,10 @@
 # define ROT_SPEED 0.03
 # define MOUSE_SENSITIVITY 0.0008
 # define COLLISION_MARGEN 0.2
-# define TILE_SIZE 10     // Minimapa
-# define MINIMAP_RADIUS 8 // solo lo que se ve del minimapa
+# define TILE_SIZE 10
+# define MINIMAP_RADIUS 8
 # define MINI_S_X 10 
-# define COL_P 0xFF0000FF // color del jugador en el minimapa
+# define COL_P 0xFF0000FF
 
 typedef struct s_player
 {
@@ -50,33 +50,33 @@ typedef struct s_textures
 
 typedef struct t_ray
 {
-	double			camera_x; // Posicion en el plano de la camara
-	double			ray_dir_x; // Direccion del rayo
+	double			camera_x;
+	double			ray_dir_x;
 	double			ray_dir_y;
-	int				map_x; // Coordenadas del mapa
+	int				map_x;
 	int				map_y;
-	double			side_dist_x; // Distancia al siguiente lado X/Y
+	double			side_dist_x;
 	double			side_dist_y;
-	double			delta_dist_x; // Distancia entre cada lado X/Y
+	double			delta_dist_x;
 	double			delta_dist_y;
-	double			perp_wall_dist; // Distancia perpendicular a la pared
-	int				step_x; // Direccion del paso (-1 o +1)
+	double			perp_wall_dist;
+	int				step_x;
 	int				step_y;
-	int				hit; // flag para choque de pared
-	int				side; // Lado NS o EW
-	double			wall_x; //Posicion exacta donde el rayo golpea
-	int				tex_x; // coordenada x en la textura
-	int				tex_y; // coordenada y en la textura
-	mlx_texture_t	*texture; // Textura a usar (N/S/E/W) 
+	int				hit;
+	int				side;
+	double			wall_x;
+	int				tex_x;
+	int				tex_y;
+	mlx_texture_t	*texture;
 }					t_ray;
 
 typedef struct s_draw
 {
-	int				line_height; //Altura de la linea
-	int				draw_start; // Inicio del dibujo
-	int				draw_end; // Fin del dibujo
-	double			step;	// Paso para recorrer textura
-	double			tex_pos; // Posicion actual en textura	
+	int				line_height;
+	int				draw_start;
+	int				draw_end;
+	double			step;
+	double			tex_pos;
 }	t_draw;
 
 typedef struct s_game
@@ -87,13 +87,13 @@ typedef struct s_game
 	t_textures		textures;
 	uint32_t		floor_color;
 	uint32_t		ceiling_color;
-	int				show_minimap; // add
-	int				mouse_locked; // add
-	int				mini_s_y; // Agregue esto por norma
+	int				show_minimap;
+	int				mouse_locked;
+	int				mini_s_y;
 	int				fd;
 	char			**map;
-	int				map_width; // Almacena tamaño del mapa
-	int				map_height; // Almacena tamaño del mapa
+	int				map_width;
+	int				map_height;
 }					t_game;
 
 // Utils Function
@@ -134,8 +134,9 @@ int					validate_walls(t_game *game);
 int					validate_side_walls(t_game *game);
 int					validate_irregular(t_game *game);
 int					check_split_rgb(char **split);
-void 				get_struct_map(char *line, t_game **game, int map_started);
-int					parsing_map(t_game *game, char *line, int *map_started, int i);
+void				get_struct_map(char *line, t_game **game, int map_started);
+int					parsing_map(t_game *game, char *line,
+						int *map_started, int i);
 int					process_map_line(char *line, t_game *game, int *i, int *fd);
 int					handle_non_map_line(char *line, int map_started, int *fd);
 int					get_map_loop(t_game *game, int fd);

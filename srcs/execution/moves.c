@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   moves.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: juan-jof <juan-jof@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/03 20:14:22 by juan-jof          #+#    #+#             */
+/*   Updated: 2025/12/03 20:14:23 by juan-jof         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
 void	move_vertical(t_game *game, int direction)
@@ -35,15 +47,12 @@ void	move_rotate(t_game *game, double angle)
 	double	old_dir_x;
 	double	old_plane_x;
 
-	// Guardo valores antiguos
 	old_dir_x = game->player.dir_x;
 	old_plane_x = game->player.plane_x;
-	// Rotar vector direccion
 	game->player.dir_x = game->player.dir_x * cos(angle)
 		- game->player.dir_y * sin(angle);
 	game->player.dir_y = old_dir_x * sin(angle)
 		+ game->player.dir_y * cos(angle);
-	// Rotar plano de la camara
 	game->player.plane_x = game->player.plane_x * cos(angle)
 		- game->player.plane_y * sin(angle);
 	game->player.plane_y = old_plane_x * sin(angle)
@@ -56,7 +65,7 @@ void	mouse_callback(double xpos, double ypos, void *param)
 	double	x_off;
 	double	center_x;
 	double	center_y;
-	//Ignorar el primer movimiento
+
 	game = (t_game *)param;
 	(void)ypos;
 	if (!game->mouse_locked)
@@ -69,11 +78,9 @@ void	mouse_callback(double xpos, double ypos, void *param)
 		game->player.first_mouse = 0;
 		return ;
 	}
-	// Calcular desplazamiento
 	x_off = xpos - center_x;
 	if (fabs(x_off) < 1.0)
 		return ;
-	// Sensibilidad del raton
 	x_off *= MOUSE_SENSITIVITY;
 	move_rotate(game, x_off);
 	mlx_set_mouse_pos(game->mlx, (int)center_x, (int)center_y);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: juan-jof <juan-jof@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/03 20:14:09 by juan-jof          #+#    #+#             */
+/*   Updated: 2025/12/03 20:14:10 by juan-jof         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
 int	init_game(t_game *game)
@@ -25,7 +37,7 @@ int	init_window(t_game *game)
 		return (print_error("Error: Failed to display image\n"));
 	}
 	game->mini_s_y = (W_HEIGHT - (MINIMAP_RADIUS * 2 + 1)
-		* TILE_SIZE - 10);
+			* TILE_SIZE - 10);
 	return (0);
 }
 
@@ -43,15 +55,11 @@ int	init_graphics(t_game *game)
 
 void	init_ray(t_game *game, t_ray *ray, int x)
 {
-	// Calcular posicion en el plano de la camara (-1 a 1)
 	ray->camera_x = 2 * x / (double)W_WIDTH - 1;
-	// Direccion del rayo
 	ray->ray_dir_x = game->player.dir_x + game->player.plane_x * ray->camera_x;
 	ray->ray_dir_y = game->player.dir_y + game->player.plane_y * ray->camera_x;
-	// Posicion inicial en el mapa
 	ray->map_x = (int)game->player.x;
 	ray->map_y = (int)game->player.y;
-	// Calcular delta (distancia entre cada interseccion)
 	if (ray->ray_dir_x == 0)
 		ray->delta_dist_x = 1e30;
 	else

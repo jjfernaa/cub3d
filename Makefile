@@ -17,12 +17,10 @@ LIBS := -lglfw -ldl -lm -pthread
 SRCS_DIR := srcs
 OBJS_DIR := build
 
-# Para probar en otro entorno ⚠️ Borrar al final
 BREW_PREFIX := /opt/homebrew
 INCLUDES := -I$(LIBFT_DIR) -I$(MLX42_DIR)/include -Iincludes -I$(BREW_PREFIX)/include
 LIBS := -L$(BREW_PREFIX)/lib -lglfw -ldl -lm -pthread
 
-# Source files - Add new .c files here
 SRCS = \
 	$(SRCS_DIR)/main.c \
 	$(SRCS_DIR)/parser/utils.c \

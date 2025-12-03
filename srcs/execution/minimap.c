@@ -1,10 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minimap.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: juan-jof <juan-jof@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/03 20:14:14 by juan-jof          #+#    #+#             */
+/*   Updated: 2025/12/03 20:14:15 by juan-jof         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
 static int	in_bounds(int x, int y)
 {
 	return (x >= 0 && x < W_WIDTH && y >= 0 && y < W_HEIGHT);
 }
-// Funcion ppara imprimir suelo del minimapa
 
 void	d_tile(t_game *game, int screen_x, int screen_y, uint32_t color)
 {
