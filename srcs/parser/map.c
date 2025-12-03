@@ -1,4 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lginer-m <lginer-m@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/03 19:35:33 by lginer-m          #+#    #+#             */
+/*   Updated: 2025/12/03 19:35:34 by lginer-m         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
+
+static int	parsing_textures(char *line, t_game *game, int *fd)
+{
+	if (is_config_line(line) == -1)
+	{
+		free(line);
+		close(*fd);
+		return (1);
+	}
+	match_paths(line, game);
+	if (match_paths_c_f(line, game) == 1)
+	{
+		free(line);
+		close(*fd);
+		return (1);
+	}
+	if (is_map_line(line))
+		game->map_height++;
+	return (0);
+}
 
 int	count_lines(char *file, t_game **game)
 {
@@ -11,21 +43,8 @@ int	count_lines(char *file, t_game **game)
 	line = get_next_line(fd);
 	while (line)
 	{
-		if (is_config_line(line) == -1)
-		{
-			free(line);
-			close(fd);
+		if (parsing_textures(line, *game, &fd) != 0)
 			return (1);
-		}
-		match_paths(line, *game);
-		if (match_paths_c_f(line, *game) == 1)
-		{
-			free(line);
-			close(fd);
-			return (1);
-		}
-		if (is_map_line(line))
-			(*game)->map_height++;
 		free(line);
 		line = get_next_line(fd);
 	}
@@ -51,54 +70,13 @@ int	memory_map(t_game *game)
 
 int	get_map(char *file, t_game *game)
 {
-	int		fd;
-	int		i;
-	int		len;
-	char	*line;
-	int		map_started;
+	int	fd;
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		return (print_error("Error: Failed opening the file\n"));
-	i = 0;
-	map_started = 0;
-	game->map_width = 0;
-	line = get_next_line(fd);
-	while (line)
-	{
-		if (is_map_line(line))
-		{
-			map_started = 1;
-			game->map[i] = ft_strdup(line);
-			len = ft_strlen(line);
-			if (len > game->map_width)
-				game->map_width = len;
-			if (check_valid_chars(line) != 0)
-			{
-				free(line);
-				close(fd);
-				return (-1);
-			}
-			if (control_spaces(line) != 0)
-			{
-				free(line);
-				close(fd);
-				return (-1);
-			}
-			i++;
-		}
-		else
-		{
-			if (map_started && control_empty_line(line) != 0)
-			{
-				free(line);
-				close(fd);
-				return (-1);
-			}
-		}
-		free(line);
-		line = get_next_line(fd);
-	}
+	if (get_map_loop(game, fd) != 0)
+		return (1);
 	close(fd);
 	return (0);
 }

@@ -30,7 +30,7 @@ void	select_texture(t_game *game, t_ray *ray)
 void	calculate_tex_x(t_ray *ray)
 {
 	ray->tex_x = (int)(ray->wall_x * (double)ray->texture->width);
-	if ((ray->side == 0 && ray->ray_dir_x > 0) // invierte textura en ciertos lados para que quede bien
+	if ((ray->side == 0 && ray->ray_dir_x > 0) 
 		|| (ray->side == 1 && ray->ray_dir_y < 0))
 		ray->tex_x = ray->texture->width - ray->tex_x - 1;
 }
@@ -42,5 +42,6 @@ uint32_t	get_texture_color(mlx_texture_t *texture, int x, int y)
 
 	index = (y * texture->width + x) * 4;
 	pixel = &texture->pixels[index];
-	return ((pixel[0] << 24) | (pixel[1] << 16) | (pixel[2] << 8) | pixel[3]);
+	return (((uint32_t)pixel[0] << 24) | ((uint32_t)pixel[1] << 16)
+		| ((uint32_t)pixel[2] << 8) | (uint32_t)pixel[3]);
 }

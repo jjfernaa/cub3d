@@ -119,8 +119,8 @@ int					is_wall(t_game *game, double x, double y);
 int					check_collision(t_game *game, double x, double y);
 int					load_textures(t_game *game);
 int					load_map(char *argv, t_game *game);
-int					memory_map(t_game **game);
-int					get_map(char *file, t_game **game);
+int					memory_map(t_game *game);
+int					get_map(char *file, t_game *game);
 int					check_valid_chars(char *line);
 uint32_t			split_path(char *path);
 uint32_t			check_path_colors(int a, int b, int c);
@@ -135,6 +135,10 @@ int					validate_side_walls(t_game *game);
 int					validate_irregular(t_game *game);
 int					check_split_rgb(char **split);
 void 				get_struct_map(char *line, t_game **game, int map_started);
+int					parsing_map(t_game *game, char *line, int *map_started, int i);
+int					process_map_line(char *line, t_game *game, int *i, int *fd);
+int					handle_non_map_line(char *line, int map_started, int *fd);
+int					get_map_loop(t_game *game, int fd);
 
 // Game Function
 void				handle_input(t_game *game);
