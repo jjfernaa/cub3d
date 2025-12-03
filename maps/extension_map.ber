@@ -3,8 +3,8 @@ SO ./textures/test_red.png
 WE ./textures/test_red.png
 EA ./textures/test_red.png
 
-F 26,17,17
-C 16,48,41
+C 127,127,200
+F 50,88,41
 
         1111111111111111111111111
         1000000000100000000000001
