@@ -111,7 +111,6 @@ char	*gnl_the_rest(char *save)
 		free(save);
 		return (NULL);
 	}
-		
 	while (save[i])
 		rest[j++] = save[i++];
 	rest[j] = '\0';

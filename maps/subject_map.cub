@@ -1,9 +1,9 @@
-NO ./textures/west.png
-SO ./textures/west.png
-WE ./textures/north.png
-EA ./textures/west.png
+NO ./textures/north.png
+SO ./textures/south.png
+WE ./textures/west.png
+EA ./textures/east.png
 
-C 147,206,256
+C 147,206,255
 F 50,88,41
 
         1111111111111111111111111
