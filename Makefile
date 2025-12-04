@@ -1,7 +1,7 @@
 NAME := cub3D
 CC := cc
 CFLAGS := -g -Wall -Werror -Wextra \
-		-fsanitize=address,undefined \
+		#-fsanitize=address,undefined \
 		#-Wunreachable-code -Ofast \
 
 ASAN_OPTIONS := suppressions=asan_suppressions.txt:detect_leaks=1:abort_on_error=1

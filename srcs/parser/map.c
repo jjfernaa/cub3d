@@ -6,7 +6,7 @@
 /*   By: lginer-m <lginer-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 19:35:33 by lginer-m          #+#    #+#             */
-/*   Updated: 2025/12/03 19:35:34 by lginer-m         ###   ########.fr       */
+/*   Updated: 2025/12/04 18:24:55 by lginer-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	get_map(char *file, t_game *game)
 	if (fd < 0)
 		return (print_error("Error: Failed opening the file\n"));
 	if (get_map_loop(game, fd) != 0)
-		return (1);
+		return (1);	
 	close(fd);
 	return (0);
 }

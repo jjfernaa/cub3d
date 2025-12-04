@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lginer-m <lginer-m@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/04 14:37:45 by lginer-m          #+#    #+#             */
+/*   Updated: 2025/12/04 16:52:51 by lginer-m         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -99,6 +111,7 @@ typedef struct s_game
 // Utils Function
 int					print_error(char *msg);
 void				path_to_null(t_game *game);
+int					check_split_rgb(char **split);
 
 // Init Function
 int					init_game(t_game *game);
@@ -108,40 +121,43 @@ int					init_player(t_game *game);
 void				init_ray(t_game *game, t_ray *ray, int x);
 
 // Parser Function
-int					validate_arguments(int argc, char **argv);
 int					check_extension(char *str);
-int					count_lines(char *file, t_game **game);
-char				*paths_of_textures(char *line, const char *name);
-void				match_paths(char *line, t_game *game);
-char				*paths_c_f(char *line, const char *name);
-int					match_paths_c_f(char *line, t_game *game);
-int					is_wall(t_game *game, double x, double y);
-int					check_collision(t_game *game, double x, double y);
 int					load_textures(t_game *game);
-int					load_map(char *argv, t_game *game);
 int					memory_map(t_game *game);
-int					get_map(char *file, t_game *game);
 int					check_valid_chars(char *line);
 uint32_t			split_path(char *path);
 uint32_t			check_path_colors(int a, int b, int c);
-int					validate_char_color(char *str);
 int					is_config_line(char *line);
 int					is_map_line(char *line);
 int					count_chars(char *line);
 int					control_spaces(char *line);
 int					control_empty_line(char *line);
+
+// Textures Functions
 int					validate_walls(t_game *game);
 int					validate_side_walls(t_game *game);
 int					validate_irregular(t_game *game);
-int					check_split_rgb(char **split);
-void				get_struct_map(char *line, t_game **game, int map_started);
+int					is_wall(t_game *game, double x, double y);
+char				*paths_of_textures(char *line, const char *name);
+void				match_paths(char *line, t_game *game);
+char				*paths_c_f(char *line, const char *name);
+int					match_paths_c_f(char *line, t_game *game);
+int					check_collision(t_game *game, double x, double y);
+
+// Map Functions
+int					count_lines(char *file, t_game **game);
+int					validate_arguments(int argc, char **argv);
+int					process_map_line(char *line, t_game *game, int *i, int *fd);
+int					validate_char_color(char *str);
 int					parsing_map(t_game *game, char *line,
 						int *map_started, int i);
-int					process_map_line(char *line, t_game *game, int *i, int *fd);
+void				get_struct_map(char *line, t_game **game, int map_started);
 int					handle_non_map_line(char *line, int map_started, int *fd);
+int					get_map(char *file, t_game *game);
 int					get_map_loop(t_game *game, int fd);
+int					load_map(char *argv, t_game *game);
 
-// Game Function
+// Game Functions
 void				handle_input(t_game *game);
 void				updates_game(void *param);
 void				run_game(t_game *game);
@@ -154,9 +170,7 @@ void				move_side(t_game *game, int direction);
 void				move_rotate(t_game *game, double angle);
 void				mouse_callback(double xpos, double ypos, void *param);
 void				set_direction(t_game *game, double x, double y);
-// Seteo direccion del jugador
 void				set_plane(t_game *game, double x, double y);
-// Seteo el plano del jugador
 
 // Minimap Functions
 void				d_tile(t_game *game, int x, int y, uint32_t color);

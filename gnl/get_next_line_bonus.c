@@ -3,7 +3,7 @@
 char	*get_next_line(int fd)
 {
 	char		*line;
-	static char	*save[__FD_SETSIZE]; //OPEN_MAX (__FD_SETSIZE)
+	static char	*save[__FD_SETSIZE];
 	if (fd < 0 || BUFFER_SIZE <= 0)
 	{
 		if (save[fd])
@@ -107,7 +107,11 @@ char	*gnl_the_rest(char *save)
 	i++;
 	rest = (char *)malloc(sizeof(char) * (gnl_strlen(save + i) + 1));
 	if (!rest)
+	{
+		free(save);
 		return (NULL);
+	}
+		
 	while (save[i])
 		rest[j++] = save[i++];
 	rest[j] = '\0';
