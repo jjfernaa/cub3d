@@ -1,9 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: juan-jof <juan-jof@student.42malaga.com    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/05 17:49:21 by juan-jof          #+#    #+#             */
+/*   Updated: 2025/12/05 17:51:06 by juan-jof         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line_bonus.h"
 
 char	*get_next_line(int fd)
 {
 	char		*line;
 	static char	*save[__FD_SETSIZE];
+
 	if (fd < 0 || BUFFER_SIZE <= 0)
 	{
 		if (save[fd])
@@ -11,7 +24,7 @@ char	*get_next_line(int fd)
 			free(save[fd]);
 			save[fd] = NULL;
 		}
-		return(NULL);
+		return (NULL);
 	}
 	if (save[fd] == NULL)
 	{
