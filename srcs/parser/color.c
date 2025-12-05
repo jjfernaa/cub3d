@@ -6,7 +6,7 @@
 /*   By: lginer-m <lginer-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 19:56:54 by lginer-m          #+#    #+#             */
-/*   Updated: 2025/12/04 19:08:14 by lginer-m         ###   ########.fr       */
+/*   Updated: 2025/12/04 20:36:38 by lginer-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,13 +106,9 @@ int	validate_char_color(char *str)
 			return (1);
 		if (!ft_isdigit(str[i]) && str[i] != '+' && str[i] != '-')
 			return (1);
-	/* 	if ((str[i] == '+' || str[i] == '-') && i != 0)
-			return (1); */
 		i++;
 	}
 	if ((i > 3) || (i < 1))
 		return (1);
-/* 	if (i == 1 && (str[0] == '+' || str[0] == '-'))
-		return (1); */
 	return (0);
 }
