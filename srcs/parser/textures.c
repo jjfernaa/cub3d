@@ -6,7 +6,7 @@
 /*   By: lginer-m <lginer-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 17:09:25 by lginer-m          #+#    #+#             */
-/*   Updated: 2025/12/04 19:12:35 by lginer-m         ###   ########.fr       */
+/*   Updated: 2025/12/06 20:15:43 by lginer-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ char	*paths_c_f(char *line, const char *name)
 		while (line[start] && (line[start] == ' ' || line[start] == '\t'))
 			start++;
 		end = start;
-		while (line[end] && line[end] != '\t'
-			&& line[end] != '\n')
+		while (line[end] && line[end] != '\t' && line[end] != '\n')
 			end++;
 		path = ft_substr(line, start, end - start);
 		if (!path)
@@ -76,8 +75,7 @@ char	*paths_of_textures(char *line, const char *name)
 		while (line[start] && (line[start] == ' ' || line[start] == '\t'))
 			start++;
 		end = start;
-		while (line[end] && line[end] != '\t'
-			&& line[end] != '\n')
+		while (line[end] && line[end] != '\t' && line[end] != '\n')
 			end++;
 		if (end <= start || start < 0 || end < 0)
 			return (NULL);
@@ -115,32 +113,4 @@ void	match_paths(char *line, t_game *game)
 		if (game->textures.tmp_path)
 			game->textures.east_path = game->textures.tmp_path;
 	}
-}
-
-int	load_textures(t_game *game)
-{
-	game->textures.north = mlx_load_png(game->textures.north_path);
-	if (!game->textures.north)
-		return (print_error("Error: North texture are not found\n"));
-	game->textures.south = mlx_load_png(game->textures.south_path);
-	if (!game->textures.south)
-	{
-		free_mlx_textures(game);
-		return (print_error("Error: South texture are not found\n"));
-	}
-	game->textures.east = mlx_load_png(game->textures.east_path);
-	if (!game->textures.east)
-	{
-		free_mlx_textures(game);
-		return (print_error("Error: East texture are not found\n"));
-	}
-	game->textures.west = mlx_load_png(game->textures.west_path);
-	if (!game->textures.west)
-	{
-		free_mlx_textures(game);
-		return (print_error("Error: West texture are not found\n"));
-	}
-	if (!game->ceiling_color || !game->floor_color)
-		return (print_error("Error: Background not found\n"));
-	return (0);
 }

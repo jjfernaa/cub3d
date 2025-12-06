@@ -6,7 +6,7 @@
 /*   By: lginer-m <lginer-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 19:35:33 by lginer-m          #+#    #+#             */
-/*   Updated: 2025/12/04 20:28:01 by lginer-m         ###   ########.fr       */
+/*   Updated: 2025/12/06 19:58:20 by lginer-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,13 +96,16 @@ int	load_map(char *argv, t_game *game)
 	error = count_lines(argv, &game);
 	if (error)
 		return (1);
-	if (game == NULL || game->map_height < 0 || game->map_width < 0)
-		return (print_error("Error: Invalid map structure\n"));
+	if (game == NULL || game->map_height < 0 || game->map_width < 0
+		|| (game->map_height == 0 && game->map_width == 0))
+		return (1);
 	if (error == 0 && memory_map(game) != 0)
 		return (print_error("Error: Failed to allocate memory on map\n"));
 	if (error == 0 && get_map(argv, game) != 0)
 		return (print_error("Error: Failed to get map\n"));
 	if (error == 0 && validate_walls(game) != 0)
 		return (print_error("Error: Invalid walls\n"));
+	if (error == 0 && player_position(game) != 0)
+		return (print_error("Error: Player not found in map\n"));
 	return (0);
 }

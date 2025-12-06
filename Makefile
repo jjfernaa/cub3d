@@ -32,6 +32,7 @@ SRCS = \
 	$(SRCS_DIR)/parser/walls.c \
 	$(SRCS_DIR)/parser/utils_map.c \
 	$(SRCS_DIR)/parser/parser_map.c \
+	$(SRCS_DIR)/parser/load_textures.c \
 	$(SRCS_DIR)/execution/init.c \
 	$(SRCS_DIR)/execution/player.c \
 	$(SRCS_DIR)/execution/game_loop.c \
@@ -88,7 +89,7 @@ $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
 	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 $(OBJS_DIR)/%.o: %.c
-	@mkdir -p $(dir $@) #Crea las subcarpetas necesarias
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:

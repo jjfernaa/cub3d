@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan-jof <juan-jof@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: lginer-m <lginer-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 20:14:09 by juan-jof          #+#    #+#             */
-/*   Updated: 2025/12/03 20:14:10 by juan-jof         ###   ########.fr       */
+/*   Updated: 2025/12/06 19:44:11 by lginer-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ int	init_window(t_game *game)
 		mlx_terminate(game->mlx);
 		return (print_error("Error: Failed to display image\n"));
 	}
-	game->mini_s_y = (W_HEIGHT - (MINIMAP_RADIUS * 2 + 1)
-			* TILE_SIZE - 10);
+	game->mini_s_y = (W_HEIGHT - (MINIMAP_RADIUS * 2 + 1) * TILE_SIZE - 10);
 	return (0);
 }
 

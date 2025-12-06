@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juan-jof <juan-jof@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: lginer-m <lginer-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 20:14:26 by juan-jof          #+#    #+#             */
-/*   Updated: 2025/12/03 20:14:27 by juan-jof         ###   ########.fr       */
+/*   Updated: 2025/12/06 19:58:19 by lginer-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 int	init_player(t_game *game)
 {
-	if (player_position(game) != 0)
-		return (print_error("Error : Player not found in map\n"));
 	game->player.mouse_x = W_WIDTH / 2.0;
 	game->player.first_mouse = 1;
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: lginer-m <lginer-m@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 14:37:45 by lginer-m          #+#    #+#             */
-/*   Updated: 2025/12/04 16:52:51 by lginer-m         ###   ########.fr       */
+/*   Updated: 2025/12/06 20:17:11 by lginer-m         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,7 @@ void				match_paths(char *line, t_game *game);
 char				*paths_c_f(char *line, const char *name);
 int					match_paths_c_f(char *line, t_game *game);
 int					check_collision(t_game *game, double x, double y);
+int					check_paths(t_game *game);
 
 // Map Functions
 int					count_lines(char *file, t_game **game);
