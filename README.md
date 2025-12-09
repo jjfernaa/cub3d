@@ -1,4 +1,4 @@
-# cub3D
+# Cub3D 👾
 
 Un motor de renderizado 3D inspirado en Wolfenstein 3D, desarrollado como proyecto de 42 School.
 
