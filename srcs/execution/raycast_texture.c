@@ -6,7 +6,7 @@
 /*   By: juan-jof <juan-jof@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 20:14:34 by juan-jof          #+#    #+#             */
-/*   Updated: 2025/12/03 20:14:35 by juan-jof         ###   ########.fr       */
+/*   Updated: 2025/12/09 17:46:28 by juan-jof         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void	select_texture(t_game *game, t_ray *ray)
 void	calculate_tex_x(t_ray *ray)
 {
 	ray->tex_x = (int)(ray->wall_x * (double)ray->texture->width);
-	if ((ray->side == 0 && ray->ray_dir_x > 0)
-		|| (ray->side == 1 && ray->ray_dir_y < 0))
+	if ((ray->side == 0 && ray->ray_dir_x < 0)
+		|| (ray->side == 1 && ray->ray_dir_y > 0))
 		ray->tex_x = ray->texture->width - ray->tex_x - 1;
 }
 
